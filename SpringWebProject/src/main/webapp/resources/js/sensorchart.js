@@ -39,21 +39,21 @@ $(function () {
 });
 
 function requestSensorData() {
-	var ws = new WebSocket("ws://" + location.host+ "/SensingCarRemoteWebControl/websocket/thermistorsensor");
+	var ws = new WebSocket("ws://" + location.host+ "/SpringWebProject/websocket/thermistorsensor");
 	ws.onmessage = function(event) {
 		var data = JSON.parse(event.data);
 		var series1 = sensorChart.series[0];
 		var shift = series1.data.length > 20;
 		series1.addPoint([ data.time, data.temperature ], true, shift);
 	};
-	var ws2 = new WebSocket("ws://" + location.host	+ "/SensingCarRemoteWebControl/websocket/photoresistorsensor");	
+	var ws2 = new WebSocket("ws://" + location.host	+ "/SpringWebProject/websocket/photoresistorsensor");	
 	ws2.onmessage = function(event) {		
 		var data = JSON.parse(event.data);
 		var series2 = sensorChart.series[1];
 		var shift = series2.data.length > 20;
 		series2.addPoint([ data.time, data.photoresistor ], true, shift);		
 	};
-	var ws3 = new WebSocket("ws://" + location.host	+ "/SensingCarRemoteWebControl/websocket/gassensor");	
+	var ws3 = new WebSocket("ws://" + location.host	+ "/SpringWebProject/websocket/gassensor");	
 	ws3.onmessage = function(event) {		
 		var data = JSON.parse(event.data);
 		var series3 = sensorChart.series[2];
