@@ -1,12 +1,12 @@
 $("#slider").roundSlider({
 	        handleShape: "round",
-	        width: 25,
+	        width: 15,
 	        radius: 130,
 	        value: 30,
 	        keyboardAction: false,
 	        mouseScrollAction: false,
 	        circleShape: "half-top",
-	        handleSize: "+5",
+	        handleSize: "+1",
 	        showTooltip: false,
 	        max: "60",
 	        

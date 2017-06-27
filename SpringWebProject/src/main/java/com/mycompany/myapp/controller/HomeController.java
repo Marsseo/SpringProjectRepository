@@ -22,8 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	private String ipAddress="192.168.3.48";
+	private String ipAddress="192.168.3.54";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -54,24 +53,7 @@ public class HomeController {
 		model.addAttribute("angle", jsonObject.getString("angle"));
 		model.addAttribute("distance", jsonObject.getString("distance"));
 		
-
-		//RGB
-		//----------------------------------------------------------------------------------------
-		jsonObject = new JSONObject();
-		jsonObject.put("command", "status");
-		json = jsonObject.toString();
-		coapClient.setURI("coap://"+ipAddress+"/rgbled");
-		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
-		json = coapResponse.getResponseText();
-		jsonObject = new JSONObject(json);
-		model.addAttribute("red", jsonObject.getString("red"));
-		model.addAttribute("green", jsonObject.getString("green"));
-		model.addAttribute("blue", jsonObject.getString("blue"));
-		
-		
-
 		return "home";
-		//return "charttest";
 	}
 	
 	@RequestMapping("/fronttire")
@@ -108,6 +90,7 @@ public class HomeController {
 		CoapClient coapClient = new CoapClient();
 		coapClient.setURI("coap://"+ipAddress+"/backtire");
 		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+
 		json = coapResponse.getResponseText();
 		coapClient.shutdown();
 		
@@ -139,27 +122,4 @@ public class HomeController {
 		pw.close();
 	}
 	
-	
-	@RequestMapping("/rgbled")
-	public void rgbled(String command, String red, String green, String blue, HttpServletResponse response)
-			throws IOException {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("command", command);
-		jsonObject.put("red", red);
-		jsonObject.put("green", green);
-		jsonObject.put("blue", blue);
-		String reqJson = jsonObject.toString();
-		
-		CoapClient coapClient = new CoapClient();
-		coapClient.setURI("coap://"+ipAddress+"/rgbled");
-		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
-		String resJson = coapResponse.getResponseText();
-		coapClient.shutdown();
-		
-		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter pw = response.getWriter();
-		pw.write(resJson);
-		pw.flush();
-		pw.close();
-	}
 }
