@@ -58,7 +58,7 @@
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="5ChartContainer"
+					<div id="ultrasonicSensorContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
