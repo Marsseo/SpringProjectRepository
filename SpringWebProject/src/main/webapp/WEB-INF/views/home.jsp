@@ -50,9 +50,37 @@
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="2ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+				<div id="6ChartContainer"
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">
+					<div class="sliders yui3-skin-sam">
+						<dl>
+							<dt>
+								R: <span id="r-val" class="val"></span>
+							</dt>
+							<dd id="r-slider"></dd>
+							<dt>
+								G: <span id="g-val" class="val"></span>
+							</dt>
+							<dd id="g-slider"></dd>
+							<dt>
+								B: <span id="b-val" class="val"></span>
+							</dt>
+							<dd id="b-slider"></dd>
+						</dl>
+					</div>
+					<div class="color"></div>
+					<div class="output">
+						<dl>
+							<dt>Hex:</dt>
+							<dd id="hex"></dd>
+							<dt>RGB:</dt>
+							<dd id="rgb"></dd>
+							<dt>HSL:</dt>
+							<dd id="hsl"></dd>
+						</dl>
+					</div>
 				</div>
+			</div>
 				<div class="col-md-4">
 					<div id="3ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;">
