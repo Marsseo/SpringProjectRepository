@@ -14,9 +14,10 @@
 		<script src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>  
 		<style>@media screen and (min-width: 480px) { #title { height: 10px; } }</style>
 		<script src="<%=application.getContextPath()%>/resources/js/backtire.js"></script>
-		
+		<link href="<%= application.getContextPath() %>/resources/css/frontcontrol.css" rel="stylesheet" />
 	</head>
 	<body>
+	
 	<h3>집가고 싶다</h3><br/><br/>
 		
     <div class="container-fluid">
@@ -156,6 +157,7 @@
 				</div>
 			</div>
 		</div>
-		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>	
+		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>
+				
 	</body>
 </html>

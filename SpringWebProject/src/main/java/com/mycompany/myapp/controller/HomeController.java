@@ -54,6 +54,7 @@ public class HomeController {
 		model.addAttribute("angle", jsonObject.getString("angle"));
 		model.addAttribute("distance", jsonObject.getString("distance"));
 		
+
 		//RGB
 		//----------------------------------------------------------------------------------------
 		jsonObject = new JSONObject();
@@ -68,9 +69,9 @@ public class HomeController {
 		model.addAttribute("blue", jsonObject.getString("blue"));
 		
 		
-		
-		
-		return "charttest";
+
+		return "home";
+		//return "charttest";
 	}
 	
 	@RequestMapping("/fronttire")
