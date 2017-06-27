@@ -26,7 +26,7 @@ function backtire(command, direction, speed){
 
 }
 function accelerator(direction){
-	for(i=100;i<4095;i+=10){
+	for(i=100;i<4095;i+=5){
 		
 		var speed = String(i);
 		
@@ -47,7 +47,7 @@ function stop(){
 	
 	var speed = String(0);
 	
-	var json = {"command":"changed", "direction": "forward", "speed":speed};
+	var json = {"command":"change", "direction": "forward", "speed":speed};
 	$.ajax({
 		url: "http://"+location.host+"/SpringWebProject/backtire",
 		data: json,

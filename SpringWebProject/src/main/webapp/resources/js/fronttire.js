@@ -1,20 +1,19 @@
 $("#slider").roundSlider({
 	        handleShape: "round",
-	        width: 25,
-	        radius: 100,
+	        width: 15,
+	        radius: 130,
 	        value: 30,
 	        keyboardAction: false,
-	        mouseScrollAction: true,
+	        mouseScrollAction: false,
 	        circleShape: "half-top",
-	        handleSize: "+5",
-	        editableTooltip: false,
+	        handleSize: "+1",
 	        showTooltip: false,
 	        max: "60",
 	        
 	        drag: function (values) {
 	           
 	            console.log(values.value);
-	            var intangle = 110 + (values.value-30);
+	            var intangle = 90 + (values.value-30);
 	            var angle = String(intangle);
 	            var json = {"command":"change", "angle": angle};
 	        	
@@ -32,5 +31,19 @@ $("#slider").roundSlider({
 	        change: function (values) {
 	        	
 	            console.log(values.value);
+	            var intangle = 90 + (values.value-30);
+	            var angle = String(intangle);
+	            var json = {"command":"change", "angle": angle};
+	        	
+	        	$.ajax({
+	        		url: "http://"+location.host+"/SpringWebProject/fronttire",
+	        		data: json,
+	        		method: "post",
+	        		success: function(data){
+	        			if(data.result == "success"){
+	        				$("#fronttireStatus").html("angle="+data.angle);
+	        			}
+	        		} 
+	        	}); 
 	        }
 	    });

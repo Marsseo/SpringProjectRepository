@@ -1,0 +1,32 @@
+#slider .rs-handle  {
+    background-color: transparent;
+    border: 8px solid transparent;
+    border-right-color: black;
+    margin: -14px 0 1px 16px !important;
+}
+#slider .rs-handle:before  {
+    display: block;
+    content: " ";
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background: black;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 100%;
+}
+#slider .rs-handle:after  {
+    display: block;
+    content: " ";
+    width: 96px;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    border-top: 2px dotted black;
+}
+#slider .rs-range-color  {
+    background-color: #8832cd;
+}
+#slider .rs-path-color  {
+    background-color: #ddc5f0;
+}
