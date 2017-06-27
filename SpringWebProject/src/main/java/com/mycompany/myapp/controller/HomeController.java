@@ -1,9 +1,15 @@
 package com.mycompany.myapp.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.CoapResponse;
+import org.eclipse.californium.core.coap.MediaTypeRegistry;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,29 +17,76 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(Model model) {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		String formattedDate = dateFormat.format(date);
+		CoapClient coapClient=null;
+		JSONObject jsonObject=null;
+		String json = null;
+		CoapResponse coapResponse = null;
 		
-		model.addAttribute("serverTime", formattedDate );
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://192.168.3.54/fronttire");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		//json = coapResponse.getResponseText();
 		
 		return "home";
+	}
+	
+	@RequestMapping("/fronttire")
+	public void fronttire(String command, String angle, HttpServletResponse response) throws IOException {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String json = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://192.168.3.54:5683/fronttire");
+		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter pwr = response.getWriter();
+		pwr.write(json);
+		pwr.flush();
+		pwr.close();
+		
+	}
+	
+	@RequestMapping("/backtire")
+	public void backtire(String command, String direction, String speed, HttpServletResponse response) throws IOException {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("direction", direction);
+		jsonObject.put("speed", speed);
+		String json = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://192.168.3.54:5683/backtire");
+		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter pwr = response.getWriter();
+		pwr.write(json);
+		pwr.flush();
+		pwr.close();
+		
 	}
 	
 }
