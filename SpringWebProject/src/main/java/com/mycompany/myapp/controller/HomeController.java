@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	private String ipAddress="192.168.3.52";
+	private String ipAddress="192.168.3.50";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -43,6 +43,7 @@ public class HomeController {
 		//json = coapResponse.getResponseText();
 		
 		return "home";
+//		return "charttest";
 	}
 	
 	@RequestMapping("/fronttire")

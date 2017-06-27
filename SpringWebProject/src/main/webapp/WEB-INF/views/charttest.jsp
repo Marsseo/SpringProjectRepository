@@ -8,15 +8,31 @@
 		<meta name="viewport"	content="width=device-width, initial-scale=1, user-scalable=no">
 		<title>JSP Page</title>
 		<link	href="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/css/bootstrap.min.css"rel="stylesheet" type="text/css" />
-		<script	src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js"	type="text/javascript"></script>
-		<script	src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-		<script	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
-		<script	src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js"	type="text/javascript"></script>
+		<script src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script> 		
+		<!-- 기존 센서 -->
+		<%-- 
+		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/rgbled.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/laseremitter.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensor.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/lcd.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/backtire.js"></script>
+		 --%>
+		<!-- 기존 센서 차트-->
+		<%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/thermistorsensorchart.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
 		<script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script>
 		<script src="<%=application.getContextPath()%>/resources/js/photoresistorsensorchart.js"></script>
 		<script src="<%=application.getContextPath()%>/resources/js/gassensorchart.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/testchart.js"></script>
+		 --%>
+		<!-- 추가 센서 차트-->
+		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
 	</head>
 
 	<body style="background-color: black;">
@@ -24,47 +40,37 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4">
-					<div id="trackingSensorChartContainer"
+					<div id="1ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="thermistorSensorChartContainer"
+					<div id="2ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="photoresistorSensorChartContainer"
+					<div id="3ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<div id="gasSensorChartContainer"
+					<div id="4ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="testchartChartContainer"
+					<div id="5ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="ChartContainer"
+					<div id="6ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<div id="ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+				<div class="col-md-12">
+					<div id="sensorChartContainer" style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>			
 				</div>
-				<div class="col-md-4">
-					<div id="ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
-				</div>
-				<div class="col-md-4">
-					<div id="ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
-				</div>
-			</div>
-	
+			</div>	
 		</div>
 	</body>
 </html>
