@@ -42,8 +42,8 @@ public class HomeController {
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		//json = coapResponse.getResponseText();
 		
-		return "home";
-//		return "charttest";
+//		return "home";
+		return "charttest";
 	}
 	
 	@RequestMapping("/fronttire")
