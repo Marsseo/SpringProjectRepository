@@ -30,7 +30,7 @@ public class GasSensorHandler extends TextWebSocketHandler implements Applicatio
 	private List<WebSocketSession> list = new Vector();
 	private CoapClient coapClient;
 	private CoapObserveRelation coapObserveRelation;
-	private String ipAddress="192.168.3.50";
+	private String ipAddress="192.168.3.54";
 	
 	@PostConstruct
 	public void init() {

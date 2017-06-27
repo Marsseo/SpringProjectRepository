@@ -54,7 +54,6 @@ public class HomeController {
 		model.addAttribute("distance", jsonObject.getString("distance"));
 		
 		return "home";
-		//return "charttest";
 	}
 	
 	@RequestMapping("/fronttire")
@@ -91,6 +90,7 @@ public class HomeController {
 		CoapClient coapClient = new CoapClient();
 		coapClient.setURI("coap://"+ipAddress+"/backtire");
 		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+
 		json = coapResponse.getResponseText();
 		coapClient.shutdown();
 		
