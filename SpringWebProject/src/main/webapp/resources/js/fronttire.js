@@ -14,7 +14,7 @@ $("#slider").roundSlider({
 	        drag: function (values) {
 	           
 	            console.log(values.value);
-	            var intangle = 110 + (values.value-30);
+	            var intangle = 90 + (values.value-30);
 	            var angle = String(intangle);
 	            var json = {"command":"change", "angle": angle};
 	        	

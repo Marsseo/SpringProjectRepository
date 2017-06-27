@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	private String ipAddress="192.168.3.50";
+	private String ipAddress="192.168.3.52";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -41,6 +41,17 @@ public class HomeController {
 		coapClient.setURI("coap://"+ipAddress+"/fronttire");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		//json = coapResponse.getResponseText();
+		
+		//----------------------------------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("angle", jsonObject.getString("angle"));
+		model.addAttribute("distance", jsonObject.getString("distance"));
 		
 		return "home";
 //		return "charttest";
@@ -89,6 +100,26 @@ public class HomeController {
 		pwr.flush();
 		pwr.close();
 		
+	}
+	
+	@RequestMapping("/ultrasonicsensor")
+	public void ultrasonicsensor(String command, String angle,HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");   //coap에 등록해놓은 리소스 이름
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
 	}
 	
 }
