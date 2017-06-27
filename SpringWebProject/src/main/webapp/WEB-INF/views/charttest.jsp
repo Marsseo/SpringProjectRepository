@@ -26,11 +26,11 @@
 		<!-- 기존 센서 차트-->
 		<%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/thermistorsensorchart.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>		
 		<script src="<%=application.getContextPath()%>/resources/js/photoresistorsensorchart.js"></script>
 		<script src="<%=application.getContextPath()%>/resources/js/gassensorchart.js"></script>
 		 --%>
+		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
 		<!-- 추가 센서 차트-->
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
 	</head>
@@ -67,7 +67,25 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-4" >
+					<div class="row">
+						<div class="col-md-6" >
+							<div id="thermistorimg" style="height: 100px; margin-top: 20px; border: 1px solid white;">	</div>
+						</div>
+						<div class="col-md-6" >
+							<div id="trackingsensor" style="height: 100px; margin-top: 20px; border: 1px solid white;">TRACKING</div>
+						</div>
+					</div>			
+					<div class="row">
+						<div class="col-md-6" >
+							<div id="photoresistorimg" style="height: 100px; margin-top: 20px; border: 1px solid white;">	</div>
+						</div>
+						<div class="col-md-6" >
+							<div id="gasimg" style="height: 100px; margin-top: 20px; border: 1px solid white;">	</div>
+						</div>
+					</div>			
+				</div>				
+				<div class="col-md-8">
 					<div id="sensorChartContainer" style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>			
 				</div>
 			</div>	
