@@ -33,9 +33,76 @@
 		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
 		<!-- 추가 센서 차트-->
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
+		
+		<link href="<%= application.getContextPath()%>/resources/css/rgbslider.css" rel="stylesheet"  /> 
+		<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script> 
+		<script>
+       YUI().use('slider', 'color', function(Y){
+                // sliders
+    var rSlider = new Y.Slider({ min: 0, max: 255, value: Math.round(Math.random()*255) }),
+        gSlider = new Y.Slider({ min: 0, max: 255, value: Math.round(Math.random()*255) }),
+        bSlider = new Y.Slider({ min: 0, max: 255, value: Math.round(Math.random()*255) }),
+
+        // slider values
+        rVal = Y.one('#r-val'),
+        gVal = Y.one('#g-val'),
+        bVal = Y.one('#b-val'),
+
+        // color strings
+        hex = Y.one('#hex'),
+        rgb = Y.one('#rgb'),
+        hsl = Y.one('#hsl'),
+
+        // color chip
+        color = Y.one('.color');
+
+    // render sliders
+    rSlider.render('#r-slider');
+    gSlider.render('#g-slider');
+    bSlider.render('#b-slider');
+
+
+                // register update events
+    rSlider.after('thumbMove', function(e) {
+        rVal.set('text', rSlider.get('value'));
+        updateColors();
+    });
+    gSlider.after('thumbMove', function(e) {
+        gVal.set('text', gSlider.get('value'));
+        updateColors();
+    });
+    bSlider.after('thumbMove', function(e) {
+        bVal.set('text', bSlider.get('value'));
+        updateColors();
+    });
+
+    // update the colors strings
+    function updateColors() {
+        var r = rSlider.get('value'),
+            g = gSlider.get('value'),
+            b = bSlider.get('value'),
+            rgbStr = Y.Color.fromArray([r,g,b], Y.Color.TYPES.RGB);
+
+        color.setStyle('backgroundColor', rgbStr);
+
+        rgb.set('text', rgbStr);
+
+        hex.set('text', Y.Color.toHex(rgbStr));
+        hsl.set('text', Y.Color.toHSL(rgbStr));
+    }
+
+
+            
+    rVal.set('text', rSlider.get('value'));
+    gVal.set('text', gSlider.get('value'));
+    bVal.set('text', bSlider.get('value'));
+    updateColors();
+
+            });
+        </script>
 	</head>
 
-	<body style="background-color: black;">
+	<body style="background-color: #2a2a2a;">
 		<h4>splinechart</h4>
 		<div class="container-fluid">
 			<div class="row">
@@ -64,6 +131,22 @@
 				<div class="col-md-4">
 					<div id="6ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+						
+						<div class="sliders yui3-skin-sam">
+						    <dl>
+						        <dt>R: <span id="r-val" class="val" ></span></dt><dd id="r-slider"></dd>
+						        <dt>G: <span id="g-val" class="val"></span></dt><dd id="g-slider"></dd>
+						        <dt>B: <span id="b-val" class="val"></span></dt><dd id="b-slider"></dd>
+						    </dl>
+						</div>
+						<div class="color"></div>
+						<div class="output">
+						    <dl>
+						        <dt>Hex:</dt><dd id="hex"></dd>
+						        <dt>RGB:</dt><dd id="rgb"></dd>
+						        <dt>HSL:</dt><dd id="hsl"></dd>
+						    </dl>
+						</div>
 				</div>
 			</div>
 			<div class="row">
