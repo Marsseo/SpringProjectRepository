@@ -19,16 +19,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class HomeController {
+public class HomeController2 {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController2.class);
 	private String ipAddress="192.168.3.50";
 	
-	@RequestMapping(value = "/jm", method = RequestMethod.GET)
+	@RequestMapping(value = "/hs", method = RequestMethod.GET)
 	public String home(Model model) {
 		
-	return "charttest";
 		
+		CoapClient coapClient=null;
+		JSONObject jsonObject=null;
+		String json = null;
+		CoapResponse coapResponse = null;
+		
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/fronttire");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		//json = coapResponse.getResponseText();
+		
+//		return "home";
+		return "charttest2";
 	}
 	
 }
