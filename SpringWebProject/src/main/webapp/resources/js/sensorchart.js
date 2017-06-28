@@ -40,7 +40,7 @@ $(function() {
 
 function requestSensorData() {
 	var ws = new WebSocket("ws://" + location.host
-			+ "/SensingCarRemoteWebControl/websocket/thermistorsensor");
+			+ "/SpringWebProject/websocket/thermistorsensor");
 	ws.onmessage = function(event) {
 		var data = JSON.parse(event.data);
 		console.log("Data: " + data.temperature);
@@ -54,7 +54,7 @@ function requestSensorData() {
 		series1.addPoint([ data.time, data.temperature ], true, shift);
 	};
 	var ws2 = new WebSocket("ws://" + location.host
-			+ "/SensingCarRemoteWebControl/websocket/photoresistorsensor");
+			+ "/SpringWebProject/websocket/photoresistorsensor");
 	ws2.onmessage = function(event) {
 		var data = JSON.parse(event.data);
 		var series2 = sensorChart.series[1];
@@ -62,14 +62,14 @@ function requestSensorData() {
 		series2.addPoint([ data.time, data.photoresistor ], true, shift);
 	};
 	var ws3 = new WebSocket("ws://" + location.host
-			+ "/SensingCarRemoteWebControl/websocket/gassensor");
+			+ "/SpringWebProject/websocket/gassensor");
 	ws3.onmessage = function(event) {
 		var data = JSON.parse(event.data);		
 		var series3 = sensorChart.series[2];
 		var shift = series3.data.length > 20;
 		series3.addPoint([ data.time, data.gas ], true, shift);
 	};
-	var ws4 = new WebSocket("ws://" + location.host + "/SensingCarRemoteWebControl/websocket/trackingsensor");
+	var ws4 = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/trackingsensor");
 	ws4.onmessage = function(event) {
 		var data = JSON.parse(event.data);
 		console.log(data.color);
