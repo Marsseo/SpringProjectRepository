@@ -45,5 +45,24 @@ public class HomeController1 {
 //		return "home";
 		return "charttest1";
 	}
+	@RequestMapping("/ultrasonicsensor")
+	public void ultrasonicsensor(String command, String angle,HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");   //coap에 등록해놓은 리소스 이름
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
 	
 }
