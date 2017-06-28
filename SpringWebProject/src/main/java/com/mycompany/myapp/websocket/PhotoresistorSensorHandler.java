@@ -24,13 +24,15 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.mycompany.myapp.controller.IpAdress;
+
 @Component
 public class PhotoresistorSensorHandler extends TextWebSocketHandler implements ApplicationListener{
 	private static final Logger logger = LoggerFactory.getLogger(PhotoresistorSensorHandler.class);
 	private List<WebSocketSession> list = new Vector();
 	private CoapClient coapClient;
 	private CoapObserveRelation coapObserveRelation;
-	private String ipAddress="192.168.3.54";
+	private String ipAddress=IpAdress.getIpAddress();
 	
 	@PostConstruct
 	public void init() {
