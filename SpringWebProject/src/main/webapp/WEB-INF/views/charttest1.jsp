@@ -11,7 +11,8 @@
 		<script src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js"	type="text/javascript"></script>
 		<script src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script> 		
+		<script src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensor.js"></script> 		
 		<!-- 기존 센서 -->
 		<%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
@@ -30,9 +31,23 @@
 		<script src="<%=application.getContextPath()%>/resources/js/photoresistorsensorchart.js"></script>
 		<script src="<%=application.getContextPath()%>/resources/js/gassensorchart.js"></script>
 		 --%>
-		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
+		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> 
+		 <script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>--%>
 		<!-- 추가 센서 차트-->
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
+		<script type="text/javascript">
+		var test=function ultrasonicsensor();
+		var ws = new WebSocket("ws://"+location.host+"/SpringWebProject/websocket/ultrasonicsensor");
+		//ws.onopen=handleOnOpen;
+		ws.onmessage=handleOnMessage;
+		//ws.onclose=handleOnClose;
+		
+		function handleOnMessage(event){
+			 var data= JSON.parse(event.data); //JSON.parse는 문자열로 되어있는 제이슨( '{"xxx":"value"}')을 javascript객체( {"xxx":"value"} )로 만들어주는 작업을함
+				$("#ultrasonicsensorStatus").html("distance :"+data.distance+";");
+			
+		}
+		</script>
 	</head>
 
 	<body style="background-color: black;">
@@ -58,8 +73,8 @@
 						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 				</div>
 				<div class="col-md-4">
-					<div id="5ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+					<div 
+						style="height: 230px; margin-top: 20px; border: 1px solid white;"><span id="ultrasonicsensorStatus">angle=${angle}; distance=${distance}</span></div>
 				</div>
 				<div class="col-md-4">
 					<div id="6ChartContainer"
