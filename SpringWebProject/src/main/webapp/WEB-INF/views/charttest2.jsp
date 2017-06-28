@@ -33,6 +33,12 @@
 		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
 		<!-- 추가 센서 차트-->
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
+		<link href="<%= application.getContextPath() %>/resources/css/roundslider.min.css" rel="stylesheet" />
+		<script src="<%= application.getContextPath() %>/resources/js/roundslider.min.js"></script>
+		<style>@media screen and (min-width: 480px) { #title { height: 10px; } }</style>
+		<script src="<%=application.getContextPath()%>/resources/js/backtire.js"></script>
+		<link href="<%= application.getContextPath() %>/resources/css/frontcontrol.css" rel="stylesheet" />
+		<script src="<%= application.getContextPath() %>/resources/js/speedgauge.js"></script>
 	</head>
 
 	<body style="background-color: black;">
@@ -49,7 +55,14 @@
 				</div>
 				<div class="col-md-4">
 					<div id="3ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+						style="height: 230px; margin-top: 20px; border: 1px solid white;">
+						<div id="slider" class="rslider" style="text-align: center;"></div>
+						<div id="speed" style="float:right;"></div>
+						<span id="fronttireStatus">${fronttireAngle}</span><br/>
+						<span id="backtireStatus">direction: ${backtireDirection}; speed: ${backtireSpeed}</span><br/>
+						<button onmousedown="accelerator('forward')" onmouseup="stop()" style="color: black;">가속 패달</button>									
+						<button onclick="stop()" style="color: black;">정지 패달</button>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -90,5 +103,6 @@
 				</div>
 			</div>	
 		</div>
+		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>
 	</body>
 </html>
