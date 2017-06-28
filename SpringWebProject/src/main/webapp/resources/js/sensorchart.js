@@ -39,8 +39,8 @@ $(function() {
 });
 
 function requestSensorData() {
-	var ws = new WebSocket("ws://" + location.host
-			+ "/SpringWebProject/websocket/thermistorsensor");
+	var ws = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/thermistorsensor");
+	console.log(ws);
 	ws.onmessage = function(event) {
 		var data = JSON.parse(event.data);
 		console.log("Data: " + data.temperature);
@@ -52,6 +52,7 @@ function requestSensorData() {
 		var series1 = sensorChart.series[0];
 		var shift = series1.data.length > 20;
 		series1.addPoint([ data.time, data.temperature ], true, shift);
+		console.log(data.temperature);
 	};
 	var ws2 = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/photoresistorsensor");
@@ -72,8 +73,8 @@ function requestSensorData() {
 	var ws4 = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/trackingsensor");
 	ws4.onmessage = function(event) {
 		var data = JSON.parse(event.data);
-		console.log(data.color);
-		if(data.color == "white"){
+
+		if(data.tracking == "white"){
 			$('#trackingsensor').css("background-color", "white");
 		} else {
 			$('#trackingsensor').css("background-color", "black");

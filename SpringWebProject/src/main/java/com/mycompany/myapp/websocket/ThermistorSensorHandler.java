@@ -34,6 +34,7 @@ public class ThermistorSensorHandler extends TextWebSocketHandler implements App
 	private CoapObserveRelation coapObserveRelation;
 	private String ipAddress=IpAdress.getIpAddress();
 	
+	
 	@PostConstruct
 	public void init() {
 		coapClient = new CoapClient();
