@@ -57,7 +57,7 @@
 					<div id="3ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;">
 						<div id="slider" class="rslider" style="text-align: center;"></div>
-						<div id="speed" style="float:right;"></div>
+						<div id="speedContainer" style="float:right;"></div>
 						<span id="fronttireStatus">${fronttireAngle}</span><br/>
 						<span id="backtireStatus">direction: ${backtireDirection}; speed: ${backtireSpeed}</span><br/>
 						<button onmousedown="accelerator('forward')" onmouseup="stop()" style="color: black;">가속 패달</button>									

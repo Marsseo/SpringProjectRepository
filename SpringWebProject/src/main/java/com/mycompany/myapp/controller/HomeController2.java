@@ -24,7 +24,7 @@ public class HomeController2 {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController2.class);
 	private String ipAddress=IpAdress.getIpAddress();
 	
-	@RequestMapping(value = "/hs", method = RequestMethod.GET)
+	@RequestMapping("/hs")
 	public String home(Model model) {
 		
 		
@@ -42,7 +42,7 @@ public class HomeController2 {
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		//json = coapResponse.getResponseText();
 		
-//		return "home";
+
 		return "charttest2";
 	}
 	
