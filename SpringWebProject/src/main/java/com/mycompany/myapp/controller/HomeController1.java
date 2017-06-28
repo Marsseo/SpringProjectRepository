@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController1 {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController1.class);
-	private String ipAddress="192.168.3.50";
+	private String ipAddress=IpAdress.getIpAddress();
 	
 	@RequestMapping(value = "/cm", method = RequestMethod.GET)
 	public String home(Model model) {

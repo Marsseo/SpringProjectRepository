@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController2 {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController2.class);
-	private String ipAddress="192.168.3.50";
+	private String ipAddress=IpAdress.getIpAddress();
 	
 	@RequestMapping(value = "/hs", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -45,5 +45,51 @@ public class HomeController2 {
 //		return "home";
 		return "charttest2";
 	}
+	
+
+	@RequestMapping("/fronttire")
+	public void fronttire(String command, String angle, HttpServletResponse response) throws IOException {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String json = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/fronttire");
+		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter pwr = response.getWriter();
+		pwr.write(json);
+		pwr.flush();
+		pwr.close();
+		
+	}
+	
+	@RequestMapping("/backtire")
+	public void backtire(String command, String direction, String speed, HttpServletResponse response) throws IOException {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("direction", direction);
+		jsonObject.put("speed", speed);
+		String json = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/backtire");
+		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter pwr = response.getWriter();
+		pwr.write(json);
+		pwr.flush();
+		pwr.close();
+		
+	}	
 	
 }
