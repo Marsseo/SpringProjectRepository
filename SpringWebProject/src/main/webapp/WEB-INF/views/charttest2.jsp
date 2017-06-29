@@ -65,8 +65,8 @@
 						<div id="speedContainer" style="float:right"></div><br/>
 						<span id="fronttireStatus">Angle : ${fronttireAngle}</span><br/>
 						<span id="backtireStatus">direction : ${backtireDirection}| speed : ${backtireSpeed}</span><br/>
-						<button onmousedown="accelerator('forward')" onmouseup="stop()" style="color: black;">가속 패달</button>									
-						<button onclick="stop()" style="color: black;">정지 패달</button>
+						<button onmousedown="accelerator('forward')" onmouseup="stop('1')" style="color: black;">가속 패달</button>									
+						<button onclick="stop('1')" style="color: black;">정지 패달</button>
 					</div>
 				</div>
 			</div>

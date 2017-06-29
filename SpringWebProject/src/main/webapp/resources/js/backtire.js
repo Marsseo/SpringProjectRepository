@@ -59,7 +59,7 @@ function accelerator(direction){
 		});
 	}
 }
-function stop(){
-	
-	return true;
+function stop(a){
+	if(a=="") return true;
+	else return false;
 }
