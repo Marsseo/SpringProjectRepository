@@ -42,6 +42,7 @@ public class HomeController1 {
 		jsonObject = new JSONObject(json);
 		model.addAttribute("angle", jsonObject.getString("angle"));
 		model.addAttribute("distance", jsonObject.getString("distance"));
+		model.addAttribute("change","null");
 		
 		return "charttest1";
 	}
