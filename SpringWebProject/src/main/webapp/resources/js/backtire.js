@@ -19,7 +19,8 @@ function backtire(command, direction, speed){
 		method: "post",
 		success: function(data){
 			if(data.result == "success"){
-				$("#backtireStatus").html("direction="+data.direction+"; speed="+data.speed);
+				$("#backtireStatus").html("direction="+data.direction+" |");
+				$("#backtireSpeed").html(data.speed);
 			}
 		} 
 	});
@@ -31,21 +32,6 @@ function accelerator(direction){
 		
 		var speed = String(i);
 		
-		if(stop()){
-			speed=String(0);
-			var json = {"command":"change", "direction":direction, "speed":speed};
-			$.ajax({
-				url: "http://"+location.host+"/SpringWebProject/backtire",
-				data: json,
-				method: "post",
-				success: function(data){
-					if(data.result == "success"){
-						$("#backtireStatus").html("direction="+data.direction+"; speed="+data.speed);
-					}
-				} 
-			});
-			break;
-		}
 		var json = {"command":"change", "direction":direction, "speed":speed};
 		$.ajax({
 			url: "http://"+location.host+"/SpringWebProject/backtire",
@@ -53,13 +39,25 @@ function accelerator(direction){
 			method: "post",
 			success: function(data){
 				if(data.result == "success"){
-					$("#backtireStatus").html("direction="+data.direction+"; speed="+data.speed);
+					$("#backtireStatus").html("direction="+data.direction+" |");
+					$("#backtireSpeed").html(data.speed);
 				}
 			} 
 		});
 	}
 }
-function stop(a){
-	if(a=="") return true;
-	else return false;
+function stop(){
+	var speed=String(0);
+	var json = {"command":"change", "direction":"forward", "speed":speed};
+	$.ajax({
+		url: "http://"+location.host+"/SpringWebProject/backtire",
+		data: json,
+		method: "post",
+		success: function(data){
+			if(data.result == "success"){
+				$("#backtireStatus").html("direction="+data.direction+" |");
+				$("#backtireSpeed").html(data.speed);
+			}
+		} 
+	});
 }

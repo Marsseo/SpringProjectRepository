@@ -13,9 +13,10 @@
 
 <AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="800.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.FXMLDocumentController">
    <children>
+
       <JFXToolbar layoutX="184.0" layoutY="14.0" prefHeight="40.0" prefWidth="1360.0" style="-fx-min-height: 42; -fx-background-color: #222D32;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <Label prefHeight="23.0" prefWidth="228.0" style="-fx-font-size: 20; -fx-text-fill: #7387A8; -fx-font-weight: bold;" text="FX DASHBOARD" BorderPane.alignment="CENTER">
+            <Label prefHeight="23.0" prefWidth="358.0" style="-fx-font-size: 20; -fx-text-fill: #7387A8; -fx-font-weight: bold;" text="IoT SENSING CAR DASHBOARD" BorderPane.alignment="CENTER">
                <padding>
                   <Insets left="40.0" />
                </padding>
@@ -24,7 +25,7 @@
       </JFXToolbar>
       <VBox layoutY="40.0" prefHeight="720.0" prefWidth="140.0" style="-fx-background-color: #2A3F54;">
          <children>
-            <Label prefHeight="60.0" prefWidth="140.0" style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;" text="NAVIGATION" />
+            <Label prefHeight="60.0" prefWidth="140.0" style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;" text="MENU" />
             <JFXButton fx:id="btnHome" prefHeight="42.0" prefWidth="139.0" style="-fx-alignment: left;" styleClass="nav-button" text="Home" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
