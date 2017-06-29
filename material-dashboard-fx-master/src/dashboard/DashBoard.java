@@ -11,10 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author danml
- */
+
 public class DashBoard extends Application {
     
     @Override
@@ -24,12 +21,13 @@ public class DashBoard extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+	
+//	stage.setMaxWidth(830);
+//        stage.setMaxHeight(520);
         stage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         launch(args);
     }
