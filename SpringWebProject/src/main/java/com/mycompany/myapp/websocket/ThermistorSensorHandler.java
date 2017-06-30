@@ -45,6 +45,7 @@ public class ThermistorSensorHandler extends TextWebSocketHandler implements App
 			public void onLoad(CoapResponse response) {
 				String json = response.getResponseText();
 				JSONObject jsonObject = new JSONObject(json);
+//				double temperature = Math.round(Double.parseDouble(jsonObject.getString("temperature"))*10)/10.0;
 				double doubleT = Double.parseDouble(jsonObject.getString("temperature"));
 				int temperature = (int)doubleT;
 				jsonObject = new JSONObject();
