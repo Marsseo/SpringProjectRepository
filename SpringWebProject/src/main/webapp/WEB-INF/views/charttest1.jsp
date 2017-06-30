@@ -25,11 +25,17 @@
 	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/exporting.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
-<link rel="stylesheet"
-	href="<%=application.getContextPath()%>/resources/slider/slider.css">
-
+	<script src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
+	
+		<script
+	src="<%=application.getContextPath()%>/resources/css/ultraslider.css"></script>
+		<script
+	src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
+		<script src="<%= application.getContextPath() %>/resources/js/roundslider.min.js"></script>
+		<link href="<%= application.getContextPath() %>/resources/css/roundslider.min.css" rel="stylesheet" />
+
 <!-- 기존 센서 -->
 <%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
@@ -193,41 +199,21 @@ body {
 }
 </style>
 
-<!--  3d 글씨 -->
-
-<style>
-body {
-	background-color: #444;
-}
-
-h1 {
-	margin: 0;
-	font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #fff;
-	text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0
-		#b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px
-		rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px
-		rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px
-		rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
-	-webkit-transition: .2s all linear;
-	letter-spacing: -2px;
-}
-
-h1:hover {
-	cursor: text;
-}
-
-h1:focus {
-	outline: none;
-}
-</style>
 </head>
 
 <body style="background-color: black;">
 
 	<h4>splinechart</h4>
+	
+	<div style="width: 600px; height: 400px; margin: 0 auto">
+    <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+</div>
+	
+	
+	
 
-	<!-- 토글버튼 -->
+	    <!-- 토글버튼 -->
+	    
 	<section class="container">
 		<div class="switch">
 			<input type="radio" class="switch-input" name="view" value="week"
@@ -278,28 +264,23 @@ h1:focus {
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<div id="4ChartContainer"
+				<div id="ultraSensorChartContainer"
 					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 			</div>
 			<div class="col-md-4">
-				<div
-					style="height: 230px; margin-top: 20px; border: 1px solid white;">
-					<div id="player"
-						style="width: 30px; height: 100px;">
-						<div id="volume" style="width: 100px; height: 20px;"></div>
-					</div>
-				</div>
+				<div id="5ChartContainer" style="height: 230px; margin-top: 20px; border: 1px solid white;">
 					<span id="ultrasonicsensorStatus" contenteditable="true">angle=${angle};
 						distance=${distance}</span>
 					<hr />
 					<a href="html/exam01" class="btn btn-warning">그래프보기</a>
 					<hr />
+				</div>
 					
 
 
 			</div>
 			<div class="col-md-4">
-				<div id="6ChartContainer"
+				<div id="handle2"
 					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 			</div>
 		</div>
@@ -335,14 +316,7 @@ h1:focus {
 			</div>
 		</div>
 	</div>
-
-	<!-- 추가 -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript"
-		src="<%=application.getContextPath()%>/resources/slider/slider.js"></script>
+	
 
 </body>
 </html>
