@@ -24,7 +24,7 @@ public class HomeController2 {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController2.class);
 	private String ipAddress=IpAdress.getIpAddress();
 	
-	@RequestMapping("/hs")
+	@RequestMapping(value = "/hs", method = RequestMethod.GET)
 	public String home(Model model) {
 		
 		
@@ -40,8 +40,23 @@ public class HomeController2 {
 		coapClient = new CoapClient();
 		coapClient.setURI("coap://"+ipAddress+"/fronttire");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
-		//json = coapResponse.getResponseText();
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("fronttireAngle", jsonObject.getString("angle"));	
+
+
+//--------------------------------------------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://192.168.3.54/backtire");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("backtireDirection", jsonObject.getString("direction"));	
+		model.addAttribute("backtireSpeed", jsonObject.getString("speed"));
 		
+//--------------------------------------------------------------------------------------------------
 
 		return "charttest2";
 	}

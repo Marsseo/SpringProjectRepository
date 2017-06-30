@@ -1,117 +1,109 @@
-var speedgauge;
+var currSpeed = parseInt($("#backtireSpeed").val);
 
-$(function(){
-	speedgauge = new Highcharts.chart('speedContainer', {
+$( function(){
+	console.log("speed : "+currSpeed);
+	var gaugeOptions = {
 
 	    chart: {
-	        type: 'gauge',
-	        plotBackgroundColor: null,
-	        plotBackgroundImage: null,
-	        plotBorderWidth: 0,
-	        plotShadow: false
+	        type: 'solidgauge'
 	    },
 
-	    title: {
-	        text: 'Speed'
-	    },
+	    title: null,
 
 	    pane: {
-	        startAngle: -150,
-	        endAngle: 150,
-	        background: [{
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#FFF'],
-	                    [1, '#333']
-	                ]
-	            },
-	            borderWidth: 0,
-	            outerRadius: '109%'
-	        }, {
-	            backgroundColor: {
-	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-	                stops: [
-	                    [0, '#333'],
-	                    [1, '#FFF']
-	                ]
-	            },
-	            borderWidth: 1,
-	            outerRadius: '107%'
-	        }, {
-	            // default background
-	        }, {
-	            backgroundColor: '#DDD',
-	            borderWidth: 0,
-	            outerRadius: '105%',
-	            innerRadius: '103%'
-	        }]
+	        center: ['50%', '85%'],
+	        size: '150%',
+	        startAngle: -90,
+	        endAngle: 90,
+	        background: {
+	            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+	            innerRadius: '60%',
+	            outerRadius: '100%',
+	            shape: 'arc'
+	        }
+	    },
+
+	    tooltip: {
+	        enabled: false
 	    },
 
 	    // the value axis
 	    yAxis: {
-	        min: 300,
-	        max: 4000,
-
-	        minorTickInterval: 'auto',
-	        minorTickWidth: 1,
-	        minorTickLength: 10,
-	        minorTickPosition: 'inside',
-	        minorTickColor: '#666',
-
-	        tickPixelInterval: 30,
-	        tickWidth: 2,
-	        tickPosition: 'inside',
-	        tickLength: 10,
-	        tickColor: '#666',
-	        labels: {
-	            step: 2,
-	            rotation: 'auto'
-	        },
+	        stops: [
+	            [0.1, '#55BF3B'], // green
+	            [0.5, '#DDDF0D'], // yellow
+	            [0.9, '#DF5353'] // red
+	        ],
+	        lineWidth: 0,
+	        minorTickInterval: null,
+	        tickAmount: 2,
 	        title: {
-	            text: 'km/h'
+	            y: -70
 	        },
-	        plotBands: [{
-	            from: 300,
-	            to: 2000,
-	            color: '#55BF3B' // green
-	        }, {
-	            from: 2000,
-	            to: 3000,
-	            color: '#DDDF0D' // yellow
-	        }, {
-	            from: 3000,
-	            to: 4000,
-	            color: '#DF5353' // red
-	        }]
+	        labels: {
+	            y: 16
+	        }
+	    },
+
+	    plotOptions: {
+	        solidgauge: {
+	            dataLabels: {
+	                y: 5,
+	                borderWidth: 0,
+	                useHTML: true
+	            }
+	        }
+	    }
+	};
+
+	// The speed gauge
+	var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
+	    yAxis: {
+	        min: 300,
+	        max: 4095,
+	        title: {
+	            text: 'Speed'
+	        }
+	    },
+
+	    credits: {
+	        enabled: false
 	    },
 
 	    series: [{
 	        name: 'Speed',
-	        data: [80],
+	        data: [0],
+	        dataLabels: {
+	            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+	                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+	                   '<span style="font-size:12px;color:silver">pwm</span></div>'
+	        },
 	        tooltip: {
-	            valueSuffix: ' km/h'
+	            valueSuffix: 'pwm'
 	        }
 	    }]
 
-	},
-	// Add some life
-	function (chart) {
-	    if (!chart.renderer.forExport) {
-	        setInterval(function () {
-	            var point = chart.series[0].points[0],
-	                newVal,
-	                inc = Math.round((Math.random() - 0.5) * 20);
+	}));
 
-	            newVal = point.y + inc;
-	            if (newVal < 0 || newVal > 200) {
-	                newVal = point.y - inc;
-	            }
+	// Bring life to the dials
+	setInterval(function () {
+	    // Speed
+	    var point,
+	        newVal,
+	        inc;
 
-	            point.update(newVal);
+	    if (chartSpeed) {
+	        point = chartSpeed.series[0].points[0];
+	        inc = currSpeed;
+	        newVal = point.y + inc;
 
-	        }, 3000);
+	        if (newVal < 0 || newVal > 200) {
+	            newVal = point.y - inc;
+	        }
+
+	        point.update(newVal);
 	    }
-	});
-	
+	    
+	}, 2000);
 });
+

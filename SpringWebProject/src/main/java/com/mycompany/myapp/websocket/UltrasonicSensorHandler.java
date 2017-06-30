@@ -70,7 +70,7 @@ public class UltrasonicSensorHandler extends TextWebSocketHandler implements App
 	// 연결이 되었을 경우 자동 실행
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		logger.info("");
+		logger.info("시작됨");
 		// 연결시 list 에 세션 저장
 		list.add(session);
 	}

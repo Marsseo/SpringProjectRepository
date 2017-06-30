@@ -27,9 +27,8 @@ public class HomeController1 {
 	@RequestMapping(value = "/cm", method = RequestMethod.GET)
 	public String home(Model model) {
 		
-		
-		CoapClient coapClient=null;
-		JSONObject jsonObject=null;
+		CoapClient coapClient = new CoapClient();
+		JSONObject jsonObject = null;
 		String json = null;
 		CoapResponse coapResponse = null;
 		
@@ -37,12 +36,14 @@ public class HomeController1 {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient = new CoapClient();
-		coapClient.setURI("coap://"+ipAddress+"/fronttire");
+		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
-		//json = coapResponse.getResponseText();
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("angle", jsonObject.getString("angle"));
+		model.addAttribute("distance", jsonObject.getString("distance"));
+		model.addAttribute("change","null");
 		
-//		return "home";
 		return "charttest1";
 	}
 	@RequestMapping("/ultrasonicsensor")
