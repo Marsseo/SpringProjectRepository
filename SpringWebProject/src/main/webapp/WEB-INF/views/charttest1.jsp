@@ -60,8 +60,9 @@
 <script
 	src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
 <script type="text/javascript">
-	var ws = new WebSocket("ws://" + location.host
+	ws = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/ultrasonicsensor");
+	/*
 	//ws.onopen=handleOnOpen;
 	ws.onmessage = handleOnMessage;
 	//ws.onclose=handleOnClose;
@@ -70,6 +71,7 @@
 		var data = JSON.parse(event.data); //JSON.parse는 문자열로 되어있는 제이슨( '{"xxx":"value"}')을 javascript객체( {"xxx":"value"} )로 만들어주는 작업을함
 		$("#ultrasonicsensorStatus").html("앞차와의 거리 :" + data.distance + ";");
 	}
+	*/
 </script>
 
 <!-- 스타일 폰트 -->

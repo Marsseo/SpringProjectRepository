@@ -7,11 +7,14 @@ $("#ultrahandle").roundSlider({
     handleSize: 0,
     handleShape: "square",
     circleShape: "half-top",
-
     drag: function (args) {
         console.log(args.handle.angle);
+     //   var json = {"command":"change", "angle":args.handle.angle};
+      
     },
     change: function (args) {
     	console.log(args.handle.angle);
+    	var json = {"command":"change", "angle":args.handle.angle};
+        ws.send(json);
     }
 });
