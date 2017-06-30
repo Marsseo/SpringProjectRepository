@@ -49,7 +49,7 @@ public class HomeController2 {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://192.168.3.54/backtire");
+		coapClient.setURI("coap://"+ipAddress+"/backtire");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -85,7 +85,7 @@ public class HomeController2 {
 	}
 	
 	@RequestMapping("/backtire")
-	public void backtire(String command, String direction, String speed, HttpServletResponse response) throws IOException {
+	public void backtire(String command, String direction, String speed, HttpServletResponse response, Model model) throws IOException {
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("command", command);

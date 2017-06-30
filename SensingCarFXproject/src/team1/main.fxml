@@ -13,7 +13,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="800.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team1.MainController">
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="800.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ToolBar layoutX="184.0" layoutY="14.0" prefHeight="40.0" prefWidth="800.0" style="-fx-min-height: 42; -fx-background-color: #222D32;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -28,7 +28,7 @@
       </ToolBar>
       <VBox layoutY="40.0" prefHeight="442.0" prefWidth="120.0" style="-fx-background-color: #2A3F54;">
          <children>
-            <Label prefHeight="50.0" prefWidth="140.0" style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;" text="MENU" />
+            <Label prefHeight="51.0" prefWidth="140.0" style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;" text="MENU" />
             <Button fx:id="btnHome" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Home" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
@@ -37,7 +37,7 @@
                   
                </graphic>
             </Button>
-            <Button fx:id="btnPricing" layoutX="10.0" layoutY="67.0" onAction="#switchPricing" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Pricing" textFill="#a1aec4">
+            <Button fx:id="btnController" layoutX="10.0" layoutY="67.0" onAction="#switchPricing" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Controller" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -45,7 +45,7 @@
                   
                </graphic>
             </Button>
-            <Button fx:id="btnContacts" layoutX="10.0" layoutY="109.0" onAction="#switchContacts" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Contacts" textFill="#a1aec4">
+            <Button fx:id="btnCharts" layoutX="10.0" layoutY="109.0" onAction="#switchContacts" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Chart" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -53,7 +53,7 @@
                 
                </graphic>
             </Button>
-            <Button fx:id="btnWidgets" layoutX="10.0" layoutY="151.0" onAction="#switchWidget" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Widgets" textFill="#a1aec4">
+            <Button fx:id="btnCamera" layoutX="10.0" layoutY="151.0" onAction="#switchWidget" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Camera" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -61,7 +61,7 @@
                   
                </graphic>
             </Button>
-            <Button fx:id="btnProfile" layoutX="10.0" layoutY="193.0" onAction="#switchProfile" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Profile" textFill="#a1aec4">
+            <Button fx:id="btnRgbnNF" layoutX="10.0" layoutY="193.0" onAction="#switchProfile" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="RGB &amp; OnOff" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -69,7 +69,7 @@
                 
                </graphic>
             </Button>
-            <Button fx:id="btnAlerts" layoutX="10.0" layoutY="235.0" onAction="#switchAlert" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Alerts" textFill="#a1aec4">
+            <Button layoutX="10.0" layoutY="235.0" onAction="#switchAlert" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Alerts" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -77,7 +77,7 @@
                  
                </graphic>
             </Button>
-            <Button fx:id="btnControls" onAction="#switchControls" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Controls" textFill="#a1aec4">
+            <Button onAction="#switchControls" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Controls" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -87,6 +87,6 @@
             </Button>
          </children>
       </VBox>
-      <AnchorPane fx:id="holderPane" layoutX="140.0" layoutY="42.0" prefHeight="438.0" prefWidth="640.0" />
+      <AnchorPane fx:id="holderPane" layoutX="120.0" layoutY="42.0" prefHeight="440.0" prefWidth="680.0" />
    </children>
 </AnchorPane>

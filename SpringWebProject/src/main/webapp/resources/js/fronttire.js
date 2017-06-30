@@ -1,8 +1,10 @@
+var currAngle = Number($('#angle').val())-60;
+
 $("#slider").roundSlider({
 	        handleShape: "round",
 	        width: 16,
 	        radius: 130,
-	        value: 30,
+	        value: currAngle,
 	        keyboardAction: false,
 	        mouseScrollAction: false,
 	        circleShape: "half-top",
@@ -11,7 +13,6 @@ $("#slider").roundSlider({
 	        
 	        drag: function (values) {
 	           
-	            console.log(values.value);
 	            var intangle = 90 + (values.value-30);
 	            var angle = String(intangle);
 	            var json = {"command":"change", "angle": angle};
@@ -23,13 +24,13 @@ $("#slider").roundSlider({
 	        		success: function(data){
 	        			if(data.result == "success"){
 	        				$("#fronttireStatus").html("angle="+data.angle);
+	        				$("#angle").val(data.angle)
 	        			}
 	        		} 
 	        	}); 
 	        },
 	        change: function (values) {
 	        	
-	            console.log(values.value);
 	            var intangle = 90 + (values.value-30);
 	            var angle = String(intangle);
 	            var json = {"command":"change", "angle": angle};
@@ -41,6 +42,7 @@ $("#slider").roundSlider({
 	        		success: function(data){
 	        			if(data.result == "success"){
 	        				$("#fronttireStatus").html("angle="+data.angle);
+	        				$("#angle").val(data.angle)
 	        			}
 	        		} 
 	        	}); 

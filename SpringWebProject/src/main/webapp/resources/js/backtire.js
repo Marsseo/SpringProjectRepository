@@ -1,3 +1,9 @@
+var currSpeed = $('#speed').val();
+var currDirection = $('#direction').val();
+
+function backtireControl(event){
+	
+}
 function backtire(command, direction, speed){
 	console.log("d: "+backtireStatus.direction);
 	if(direction=="") {
@@ -11,7 +17,7 @@ function backtire(command, direction, speed){
 	else backtireStatus.speed = speed; 
 	console.log("d: "+direction);
 	console.log("s: "+speed);
-	var json = {"command":command, "direction": direction, "speed":speed};
+	var json = {"command":"change", "direction": direction, "speed":speed};
 	
 	$.ajax({
 		url: "http://"+location.host+"/SpringWebProject/backtire",
@@ -19,8 +25,8 @@ function backtire(command, direction, speed){
 		method: "post",
 		success: function(data){
 			if(data.result == "success"){
-				$("#backtireStatus").html("direction="+data.direction+" |");
-				$("#backtireSpeed").html(data.speed);
+				$("#backtireStatus").html("direction : "+data.direction+" | speed : "+data.speed);
+				$("#speed").val(data.speed);
 			}
 		} 
 	});
@@ -39,8 +45,8 @@ function accelerator(direction){
 			method: "post",
 			success: function(data){
 				if(data.result == "success"){
-					$("#backtireStatus").html("direction="+data.direction+" |");
-					$("#backtireSpeed").html(data.speed);
+					$("#backtireStatus").html("direction : "+data.direction+" | speed : "+data.speed);
+					$("#speed").val(data.speed);
 				}
 			} 
 		});
@@ -55,8 +61,8 @@ function stop(){
 		method: "post",
 		success: function(data){
 			if(data.result == "success"){
-				$("#backtireStatus").html("direction="+data.direction+" |");
-				$("#backtireSpeed").html(data.speed);
+				$("#backtireStatus").html("direction : "+data.direction+" | speed : "+data.speed);
+				$("#speed").val(data.speed);
 			}
 		} 
 	});
