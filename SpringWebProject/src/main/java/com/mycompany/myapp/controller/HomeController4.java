@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HomeController {
+public class HomeController4 {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController4.class);
 	private String ipAddress = IpAdress.getIpAddress();
 
-	@RequestMapping(value = "/project", method = RequestMethod.GET)
+	@RequestMapping(value = "/jm", method = RequestMethod.GET)
 	public String home(Model model) {
 		CoapClient coapClient = new CoapClient();
 		CoapResponse coapResponse = null;

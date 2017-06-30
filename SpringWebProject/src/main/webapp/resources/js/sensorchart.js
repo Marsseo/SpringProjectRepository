@@ -10,12 +10,10 @@ var series1;
 var series2;
 var series3;
 
-
 function thermistoronly() {
 	series1.show();
 	series2.hide();
-	series3.hide();
-	
+	series3.hide();	
 }
 
 function photoresistoronly() {
@@ -43,7 +41,8 @@ $(function() {
 			type : "spline",
 			events : {
 				load : requestSensorData
-			}
+			},			
+			animation: Highcharts.svg
 		},
 		colors : [ 'red', 'yellow', 'purple' ],
 		title : {
@@ -52,7 +51,7 @@ $(function() {
 		xAxis : {
 			type : "datetime",
 			tickPixelInterval : 100,
-			minRange : 20 * 1000
+			minRange : 20 * 1000		
 		},
 		yAxis : {
 			title : {
@@ -75,8 +74,7 @@ $(function() {
 });
 
 function requestSensorData() {
-	ws1 = new WebSocket("ws://" + location.host
-			+ "/SpringWebProject/websocket/thermistorsensor");
+	ws1 = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/thermistorsensor");
 	ws1.onmessage = function(event) {
 		var data = JSON.parse(event.data);
 
@@ -85,12 +83,15 @@ function requestSensorData() {
 		}
 		temperaturevalue = data.temperature;
 
-		// if( data.temperature > 25) {
-		// $('#thermistorimg').html("<img style='height: 100px;'
-		// src='/SpringWebProject/resources/image/hot.jpg'/>");
-		// } else {
-		// $('#thermistorimg').html("<img style='height: 100px;' />");
-		// }
+		 if( data.temperature < 24) {
+			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature24.png'/>");
+		 } else if(data.temperature < 27){
+			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature27.png'/>");			 
+		 } else if(data.temperature < 30){
+			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature30.png'/>");			 
+		 } else {
+			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature33.png'/>");
+		 }
 
 		series1 = sensorChart.series[0];
 		var shift = series1.data.length > 20;
@@ -103,12 +104,16 @@ function requestSensorData() {
 		var strValue;
 		if (data.photoresistor < 20) {
 			strValue = "아주밝음";
+			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star20.png'/>");			
 		} else if (data.photoresistor < 100) {
 			strValue = "밝음";
+			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star100.png'/>");
 		} else if (data.photoresistor < 150) {
 			strValue = "보통";
+			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star150.png'/>");
 		} else {
 			strValue = "어두움";
+			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star151.png'/>");
 		}
 
 		if (data.photoresistor != photoresistorvalue) {
@@ -129,12 +134,16 @@ function requestSensorData() {
 		var strValue;
 		if (data.gas < 40) {
 			strValue = "아주좋음";
+			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas40.png'/>");
 		} else if (data.gas < 80) {
 			strValue = "보통";
+			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas80.png'/>");
 		} else if (data.gas < 150) {
 			strValue = "가스검출";
+			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas150.png'/>");
 		} else {
 			strValue = "가스심각";
+			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas151.png'/>");
 		}
 
 		if (data.gas != gasvalue) {
