@@ -28,6 +28,13 @@
 	<script src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
+	
+		<script
+	src="<%=application.getContextPath()%>/resources/css/ultraslider.css"></script>
+		<script
+	src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
+		<script src="<%= application.getContextPath() %>/resources/js/roundslider.min.js"></script>
+		<link href="<%= application.getContextPath() %>/resources/css/roundslider.min.css" rel="stylesheet" />
 
 <!-- 기존 센서 -->
 <%-- 
@@ -310,12 +317,6 @@ body {
 		</div>
 	</div>
 	
-	<script
-	src="<%=application.getContextPath()%>/resources/css/ultraslider.css"></script>
-		<script
-	src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
-	<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
-		
-		<script src="<%= application.getContextPath() %>/resources/js/roundslider.min.js"></script>
+
 </body>
 </html>
