@@ -11,6 +11,9 @@
 		<script src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js"	type="text/javascript"></script>
 		<script src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
+		<%-- <script src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts-more.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/highcharts/code/modules/exporting.js"></script> --%>
+		
 		<script src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script> 		
 		<!-- 기존 센서 -->
 		<%-- 
@@ -33,6 +36,7 @@
 		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
 		<!-- 추가 센서 차트-->
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
+		
 	</head>
 
 	<body style="background-color: black;">
@@ -69,24 +73,33 @@
 			<div class="row">
 				<div class="col-md-4" >
 					<div class="row">
-						<div class="col-md-6" >
-							<div id="thermistorimg" style="height: 100px; margin-top: 20px; border: 1px solid white;">	</div>
+						<div class="col-md-6" >							
+							<div style="height: 100px; margin-top: 20px; border: 1px solid white; " onmouseenter="thermistoronly()">						
+								<div style="display: inline; width: 100px;"><span  id="thermistorvalue"  style="color: white; font-size: 30px; line-height: 2;">현재온도:  ${temperature} ºC</span></div>
+								<div id="thermistorimg" style="display: inline"></div>
+							</div>
 						</div>
-						<div class="col-md-6" >
-							<div id="trackingsensor" style="height: 100px; margin-top: 20px; border: 1px solid white;">TRACKING</div>
+						<div class="col-md-6"  >
+							<div >
+								<div id="trackingsensor" style="height: 100px; margin-top: 20px; border: 1px solid white; text-align: center; line-height: 2; font-size: 30px; color: white;background-color: ${tracking}">TRACKING</div>
+							</div>
 						</div>
 					</div>			
 					<div class="row">
 						<div class="col-md-6" >
-							<div id="photoresistorimg" style="height: 100px; margin-top: 20px; border: 1px solid white;">	</div>
+							<div style="height: 100px; margin-top: 20px; border: 1px solid white;" onmouseenter="photoresistoronly()">
+								<div style="display: inline; width: 100px"><span  id="photoresistorvalue"  style="color: white; font-size: 30px; line-height: 2;">현재밝기: ${photoresistorStr} (${photoresistor})</span></div>
+							</div>
 						</div>
 						<div class="col-md-6" >
-							<div id="gasimg" style="height: 100px; margin-top: 20px; border: 1px solid white;">	</div>
+							<div style="height: 100px; margin-top: 20px; border: 1px solid white; " onmouseenter="gasonly()">
+								<div style="display: inline; width: 100px"><span  id="gasvalue"  style="color: white; font-size: 30px; line-height: 2;">가스상태: ${gasStr} (${gas}) </span></div>
+							</div>
 						</div>
 					</div>			
 				</div>				
 				<div class="col-md-8">
-					<div id="sensorChartContainer" style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>			
+					<div id="sensorChartContainer" style="height: 230px; margin-top: 20px; border: 1px solid white;" onmouseenter="showall()"></div>			
 				</div>
 			</div>	
 		</div>

@@ -12,7 +12,8 @@
 		<script src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
 		<script src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
-			
+		<script src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts-more.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>	
 		<!-- 기존 센서 -->
 		<%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
@@ -39,12 +40,11 @@
 		<style>@media screen and (min-width: 480px) { #title { height: 10px; } }</style>
 		<script src="<%=application.getContextPath()%>/resources/js/backtire.js"></script>
 		<link href="<%= application.getContextPath() %>/resources/css/frontcontrol.css" rel="stylesheet" />
-		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/highcharts-more.js"></script>
-		<script src="https://code.highcharts.com/modules/exporting.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/speedgauge.js"></script>
+		
+		
+		
 	</head>
-
+	
 	<body style="background-color: black;">
 		
 		<h4>splinechart</h4>
@@ -62,9 +62,12 @@
 					<div id="3ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;">
 						<div id="slider" class="rslider" style="float:left;background-color: white"></div>
-						<div id="speedContainer" style="float:right"></div><br/>
+    					<div id="container-speed" style="width: 300px; height: 200px; float: right"></div><br/>
+						<div style="float:left;background-color: white">
 						<span id="fronttireStatus">Angle : ${fronttireAngle}</span><br/>
-						<span id="backtireStatus">direction : ${backtireDirection}| speed : ${backtireSpeed}</span><br/>
+						<span id="backtireStatus">direction : ${backtireDirection} |</span>
+						speed : <span id="backtireSpeed">${backtireSpeed}</span><br/>
+						</div>
 						<button onmousedown="accelerator('forward')" onmouseup="stop('1')" style="color: black;">가속 패달</button>									
 						<button onclick="stop('1')" style="color: black;">정지 패달</button>
 					</div>
@@ -109,5 +112,6 @@
 			</div>	
 		</div>
 		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/speedgauge.js"></script>
 	</body>
 </html>

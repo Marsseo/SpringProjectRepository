@@ -33,15 +33,24 @@
 		 <%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
 		<!-- 추가 센서 차트-->
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
-		
-		<link href="<%= application.getContextPath()%>/resources/css/rgbslider.css" rel="stylesheet"  /> 
+		<script src="<%=application.getContextPath()%>/resources/js/rgbled.js"></script>
+		<link href="<%= application.getContextPath()%>/resources/css/rgbslider.css" rel="stylesheet"/> 
 		<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script> 
+		
+		
+		<script src="<%=application.getContextPath()%>/resources/js/rangeslider.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/rangeslider.min.js"></script>
+			<link href="<%= application.getContextPath()%>/resources/css/rangeslider.css" rel="stylesheet"/> 
+			<link href="<%= application.getContextPath()%>/resources/css/camera.css" rel="stylesheet"  /> 
+			<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
+		
+		
 		<script>
        YUI().use('slider', 'color', function(Y){
                 // sliders
-    var rSlider = new Y.Slider({ min: 0, max: 255, value: Math.round(Math.random()*255) }),
-        gSlider = new Y.Slider({ min: 0, max: 255, value: Math.round(Math.random()*255) }),
-        bSlider = new Y.Slider({ min: 0, max: 255, value: Math.round(Math.random()*255) }),
+    var rSlider = new Y.Slider({ min: 0, max: 255, value: 255 }),
+        gSlider = new Y.Slider({ min: 0, max: 255, value: 0 }),
+        bSlider = new Y.Slider({ min: 0, max: 255, value: 0 }),
 
         // slider values
         rVal = Y.one('#r-val'),
@@ -78,7 +87,7 @@
 
     // update the colors strings
     function updateColors() {
-        var r = rSlider.get('value'),
+          r = rSlider.get('value'),
             g = gSlider.get('value'),
             b = bSlider.get('value'),
             rgbStr = Y.Color.fromArray([r,g,b], Y.Color.TYPES.RGB);
@@ -99,7 +108,10 @@
     updateColors();
 
             });
-        </script>
+        </script> 
+	
+
+	
 	</head>
 
 	<body style="background-color: #2a2a2a;">
@@ -112,11 +124,15 @@
 				</div>
 				<div class="col-md-4">
 					<div id="2ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+						style="height: 230px; margin-top: 20px; border: 1px solid white;">
+						<img class="img-responsive" src="${cameraUrl}" style="width:100%; height:100%;"/>
+						</div>
 				</div>
 				<div class="col-md-4">
 					<div id="3ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+						style="height: 230px; margin-top: 20px; border: 1px solid white;">
+						</div>
+						
 				</div>
 			</div>
 			<div class="row">
@@ -126,13 +142,27 @@
 				</div>
 				<div class="col-md-4">
 					<div id="5ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+						style="height: 230px; margin-top: 20px; border: 1px solid white;">	
+						
+						<div class="budget-wrap">
+							<div class="budget">
+								<div class="header">
+									<div class="title clearfix">Camera Control <span class="pull-right"></span></div>
+								</div>
+								<div class="content" style="height: 10px;  width: 100px; ">
+									<input type="range" min="10" max="170" value="45" data-rangeslider>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+		
 				</div>
+				
 				<div class="col-md-4">
 					<div id="6ChartContainer"
-						style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
-						
-						<div class="sliders yui3-skin-sam">
+						style="height: 230px; margin-top: 20px; border: 1px solid white;">
+												<div class="sliders yui3-skin-sam">
 						    <dl>
 						        <dt>R: <span id="r-val" class="val" ></span></dt><dd id="r-slider"></dd>
 						        <dt>G: <span id="g-val" class="val"></span></dt><dd id="g-slider"></dd>
@@ -147,6 +177,16 @@
 						        <dt>HSL:</dt><dd id="hsl"></dd>
 						    </dl>
 						</div>
+						
+						<div style="text-align: center;">
+									<button type="button" class="btn btn-danger" onclick="rgbled('change', '255', '0', '0')">Red</button>
+									<button type="button" class="btn btn-success" onclick="rgbled('change', '0', '255', '0')">Green</button>
+									<button type="button" class="btn btn-primary" onclick="rgbled('change', '0', '0', '255')">Blue</button>
+									<button type="button" class="btn btn-primary" onclick="rgbled('change', r, g, b)">Send RGB</button>
+								</div>
+						</div>
+						
+
 				</div>
 			</div>
 			<div class="row">
