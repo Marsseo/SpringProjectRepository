@@ -29,12 +29,12 @@
 <script
 	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
 	
-		<script
-	src="<%=application.getContextPath()%>/resources/css/ultraslider.css"></script>
-		<script
-	src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
+
+<link href="<%= application.getContextPath() %>/resources/css/roundslider.min.css" rel="stylesheet" />
 		<script src="<%= application.getContextPath() %>/resources/js/roundslider.min.js"></script>
-		<link href="<%= application.getContextPath() %>/resources/css/roundslider.min.css" rel="stylesheet" />
+					<link
+	href="<%=application.getContextPath()%>/resources/css/ultraslider.css" rel="stylesheet"></link>
+		
 
 <!-- 기존 센서 -->
 <%-- 
@@ -276,12 +276,14 @@ body {
 					<hr />
 				</div>
 					
-
-
 			</div>
+		
+			
 			<div class="col-md-4">
-				<div id="handle2"
-					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+				<div id="3ChartContainer"
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">
+					<div id="ultrahandle"  style="height: 100px; margin-top: 20px; border: 1px solid white;"></div>
+					</div>
 			</div>
 		</div>
 		<div class="row">
@@ -316,7 +318,9 @@ body {
 			</div>
 		</div>
 	</div>
-	
+			<script
+	src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
+
 
 </body>
 </html>

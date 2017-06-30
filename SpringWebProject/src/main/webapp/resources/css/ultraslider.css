@@ -1,10 +1,10 @@
-#handle2 .rs-handle  {
+#ultrahandle .rs-handle  {
     background-color: transparent;
     border: 8px solid transparent;
     border-right-color: black;
     margin: -8px 0 0 14px !important;
 }
-#handle2 .rs-handle:before  {
+#ultrahandle .rs-handle:before  {
     display: block;
     content: " ";
     position: absolute;
@@ -15,7 +15,7 @@
     bottom: -6px;
     border-radius: 100%;
 }
-#handle2 .rs-handle:after  {
+#ultrahandle .rs-handle:after  {
     display: block;
     content: " ";
     width: 106px;
@@ -24,9 +24,9 @@
     right: 0px;
     border-top: 2px dotted black;
 }
-#handle2 .rs-range-color  {
+#ultrahandle .rs-range-color  {
     background-color: #8832cd;
 }
-#handle2 .rs-path-color  {
+#ultrahandle .rs-path-color  {
     background-color: #ddc5f0;
 }
