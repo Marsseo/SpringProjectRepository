@@ -75,7 +75,6 @@ $(function() {
 });
 
 function requestSensorData() {
-<<<<<<< HEAD
 	ws1 = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/thermistorsensor");
 	ws1.onmessage = function(event) {
@@ -83,16 +82,6 @@ function requestSensorData() {
 
 		if (data.temperature != temperaturevalue) {
 			$('#thermistorvalue').html("현재온도: " + data.temperature + " ºC");
-=======
-	var ws = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/thermistorsensor");
-
-	ws.onmessage = function(event) {
-		var data = JSON.parse(event.data);
-		if( data.temperature > 25) {
-			$('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/hot.jpg'/>");
-		} else {
-			$('#thermistorimg').html("<img style='height: 100px;' />");
->>>>>>> origin/master
 		}
 		temperaturevalue = data.temperature;
 
@@ -106,10 +95,6 @@ function requestSensorData() {
 		series1 = sensorChart.series[0];
 		var shift = series1.data.length > 20;
 		series1.addPoint([ data.time, data.temperature ], true, shift);
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 	};
 	ws2 = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/photoresistorsensor");
