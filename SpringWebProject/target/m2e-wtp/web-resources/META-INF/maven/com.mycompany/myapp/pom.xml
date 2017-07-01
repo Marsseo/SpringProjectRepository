@@ -115,7 +115,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
-			<scope>provided</scope>
+		<!-- 	<scope>provided</scope> -->
 		</dependency>
 		<!-- JSP 라이브러리 설정 -->
 		<dependency>
