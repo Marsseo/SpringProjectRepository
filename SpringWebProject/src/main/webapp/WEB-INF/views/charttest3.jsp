@@ -144,13 +144,29 @@
 					<div id="5ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;">	
 						
-						<div class="budget-wrap">
-							<div class="budget">
-								<div class="header">
-									<div class="title clearfix">Camera Control <span class="pull-right"></span></div>
+						<div class="budget-wrap" >
+							<div class="budget"  >
+								<div class="header" >
+									<div class="title clearfix" style=" display:inline-block:">
+									<span>Camera Control  </span>
+									
+									<span style=" float:right;">상하 :
+									<span  id="upDown" style=" float:right; "> </span>  
+									</span> 
+									&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+								
+									<span style="float:right;">좌우 :
+									<span class="pull-right" > </span> 
+									</span> 
+									
+									</div>
 								</div>
-								<div class="content" style="height: 10px;  width: 100px; ">
-									<input type="range" min="10" max="170" value="45" data-rangeslider>
+								<div class="content" display:inline;  ">
+							
+								<input id="rangeslider0" type="range" min="10" max="170" value="90" data-rangeslider>
+								</br></br>
+									<input id="rangeslider1" type="range" min="10" max="100" value="45" data-rangeslider >
+									
 								</div>
 								
 							</div>
