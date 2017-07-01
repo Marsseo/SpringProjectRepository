@@ -93,6 +93,11 @@
                               <Circle fill="#44505b" layoutX="69.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fill="#44505b" layoutY="69.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fill="#44505b" layoutX="-69.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label layoutX="-37.0" layoutY="-11.0" text="TEAM 1" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Group>
                         <Slider fx:id="sliderSpeed" layoutX="233.0" layoutY="104.0" max="4095.0" orientation="VERTICAL" prefHeight="155.0" prefWidth="18.0" />
