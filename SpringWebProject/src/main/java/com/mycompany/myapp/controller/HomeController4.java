@@ -1,5 +1,10 @@
 package com.mycompany.myapp.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResponse;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
@@ -106,8 +111,47 @@ public class HomeController4 {
 		String tracking = jsonObject.getString("tracking");
 
 		model.addAttribute("tracking", tracking);
+		/*
+		* 			lcd
+		*/
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+
+		coapClient.setURI("coap://"+ipAddress+"/lcd");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+
+		jsonObject = new JSONObject(json);
+		model.addAttribute("lcdline0", jsonObject.getString("line0"));
+		model.addAttribute("lcdline1", jsonObject.getString("line1"));
+		System.out.println("읽나?");
+		System.out.println(jsonObject.getString("line0"));
 
 		return "charttest";
 
 	}
+	/*
+	* 			lcd
+	*/
+	/*@RequestMapping("/lcd")
+	public void lcd(String command, String line0, String line1, HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("line0", line0);
+		jsonObject.put("line1", line1);
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/lcd");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		response.setContentType("application/json; charset=UTF-8");
+
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}*/
 }

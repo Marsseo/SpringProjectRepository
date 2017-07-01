@@ -1,5 +1,10 @@
 package com.mycompany.myapp.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResponse;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
@@ -24,7 +29,7 @@ public class HomeController {
 		JSONObject jsonObject = null;
 		String json = null;
 		/*
-		 * thermistorsensor
+		 * 			thermistorsensor
 		 */
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
@@ -39,7 +44,7 @@ public class HomeController {
 		int temperature = (int)doubleT;
 		model.addAttribute("temperature", temperature);
 		/*
-		 * photoresistorsensor
+		 * 			photoresistorsensor
 		 */
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
@@ -66,7 +71,7 @@ public class HomeController {
 		model.addAttribute("photoresistor", photoresistor);
 		model.addAttribute("photoresistorStr", strValue);
 		/*
-		 * gassensor
+		 * 			gassensor
 		 */
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
@@ -92,7 +97,7 @@ public class HomeController {
 		model.addAttribute("gas", gas);
 		model.addAttribute("gasStr", strValue);
 		/*
-		 * trackingsensor
+		 * 			trackingsensor
 		 */
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
@@ -106,8 +111,44 @@ public class HomeController {
 		String tracking = jsonObject.getString("tracking");
 
 		model.addAttribute("tracking", tracking);
+		/*
+		* 			lcd
+		*/
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
 
+		coapClient.setURI("coap://"+ipAddress+"/lcd");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+
+		jsonObject = new JSONObject(json);
+		model.addAttribute("lcdline0", jsonObject.getString("line0"));
+		model.addAttribute("lcdline1", jsonObject.getString("line1"));
 		return "charttest";
 
+	}
+	/*
+	* 			lcd
+	*/
+	@RequestMapping("/lcd")
+	public void lcd(String command, String line0, String line1, HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("line0", line0);
+		jsonObject.put("line1", line1);
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/lcd");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		response.setContentType("application/json; charset=UTF-8");
+
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
 	}
 }

@@ -27,17 +27,17 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.mycompany.myapp.controller.IpAdress;
 
 @Component
-public class TrackingSensorHandler extends TextWebSocketHandler implements ApplicationListener{
+public class TrackingSensorHandler extends TextWebSocketHandler implements ApplicationListener {
 	private static final Logger logger = LoggerFactory.getLogger(TrackingSensorHandler.class);
 	private List<WebSocketSession> list = new Vector();
 	private CoapClient coapClient;
 	private CoapObserveRelation coapObserveRelation;
-	private String ipAddress=IpAdress.getIpAddress();
-	
+	private String ipAddress = IpAdress.getIpAddress();
+
 	@PostConstruct
 	public void init() {
 		coapClient = new CoapClient();
-		coapClient.setURI("coap://"+ ipAddress + "/trackingsensor");
+		coapClient.setURI("coap://" + ipAddress + "/trackingsensor");
 		coapObserveRelation = coapClient.observe(new CoapHandler() {
 
 			@Override
@@ -101,12 +101,11 @@ public class TrackingSensorHandler extends TextWebSocketHandler implements Appli
 
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
-		if(event instanceof ContextClosedEvent ) {
+		if (event instanceof ContextClosedEvent) {
 			logger.info("웹 애플리케이션 종료");
 			coapObserveRelation.proactiveCancel();
-			coapClient.shutdown();		
-		}		
+			coapClient.shutdown();
+		}
 	}
-
 
 }

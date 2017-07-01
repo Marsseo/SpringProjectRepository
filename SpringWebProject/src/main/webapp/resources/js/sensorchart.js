@@ -79,18 +79,18 @@ function requestSensorData() {
 		var data = JSON.parse(event.data);
 
 		if (data.temperature != temperaturevalue) {
-			$('#thermistorvalue').html("현재온도: " + data.temperature + " ºC");
+			$('#thermistorvalue').html("▶현재온도◀<br/>" + data.temperature + " ºC");
 		}
 		temperaturevalue = data.temperature;
 
 		 if( data.temperature < 24) {
-			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature24.png'/>");
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature24.png'/>");
 		 } else if(data.temperature < 27){
-			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature27.png'/>");			 
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature27.png'/>");			 
 		 } else if(data.temperature < 30){
-			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature30.png'/>");			 
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature30.png'/>");			 
 		 } else {
-			 $('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/temperature33.png'/>");
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature33.png'/>");
 		 }
 
 		series1 = sensorChart.series[0];
@@ -104,21 +104,21 @@ function requestSensorData() {
 		var strValue;
 		if (data.photoresistor < 20) {
 			strValue = "아주밝음";
-			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star20.png'/>");			
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star20.png'/>");			
 		} else if (data.photoresistor < 100) {
 			strValue = "밝음";
-			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star100.png'/>");
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star100.png'/>");
 		} else if (data.photoresistor < 150) {
 			strValue = "보통";
-			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star150.png'/>");
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star150.png'/>");
 		} else {
 			strValue = "어두움";
-			$('#photoresistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/star151.png'/>");
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star151.png'/>");
 		}
 
 		if (data.photoresistor != photoresistorvalue) {
 			$('#photoresistorvalue').html(
-					"현재밝기: " + strValue + " (" + data.photoresistor + ")");
+					"▶현재밝기◀<br/>" + strValue + " (" + data.photoresistor + ")");
 		}
 		photoresistorvalue = data.photoresistor;
 
@@ -134,20 +134,20 @@ function requestSensorData() {
 		var strValue;
 		if (data.gas < 40) {
 			strValue = "아주좋음";
-			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas40.png'/>");
-		} else if (data.gas < 80) {
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas40.png'/>");
+		} else if (data.gas < 120) {
 			strValue = "보통";
-			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas80.png'/>");
-		} else if (data.gas < 150) {
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas80.png'/>");
+		} else if (data.gas < 200) {
 			strValue = "가스검출";
-			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas150.png'/>");
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas150.png'/>");
 		} else {
 			strValue = "가스심각";
-			$('#gasimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/gas151.png'/>");
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas151.png'/>");
 		}
 
 		if (data.gas != gasvalue) {
-			$('#gasvalue').html("가스상태: " + strValue + " (" + data.gas + ")");
+			$('#gasvalue').html("▶가스오염◀<br/>" + strValue + " (" + data.gas + ")");
 		}
 		gasvalue = data.gas;
 
@@ -162,9 +162,11 @@ function requestSensorData() {
 		var data = JSON.parse(event.data);
 		if (data.tracking == "white") {
 			$('#trackingsensor').css("background-color", "white");
+			$('#trackingsensor').css("background", "linear-gradient(#FFFFFF, #F4E6FA)");
 			$('#trackingsensor').css("color", "black");
 		} else {
 			$('#trackingsensor').css("background-color", "black");
+			$('#trackingsensor').css("background", "linear-gradient(#575151, #000000)");
 			$('#trackingsensor').css("color", "white");
 		}
 	};
