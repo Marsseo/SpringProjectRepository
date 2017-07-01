@@ -125,6 +125,33 @@ public class HomeController {
 		jsonObject = new JSONObject(json);
 		model.addAttribute("lcdline0", jsonObject.getString("line0"));
 		model.addAttribute("lcdline1", jsonObject.getString("line1"));
+		
+		
+		// -camera-------------------------------------------------
+		jsonObject = new JSONObject();
+		logger.info("");
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/camera");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("leftright", jsonObject.getString("leftright"));
+		model.addAttribute("updown", jsonObject.getString("updown"));
+		
+		//rgb -------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/rgbled");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("red", jsonObject.getString("red"));
+		model.addAttribute("green", jsonObject.getString("green"));
+		model.addAttribute("blue", jsonObject.getString("blue"));
+
+		model.addAttribute("cameraUrl", "http://"+ipAddress+":50001?action=stream");
 		return "charttest";
 
 	}
@@ -146,6 +173,53 @@ public class HomeController {
 		coapClient.shutdown();
 		response.setContentType("application/json; charset=UTF-8");
 
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+	
+	@RequestMapping("/camera")
+	public void camera(String command, String leftright, String updown, HttpServletResponse response)
+			throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("leftright", leftright);
+		jsonObject.put("updown", updown);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/camera");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+	
+	@RequestMapping("/rgbled")
+	public void rgbled(String command, String red, String green, String blue,
+			HttpServletResponse response)
+			throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("red", red);
+		jsonObject.put("green", green);
+		jsonObject.put("blue", blue);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/rgbled");
+		CoapResponse coapResponse = coapClient.post(reqJson,
+				MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter pw = response.getWriter();
 		pw.write(resJson);
 		pw.flush();
