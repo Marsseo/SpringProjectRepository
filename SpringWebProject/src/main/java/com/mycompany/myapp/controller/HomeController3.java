@@ -1,4 +1,4 @@
-package com.mycompany.myapp.controller;
+/*package com.mycompany.myapp.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -107,3 +107,4 @@ public class HomeController3 {
 	}
 	
 }
+*/

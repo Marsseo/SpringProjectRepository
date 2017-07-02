@@ -34,6 +34,82 @@
 		<link	href="<%=application.getContextPath()%>/resources/css/project.css" rel="stylesheet" type="text/css" />		
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>	
 		<script src="<%=application.getContextPath()%>/resources/js/lcd.js"></script>			
+		
+		<script src="<%=application.getContextPath()%>/resources/js/rgbled.js"></script>
+		<link href="<%= application.getContextPath()%>/resources/css/rgbslider.css" rel="stylesheet"/> 
+		<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script> 
+		
+		
+		<script src="<%=application.getContextPath()%>/resources/js/rangeslider.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/rangeslider.min.js"></script>
+		<link href="<%= application.getContextPath()%>/resources/css/rangeslider.css" rel="stylesheet"/> 
+		<link href="<%= application.getContextPath()%>/resources/css/camera.css" rel="stylesheet"  /> 
+		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
+		<script>
+       YUI().use('slider', 'color', function(Y){
+                // sliders
+    var rSlider = new Y.Slider({ min: 0, max: 255, value: 255 }),
+        gSlider = new Y.Slider({ min: 0, max: 255, value: 0 }),
+        bSlider = new Y.Slider({ min: 0, max: 255, value: 0 }),
+
+        // slider values
+        rVal = Y.one('#r-val'),
+        gVal = Y.one('#g-val'),
+        bVal = Y.one('#b-val'),
+
+        // color strings
+        hex = Y.one('#hex'),
+        rgb = Y.one('#rgb'),
+        hsl = Y.one('#hsl'),
+
+        // color chip
+        color = Y.one('.color');
+
+    // render sliders
+    rSlider.render('#r-slider');
+    gSlider.render('#g-slider');
+    bSlider.render('#b-slider');
+
+
+                // register update events
+    rSlider.after('thumbMove', function(e) {
+        rVal.set('text', rSlider.get('value'));
+        updateColors();
+    });
+    gSlider.after('thumbMove', function(e) {
+        gVal.set('text', gSlider.get('value'));
+        updateColors();
+    });
+    bSlider.after('thumbMove', function(e) {
+        bVal.set('text', bSlider.get('value'));
+        updateColors();
+    });
+
+    // update the colors strings
+    function updateColors() {
+          r = rSlider.get('value'),
+            g = gSlider.get('value'),
+            b = bSlider.get('value'),
+            rgbStr = Y.Color.fromArray([r,g,b], Y.Color.TYPES.RGB);
+
+        color.setStyle('backgroundColor', rgbStr);
+
+        rgb.set('text', rgbStr);
+
+        hex.set('text', Y.Color.toHex(rgbStr));
+        hsl.set('text', Y.Color.toHSL(rgbStr));
+    }
+
+
+            
+    rVal.set('text', rSlider.get('value'));
+    gVal.set('text', gSlider.get('value'));
+    bVal.set('text', bSlider.get('value'));
+    updateColors();
+
+            });
+        </script> 
+	
 	</head>
 
 	<body >
@@ -56,15 +132,79 @@
 					<section>
 						<div class="container-fluid" style="float: left">
 							<div class="row">
-								<div class="col-md-4">
-									<div id="4ChartContainer" class="box-design2"></div>
+							<div class="col-md-4">
+								<div id="4ChartContainer" class="box-design2">
+									<div class="sliders yui3-skin-sam">
+										<dl>
+											<dt>
+												R: <span id="r-val" class="val"></span>
+											</dt>
+											<dd id="r-slider"></dd>
+											<dt>
+												G: <span id="g-val" class="val"></span>
+											</dt>
+											<dd id="g-slider"></dd>
+											<dt>
+												B: <span id="b-val" class="val"></span>
+											</dt>
+											<dd id="b-slider"></dd>
+										</dl>
+									</div>
+									<div class="color"></div>
+									<div class="output">
+										<dl>
+											<dt>Hex:</dt>
+											<dd id="hex"></dd>
+											<dt>RGB:</dt>
+											<dd id="rgb"></dd>
+											<!-- <dt>HSL:</dt><dd id="hsl"></dd> -->
+										</dl>
+									</div>
+
+									<div style="text-align: center;">
+										<button type="button" class="btn btn-danger"
+											onclick="rgbled('change', '255', '0', '0')">Red</button>
+										<button type="button" class="btn btn-success"
+											onclick="rgbled('change', '0', '255', '0')">Green</button>
+										<button type="button" class="btn btn-primary"
+											onclick="rgbled('change', '0', '0', '255')">Blue</button>
+										<button type="button" class="btn btn-primary"
+											onclick="rgbled('change', r, g, b)">Send RGB</button>
+									</div>
 								</div>
-								<div class="col-md-4">
-									<div id="5ChartContainer" class="box-design2"></div>
+							</div>
+							<div class="col-md-4">
+								<div id="5ChartContainer" class="box-design2">
+								
+								<img class="img-responsive" src="${cameraUrl}"  style="width:100%; height:100%;"/>
+								
+									
 								</div>
-								<div class="col-md-4">
-									<div id="6ChartContainer" class="box-design2"></div>
+							</div>
+							<div class="col-md-4">
+								<div id="6ChartContainer" class="box-design2">
+									<div class="budget-wrap">
+										<div class="budget">
+											<div class="header">
+												<div class="title clearfix" style="display: inline-block:">
+													<span>Camera Control </span> <span style="float: right;">상하
+														: <span id="upDown" style="float: right;"> </span>
+													</span> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <span
+														style="float: right;">좌우 : <span class="pull-right">
+													</span>
+													</span>
+												</div>
+											</div>
+											<div class="content" style="display: inline;">
+												<input id="rangeslider0" type="range" min="10" max="170"
+													value="90" data-rangeslider> </br> </br> <input
+													id="rangeslider1" type="range" min="10" max="100"
+													value="45" data-rangeslider>
+											</div>
+										</div>
+									</div>
 								</div>
+							</div>
 							</div>
 							<div class="row">
 								<div class="col-md-4">

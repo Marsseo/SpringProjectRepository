@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team1.RgbController">
+   <children>
+      <TabPane prefHeight="440.0" prefWidth="680.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="RGB">
+            <content>
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="680.0">
+                     <children>
+                        <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
+                        <Slider fx:id="sliderR" blockIncrement="1.0" layoutX="30.0" layoutY="240.0" majorTickUnit="50.0" max="255.0" minorTickCount="5" prefHeight="42.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="sliderG" blockIncrement="1.0" layoutX="30.0" layoutY="290.0" majorTickUnit="50.0" max="255.0" minorTickCount="5" prefHeight="42.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="sliderB" blockIncrement="1.0" layoutX="30.0" layoutY="340.0" majorTickUnit="50.0" max="255.0" minorTickCount="5" prefHeight="42.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Button fx:id="Red" layoutX="450.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleBtnRed" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #FF0000;" text="RED" textFill="WHITE" />
+                        <Button fx:id="Green" layoutX="450.0" layoutY="290.0" mnemonicParsing="false" onAction="#handleBtnGreen" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #00FF00;" text="GREEN" textFill="WHITE" />
+                        <Button fx:id="blue" layoutX="450.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBtnBlue" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #0000FF;" text="BLUE" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
