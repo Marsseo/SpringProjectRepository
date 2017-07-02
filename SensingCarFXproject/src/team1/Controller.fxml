@@ -24,8 +24,6 @@
     <children>
         <Label layoutX="19.0" layoutY="17.0" prefHeight="30.0" prefWidth="392.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Controller" />
       <Separator layoutX="3.0" layoutY="50.0" prefHeight="4.0" prefWidth="680.0" />
-      <HBox layoutX="248.0" layoutY="316.0" spacing="10.0" />
-      <HBox layoutX="248.0" layoutY="396.0" spacing="10.0" />
       <TabPane layoutX="5.0" layoutY="59.0" prefHeight="378.0" prefWidth="673.0" tabMinHeight="50.0" tabMinWidth="70.0">
          <tabs>
             <Tab closable="false" text="Front Tire">
