@@ -76,7 +76,7 @@ public class ControllerController implements Initializable {
 	@FXML
 	private Label lblLcdLine1;
 	// 공통으로 사용하는 필드 값 정리
-	private String ipAdress = "192.168.0.6";
+	private String ipAdress = "192.168.0.18";
 	private CoapClient coapClient;
 	private CoapResponse coapResponse;
 	private JSONObject jsonObject;
@@ -86,6 +86,18 @@ public class ControllerController implements Initializable {
 	private String direction = "forward";
 
 	private RotateTransition rotate;
+    @FXML
+    private Button btnUltraLeft;
+    @FXML
+    private Button btnUltraRight;
+    @FXML
+    private Button btnUltraCenter;
+    @FXML
+    private Slider sliderUltra;
+    @FXML
+    private Group circleUltra;
+    @FXML
+    private Label lblUltraAngle;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -95,6 +107,7 @@ public class ControllerController implements Initializable {
 		frontTireState();
 		backTireState();
 		lcdState();
+                             ultraSensorState();
 
 		// CoAP 통신을 사용하여, 패널에서 입력한 값을 센싱카로 전달하기
 		sliderFrontTire.valueProperty().addListener(new ChangeListener<Number>() {
@@ -161,6 +174,27 @@ public class ControllerController implements Initializable {
 				coapClient.shutdown();
 			}
 		});
+                
+                
+                sliderUltra.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				int angle = newValue.intValue();
+				lblUltraAngle.setText(String.valueOf(angle) + " º");
+				circleUltra.setRotate(angle * 2);
+
+				jsonObject = new JSONObject();
+				jsonObject.put("command", "change");
+				jsonObject.put("angle", String.valueOf(angle));
+				json = jsonObject.toString();
+
+				coapClient = new CoapClient();
+				coapClient.setURI("coap://" + ipAdress + "/ultrasonicsensor");
+				coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+				coapClient.shutdown();
+
+			}
+		});
 
 		// FrontTire
 		btnFrontTireClear.setOnAction(e -> handleBtnFrontTireClear());
@@ -179,6 +213,10 @@ public class ControllerController implements Initializable {
 		// LCD
 		btnLcdSend.setOnAction(e -> handleBtnLcdSend());
 		btnLcdClear.setOnAction(e -> handleBtnLcdClear());
+                //ultra
+                btnUltraCenter.setOnAction(e->handleBtnUltraCenter());
+                btnUltraLeft.setOnAction(e->handleBtnUltraLeft());
+                btnUltraRight.setOnAction(e->handleBtnUltraRight());
 	}
 
 	private void frontTireState() {
@@ -230,6 +268,21 @@ public class ControllerController implements Initializable {
 		lblLcdLine0.setText(jsonObject.getString("line0"));
 		lblLcdLine1.setText(jsonObject.getString("line1"));
 	}
+        private void ultraSensorState(){
+            jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://" + ipAdress + "/ultrasonicsensor");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+
+		jsonObject = new JSONObject(json);
+                              lblUltraAngle.setText(jsonObject.getString("angle"));
+		sliderUltra.setValue(jsonObject.getDouble("angle"));
+		circleUltra.setRotate(jsonObject.getDouble("angle") * 2);
+        }
 
 	private void handleBtnFrontTireClear() {
 		sliderFrontTire.setValue(90);
@@ -327,4 +380,16 @@ public class ControllerController implements Initializable {
 		txtLcdLine0.setText("");
 		txtLcdLine1.setText("");
 	}
+
+    private void handleBtnUltraCenter() {
+        sliderUltra.setValue(90);
+    }
+
+    private void handleBtnUltraLeft() {
+        sliderUltra.setValue(30);
+    }
+    private void handleBtnUltraRight() {
+        sliderUltra.setValue(150);
+    }
+
 }

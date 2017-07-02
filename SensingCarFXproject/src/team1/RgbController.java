@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -37,11 +38,9 @@ public class RgbController implements Initializable {
     private Button Green;
     @FXML
     private Button blue;
-    @FXML
-    private Button Send;
 
 // 공통으로 사용하는 필드 값 정리
-    private String ipAddress = "192.168.3.48";
+    private String ipAddress = "192.168.0.18";
     private CoapClient coapClient;
     private CoapResponse coapResponse;
     private JSONObject jsonObject;
@@ -50,8 +49,14 @@ public class RgbController implements Initializable {
     int redValue;
     int greenValue;
     int blueValue;
+    @FXML
+    private ImageView imgBuzzer;
+    @FXML
+    private ImageView imgLaser;
 
     public void initialize(URL url, ResourceBundle rb) {
+        buzzerState();
+        laserState();
         getState();
         //cambia el color de fondo del objeto Pane
         pane.setBackground(
@@ -184,4 +189,10 @@ public class RgbController implements Initializable {
         
         
     }
+   private void buzzerState(){
+       
+   }
+   private void laserState(){
+       
+   }
 }

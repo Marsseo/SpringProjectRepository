@@ -190,21 +190,52 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="131.0" layoutY="81.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #F39C12;" textFill="WHITE">
+                        <Button fx:id="btnUltraLeft" layoutX="97.0" layoutY="223.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #F39C12;" text="Left" textFill="WHITE">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="317.0" layoutY="81.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #F39C12;" textFill="WHITE">
+                        <Button fx:id="btnUltraRight" layoutX="441.0" layoutY="223.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #F39C12;" text="Right" textFill="WHITE">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="244.0" layoutY="81.0" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: #F3ff12;" textFill="WHITE">
+                        <Button fx:id="btnUltraCenter" layoutX="277.0" layoutY="223.0" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #F3ff12;" text="Center" textFill="#282525">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Button>
+                        <Slider fx:id="sliderUltra" layoutX="242.0" layoutY="269.0" max="120.0" min="60.0" value="90.0">
+                           <effect>
+                              <InnerShadow color="#fe2ef7" />
+                           </effect>
+                        </Slider>
+                        <Group fx:id="circleUltra" layoutX="312.0" layoutY="122.0">
+                           <children>
+                              <Circle fill="DODGERBLUE" layoutY="-8.0" opacity="0.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Arc layoutX="15.0" layoutY="-23.0" length="270.0" radiusX="100.0" radiusY="100.0" rotate="90.0" startAngle="45.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND">
+                                 <fill>
+                                    <RadialGradient centerX="0.8295454545454546" centerY="0.49514563106796117" focusDistance="-0.12195121951219523" radius="0.39024390243902446">
+                                       <stops>
+                                          <Stop color="WHITE" />
+                                          <Stop color="WHITE" offset="0.9962962962962963" />
+                                          <Stop color="#563fd9" offset="1.0" />
+                                       </stops>
+                                    </RadialGradient>
+                                 </fill>
+                              </Arc>
+                              <Label layoutX="-48.0" layoutY="-81.0" rotate="180.0" text="Ultrasonic" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Italic" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Group>
+                        <Label fx:id="lblUltraAngle" layoutX="486.0" layoutY="92.0" text="Label">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
                </content>
             </Tab>

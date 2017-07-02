@@ -56,7 +56,7 @@ public class CameraController implements Initializable {
     private Slider vSlider;
 
     // 공통으로 사용하는 필드 값 정리
-    private String ipAddress = "192.168.3.48";
+    private String ipAddress = "192.168.0.18";
     private CoapClient coapClient;
     private CoapResponse coapResponse;
     private JSONObject jsonObject;
