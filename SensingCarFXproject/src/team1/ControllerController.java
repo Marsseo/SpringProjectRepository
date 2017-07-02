@@ -63,7 +63,7 @@ public class ControllerController implements Initializable {
 	private Group backTire;
 
 	// 공통으로 사용하는 필드 값 정리
-	private String ipAdress = "192.168.0.5";
+	private String ipAdress = "192.168.3.48";
 	private CoapClient coapClient;
 	private CoapResponse coapResponse;
 	private JSONObject jsonObject;
