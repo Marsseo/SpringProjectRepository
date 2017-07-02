@@ -31,24 +31,9 @@
 <script
 	src="<%=application.getContextPath()%>/resources/js/laseremitter.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
-		<!-- 기존 센서 -->
-		<%-- 
-		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/rgbled.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/laseremitter.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensor.js"></script>		
-		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>
+		<style>@media screen and (min-width: 480px) { #title { height: 10px; } }</style>
 		<script src="<%=application.getContextPath()%>/resources/js/backtire.js"></script>
-		 --%>
-		<!-- 기존 센서 차트-->
-		<%-- 
-		<script src="<%=application.getContextPath()%>/resources/js/thermistorsensorchart.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>		
-		<script src="<%=application.getContextPath()%>/resources/js/photoresistorsensorchart.js"></script>
-		<script src="<%=application.getContextPath()%>/resources/js/gassensorchart.js"></script>
-		 --%>
-		<%-- <script src="<%=application.getContextPath()%>/resources/js/trackingsensorchart.js"></script> --%>
+		<link href="<%= application.getContextPath() %>/resources/css/frontcontrol.css" rel="stylesheet" />
 		<!-- 추가 센서 차트-->
 		<link	href="<%=application.getContextPath()%>/resources/css/project.css" rel="stylesheet" type="text/css" />		
 		<script src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>	
@@ -395,5 +380,7 @@
 		
 		<script
 		src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/fronttire.js"></script>
+		<script src="<%=application.getContextPath()%>/resources/js/speedgauge.js"></script>
 	</body>
 </html>

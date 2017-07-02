@@ -5,18 +5,7 @@ function backtireControl(event){
 	
 }
 function backtire(command, direction, speed){
-	console.log("d: "+backtireStatus.direction);
-	if(direction=="") {
-		direction = backtireStatus.direction;
-	} else {
-		backtireStatus.direction = direction;
-	}
-	if(speed=""){
-		speed=backtireStatus.speed;
-	}
-	else backtireStatus.speed = speed; 
-	console.log("d: "+direction);
-	console.log("s: "+speed);
+	
 	var json = {"command":"change", "direction": direction, "speed":speed};
 	
 	$.ajax({
@@ -27,6 +16,7 @@ function backtire(command, direction, speed){
 			if(data.result == "success"){
 				$("#backtireStatus").html("direction : "+data.direction+" | speed : "+data.speed);
 				$("#speed").val(data.speed);
+				$('#direction').val(data.direction);
 			}
 		} 
 	});
@@ -47,6 +37,7 @@ function accelerator(direction){
 				if(data.result == "success"){
 					$("#backtireStatus").html("direction : "+data.direction+" | speed : "+data.speed);
 					$("#speed").val(data.speed);
+					$('#direction').val(data.direction);
 				}
 			} 
 		});

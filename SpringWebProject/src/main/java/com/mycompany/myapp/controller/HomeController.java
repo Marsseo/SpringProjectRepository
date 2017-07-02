@@ -185,6 +185,31 @@ public class HomeController {
 		model.addAttribute("buzzerStatus", jsonObject.getString("status"));
 		
 		//----------------------------------------------
+		// 앞바퀴
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/fronttire");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("fronttireAngle", jsonObject.getString("angle"));	
+
+
+//--------------------------------------------------------------------------------------------------
+		// 뒷바퀴
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/backtire");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("backtireDirection", jsonObject.getString("direction"));	
+		model.addAttribute("backtireSpeed", jsonObject.getString("speed"));
+		
+//--------------------------------------------------------------------------------------------------
 
 		model.addAttribute("cameraUrl", "http://"+ipAddress+":50001?action=stream");
 		coapClient.shutdown();
@@ -321,5 +346,51 @@ public class HomeController {
 		pw.write(resJson);
 		pw.flush();
 		pw.close();
+	}
+	
+	// 앞바퀴와 뒷바퀴 제어
+	@RequestMapping("/fronttire")
+	public void fronttire(String command, String angle, HttpServletResponse response) throws IOException {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String json = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/fronttire");
+		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter pwr = response.getWriter();
+		pwr.write(json);
+		pwr.flush();
+		pwr.close();
+		
+	}
+	
+	@RequestMapping("/backtire")
+	public void backtire(String command, String direction, String speed, HttpServletResponse response, Model model) throws IOException {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("direction", direction);
+		jsonObject.put("speed", speed);
+		String json = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/backtire");
+		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter pwr = response.getWriter();
+		pwr.write(json);
+		pwr.flush();
+		pwr.close();
+		
 	}
 }
