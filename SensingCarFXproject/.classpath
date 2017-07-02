@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="team1/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/team1"/>
+	<classpathentry kind="lib" path="lib/bridj-0.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/californium-core-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/californium-osgi-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/californium-proxy-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="lib" path="lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
+	<classpathentry kind="lib" path="lib/element-connector-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="lib/guava-22.0.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-nio-4.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/httpmime-4.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/jcl-over-slf4j-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="lib/json-20170516.jar"/>
+	<classpathentry kind="lib" path="lib/junit_4/junit-4.12-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/junit_4/junit-4.12-sources.jar"/>
+	<classpathentry kind="lib" path="lib/junit_4/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.paho.client.mqttv3-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="lib" path="lib/scandium-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/webcam-capture-0.3.10.jar"/>
+	<classpathentry kind="lib" path="lib/webcam-capture-driver-ipcam-0.3.11.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
