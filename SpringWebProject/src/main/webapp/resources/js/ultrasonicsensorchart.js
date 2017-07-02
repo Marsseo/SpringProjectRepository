@@ -131,7 +131,7 @@ $(function() {
 
 function requestUltrasonicSensorChartData(){
 	console.log("시작스");
-	//var ws = new WebSocket("ws://"+location.host+"/SpringWebProject/websocket/ultrasonicsensor");
+	var ws = new WebSocket("ws://"+location.host+"/SpringWebProject/websocket/ultrasonicsensor");
 	ws.onmessage = function(event){
 		var data= JSON.parse(event.data); //JSON.parse는 문자열로 되어있는 제이슨( '{"xxx":"value"}')을 javascript객체( {"xxx":"value"} )로 만들어주는 작업을함
 		var point,value;

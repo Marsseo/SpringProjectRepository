@@ -12,6 +12,25 @@
 		<script	src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js"	type="text/javascript"></script>
 		<script	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
 		<script	src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
+		<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts-more.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/exporting.js"></script>
+	<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
+	<link
+	href="<%=application.getContextPath()%>/resources/css/roundslider.min.css"
+	rel="stylesheet" />
+<script
+	src="<%=application.getContextPath()%>/resources/js/roundslider.min.js"></script>
+<link
+	href="<%=application.getContextPath()%>/resources/css/ultraslider.css"
+	rel="stylesheet"></link>
+<script
+	src="<%=application.getContextPath()%>/resources/js/laseremitter.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
 		<!-- 기존 센서 -->
 		<%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
@@ -113,6 +132,7 @@
 	</head>
 
 	<body >
+	
 		<header>
 			<hgroup class="clearfix">
 				<h1>SensingCar Web Controller</h1>				
@@ -208,13 +228,26 @@
 							</div>
 							<div class="row">
 								<div class="col-md-4">
-									<div id="4ChartContainer" class="box-design1"></div>
+								<input type="hidden" id="ultraangle" value=" ${angle}"/>
+									<div id="4ChartContainer" class="box-design1">
+									<div id="ultrahandle"
+						style="height: 100px; margin-top: 20px; border: 1px solid white;"></div>
+									</div>
 								</div>
 								<div class="col-md-4">
-									<div id="5ChartContainer" class="box-design1"></div>
+									<div id="ultraSensorChartContainer" class="box-design1"></div>
 								</div>
 								<div class="col-md-4">
-									<div id="6ChartContainer" class="box-design1"></div>
+									<div id="6c"
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">
+					
+					<input id="laserOn" <c:if test="${laseremitterStatus=='off'}">onclick="laseremitter('change','on')" </c:if>
+					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					<input id="buzzerOn" <c:if test="${buzzerStatus=='off'}">onclick="buzzer('change','on')" </c:if>
+					<c:if test="${buzzerStatus=='on'}">onclick="buzzer('change','off')" </c:if> 
+					<c:if test="${buzzerStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${buzzerStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					
+				</div>
 								</div>
 							</div>
 							<div class="row">
@@ -348,5 +381,9 @@
 				</article>				
 			</div>
 		</div>
+		
+		
+		<script
+		src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
 	</body>
 </html>

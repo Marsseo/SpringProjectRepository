@@ -150,8 +150,44 @@ public class HomeController {
 		model.addAttribute("red", jsonObject.getString("red"));
 		model.addAttribute("green", jsonObject.getString("green"));
 		model.addAttribute("blue", jsonObject.getString("blue"));
+		
+		//초음파---------------------------------------------------------------
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("angle", jsonObject.getString("angle"));
+		model.addAttribute("distance", jsonObject.getString("distance"));
+		model.addAttribute("change","null");
+		
+		//레이저---------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/laseremitter");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("laseremitterStatus", jsonObject.getString("status"));
+		
+		//부저---------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://"+ipAddress+"/buzzer");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		model.addAttribute("buzzerStatus", jsonObject.getString("status"));
+		
+		//----------------------------------------------
 
 		model.addAttribute("cameraUrl", "http://"+ipAddress+":50001?action=stream");
+		coapClient.shutdown();
 		return "charttest";
 
 	}
@@ -216,6 +252,67 @@ public class HomeController {
 		coapClient.setURI("coap://"+ipAddress+"/rgbled");
 		CoapResponse coapResponse = coapClient.post(reqJson,
 				MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+	
+	
+	@RequestMapping("/ultrasonicsensor")
+	public void ultrasonicsensor(String command, String angle,HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");   //coap에 등록해놓은 리소스 이름
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+	
+	@RequestMapping("/laseremitter")
+	public void rgbled(String command, String status, HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("status", status);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/laseremitter");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+	
+	@RequestMapping("/buzzer")
+	public void buzzer(String command, String status, HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("status", status);
+		String reqJson = jsonObject.toString();
+		
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://"+ipAddress+"/buzzer");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
 		String resJson = coapResponse.getResponseText();
 		coapClient.shutdown();
 		

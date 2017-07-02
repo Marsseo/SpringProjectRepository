@@ -63,7 +63,11 @@ public class HomeController1 {
 		
 		coapClient.shutdown();
 		return "charttest1";
+		
 	}
+	/*
+	
+	
 	@RequestMapping("/ultrasonicsensor")
 	public void ultrasonicsensor(String command, String angle,HttpServletResponse response) throws IOException {
 		JSONObject jsonObject = new JSONObject();
@@ -123,5 +127,6 @@ public class HomeController1 {
 		pw.flush();
 		pw.close();
 	}
+	*/
 	
 }
