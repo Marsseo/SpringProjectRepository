@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.util.Duration;
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResponse;
@@ -61,9 +63,20 @@ public class ControllerController implements Initializable {
 	private Label lblDirection;
 	@FXML
 	private Group backTire;
-
+	@FXML
+	private TextField txtLcdLine0;
+	@FXML
+	private TextField txtLcdLine1;
+	@FXML
+	private Button btnLcdSend;
+	@FXML
+	private Button btnLcdClear;
+	@FXML
+	private Label lblLcdLine0;
+	@FXML
+	private Label lblLcdLine1;
 	// 공통으로 사용하는 필드 값 정리
-	private String ipAdress = "192.168.3.48";
+	private String ipAdress = "192.168.0.6";
 	private CoapClient coapClient;
 	private CoapResponse coapResponse;
 	private JSONObject jsonObject;
@@ -76,12 +89,12 @@ public class ControllerController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		rotate = new RotateTransition();
 
-		// 초기값 읽기			
+		// 초기값 읽기		
 		frontTireState();
 		backTireState();
-
-		rotate = new RotateTransition();
+		lcdState();
 
 		// CoAP 통신을 사용하여, 패널에서 입력한 값을 센싱카로 전달하기
 		sliderFrontTire.valueProperty().addListener(new ChangeListener<Number>() {
@@ -163,6 +176,9 @@ public class ControllerController implements Initializable {
 		btnBackTireForward.setOnAction(e -> handleBtnDirection("run"));
 		btnBackTireStop.setOnAction(e -> handleBtnDirection("stop"));
 		btnBackTireBackward.setOnAction(e -> handleBtnDirection("back"));
+		// LCD
+		btnLcdSend.setOnAction(e -> handleBtnLcdSend());
+		btnLcdClear.setOnAction(e -> handleBtnLcdClear());
 	}
 
 	private void frontTireState() {
@@ -195,6 +211,24 @@ public class ControllerController implements Initializable {
 		lblSpeed.setText(jsonObject.getString("speed"));
 		lblDirection.setText(jsonObject.getString("direction"));
 		sliderSpeed.setValue(jsonObject.getDouble("speed"));
+		speed = jsonObject.getInt("speed");
+		direction = jsonObject.getString("direction");
+		backTireRolling(speed);
+	}
+
+	private void lcdState() {
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://" + ipAdress + "/lcd");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+
+		jsonObject = new JSONObject(json);
+		lblLcdLine0.setText(jsonObject.getString("line0"));
+		lblLcdLine1.setText(jsonObject.getString("line1"));
 	}
 
 	private void handleBtnFrontTireClear() {
@@ -249,7 +283,7 @@ public class ControllerController implements Initializable {
 
 	// backTire 회전 애니메이션
 	private void backTireRolling(int speed) {
-		if( rotate != null) {
+		if (rotate != null) {
 			rotate.stop();
 			rotate = null;
 			rotate = new RotateTransition();
@@ -269,5 +303,28 @@ public class ControllerController implements Initializable {
 
 	private void backTireStop() {
 		rotate.stop();
+	}
+
+	private void handleBtnLcdSend() {
+		String line0 = txtLcdLine0.getText();
+		String line1 = txtLcdLine1.getText();
+		lblLcdLine0.setText(line0);
+		lblLcdLine1.setText(line1);
+
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "change");
+		jsonObject.put("line0", line0);
+		jsonObject.put("line1", line1);
+		json = jsonObject.toString();
+
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://" + ipAdress + "/lcd");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		coapClient.shutdown();
+	}
+
+	private void handleBtnLcdClear() {
+		txtLcdLine0.setText("");
+		txtLcdLine1.setText("");
 	}
 }
