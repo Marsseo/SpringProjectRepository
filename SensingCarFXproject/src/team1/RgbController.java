@@ -61,9 +61,9 @@ public class RgbController implements Initializable {
         buzzerState();
         laserState();
         getState();
-        
-        imgBuzzer.setOnMousePressed(event->handleImgBuzzer());
-        imgLaser.setOnMousePressed(event->handleImgLaser());
+
+        imgBuzzer.setOnMousePressed(event -> handleImgBuzzer());
+        imgLaser.setOnMousePressed(event -> handleImgLaser());
         //cambia el color de fondo del objeto Pane
         pane.setBackground(
                 //la clase Background crea un fondo para agregar al Pane
@@ -207,14 +207,13 @@ public class RgbController implements Initializable {
         json = coapResponse.getResponseText();
 
         jsonObject = new JSONObject(json);
-        if(jsonObject.getString("status")=="on"){
-            buzzerState=1;
+        if (jsonObject.getString("status") == "on") {
+            buzzerState = 1;
             imgBuzzer.setImage(new Image(getClass().getResource("images/buzzerOn.png").toString()));
-        }else if(jsonObject.getString("status")=="off"){
-            buzzerState=0;
+        } else if (jsonObject.getString("status") == "off") {
+            buzzerState = 0;
             imgBuzzer.setImage(new Image(getClass().getResource("images/buzzer.png").toString()));
         }
-
 
     }
 
@@ -229,32 +228,73 @@ public class RgbController implements Initializable {
         json = coapResponse.getResponseText();
 
         jsonObject = new JSONObject(json);
-        if(jsonObject.getString("status")=="on"){
-             laserState=1;
+        if (jsonObject.getString("status") == "on") {
+            laserState = 1;
             imgLaser.setImage(new Image(getClass().getResource("images/laserOn.png").toString()));
-        }else if(jsonObject.getString("status")=="off"){
-            laserState=0;
+        } else if (jsonObject.getString("status") == "off") {
+            laserState = 0;
             imgLaser.setImage(new Image(getClass().getResource("images/laser.png").toString()));
         }
     }
 
     private void handleImgBuzzer() {
-        if(buzzerState==0){
-            buzzerState=1;
+        if (buzzerState == 0) {
+            buzzerState = 1;
             imgBuzzer.setImage(new Image(getClass().getResource("images/buzzerOn.png").toString()));
-        }else if(buzzerState==1){
-            buzzerState=0;
+
+            jsonObject = new JSONObject();
+            jsonObject.put("command", "change");
+            jsonObject.put("status", "on");
+            json = jsonObject.toString();
+
+            coapClient = new CoapClient();
+            coapClient.setURI("coap://" + ipAddress + "/buzzer");
+            coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+            coapClient.shutdown();
+            
+        } else if (buzzerState == 1) {
+            buzzerState = 0;
             imgBuzzer.setImage(new Image(getClass().getResource("images/buzzer.png").toString()));
+            
+             jsonObject = new JSONObject();
+            jsonObject.put("command", "change");
+            jsonObject.put("status", "off");
+            json = jsonObject.toString();
+
+            coapClient = new CoapClient();
+            coapClient.setURI("coap://" + ipAddress + "/buzzer");
+            coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+            coapClient.shutdown();
         }
     }
 
     private void handleImgLaser() {
-        if(laserState==0){
-             laserState=1;
+        if (laserState == 0) {
+            laserState = 1;
             imgLaser.setImage(new Image(getClass().getResource("images/laserOn.png").toString()));
-        }else if(laserState==1){
-            laserState=0;
+            
+             jsonObject = new JSONObject();
+            jsonObject.put("command", "change");
+            jsonObject.put("status", "on");
+            json = jsonObject.toString();
+
+            coapClient = new CoapClient();
+            coapClient.setURI("coap://" + ipAddress + "/laseremitter");
+            coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+            coapClient.shutdown();
+        } else if (laserState == 1) {
+            laserState = 0;
             imgLaser.setImage(new Image(getClass().getResource("images/laser.png").toString()));
+            
+             jsonObject = new JSONObject();
+            jsonObject.put("command", "change");
+            jsonObject.put("status", "off");
+            json = jsonObject.toString();
+
+            coapClient = new CoapClient();
+            coapClient.setURI("coap://" + ipAddress + "/laseremitter");
+            coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+            coapClient.shutdown();
         }
     }
 }

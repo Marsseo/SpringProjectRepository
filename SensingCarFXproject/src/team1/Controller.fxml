@@ -190,6 +190,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <ImageView fitHeight="324.0" fitWidth="738.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@images/background.png" />
+                           </image>
+                        </ImageView>
                         <Button fx:id="btnUltraLeft" layoutX="97.0" layoutY="223.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #F39C12;" text="Left" textFill="WHITE">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
@@ -231,7 +236,7 @@
                               </Label>
                            </children>
                         </Group>
-                        <Label fx:id="lblUltraAngle" layoutX="486.0" layoutY="92.0" text="Label">
+                        <Label fx:id="lblUltraAngle" layoutX="486.0" layoutY="92.0" text="Label" textFill="#f8e8e8">
                            <font>
                               <Font size="24.0" />
                            </font>
