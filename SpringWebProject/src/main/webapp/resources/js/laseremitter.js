@@ -14,10 +14,10 @@ function laseremitter(command,status){
 			//	$("#laseremitterStatus").html(data.status);
 				if(status=='off'){
 					$("#laserOn").attr("onclick","laseremitter('change', 'on')");
-					$("#laserOn").attr("src","/SpringWebProject/resources/image/laserOn.PNG");
+					$("#laserOn").attr("src","/SpringWebProject/resources/image/laser.png");
 				}else if(status=='on'){
 					$("#laserOn").attr("onclick","laseremitter('change', 'off')");
-					$("#laserOn").attr("src","/SpringWebProject/resources/image/star100.png");
+					$("#laserOn").attr("src","/SpringWebProject/resources/image/laserOn.png");
 				}
 			}
 		}

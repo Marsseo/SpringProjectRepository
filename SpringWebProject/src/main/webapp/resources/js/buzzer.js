@@ -11,10 +11,10 @@ function buzzer(command,status){
 				
 				if(status=='off'){
 					$("#buzzerOn").attr("onclick","buzzer('change', 'on')");
-					$("#buzzerOn").attr("src","/SpringWebProject/resources/image/laserOn.PNG");
+					$("#buzzerOn").attr("src","/SpringWebProject/resources/image/laserOn.png");
 				}else if(status=='on'){
 					$("#buzzerOn").attr("onclick","buzzer('change', 'off')");
-					$("#buzzerOn").attr("src","/SpringWebProject/resources/image/star100.png");
+					$("#buzzerOn").attr("src","/SpringWebProject/resources/image/buzzerOn.png");
 				}
 			}
 		}

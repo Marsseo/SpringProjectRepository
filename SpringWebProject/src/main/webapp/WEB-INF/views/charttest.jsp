@@ -229,23 +229,33 @@
 							<div class="row">
 								<div class="col-md-4">
 								<input type="hidden" id="ultraangle" value=" ${angle}"/>
-									<div id="4ChartContainer" class="box-design1">
-									<div id="ultrahandle"
-						style="height: 100px; margin-top: 20px; border: 1px solid white;"></div>
+									<div id="ultraSensorChartContainer" class="box-design1">
+									
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div id="ultraSensorChartContainer" class="box-design1"></div>
+									<div id="contatin" class="box-design2">
+									<div class="budget-wrap">
+										<div class="budget">
+											<div class="header">
+												<div class="title clearfix" style="float: up">
+													<span>UltraSensor Control </span>
+									<div  id="ultrahandle"></div>
+									</div>
+									</div>
+									</div>
+									</div>
+									</div>
 								</div>
 								<div class="col-md-4">
 									<div id="6c"
-					style="height: 230px; margin-top: 20px; border: 1px solid white;">
+					style="height: 230px; margin-top: 20px; border: 1px solid white; background-color: black;">
 					
-					<input id="laserOn" <c:if test="${laseremitterStatus=='off'}">onclick="laseremitter('change','on')" </c:if>
-					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
-					<input id="buzzerOn" <c:if test="${buzzerStatus=='off'}">onclick="buzzer('change','on')" </c:if>
+					<input style="float: left; height: 50; width: 50;" id="laserOn" <c:if test="${laseremitterStatus=='off'}">onclick="laseremitter('change','on')" </c:if>
+					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laser.png"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.png"</c:if>/>
+					<input style="float: right; height: 50; width: 50;" id="buzzerOn" <c:if test="${buzzerStatus=='off'}">onclick="buzzer('change','on')" </c:if>
 					<c:if test="${buzzerStatus=='on'}">onclick="buzzer('change','off')" </c:if> 
-					<c:if test="${buzzerStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${buzzerStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					<c:if test="${buzzerStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laser.png"</c:if> <c:if test="${buzzerStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/buzzerOn.png"</c:if>/>
 					
 				</div>
 								</div>
