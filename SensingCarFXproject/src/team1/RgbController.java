@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -53,11 +54,16 @@ public class RgbController implements Initializable {
     private ImageView imgBuzzer;
     @FXML
     private ImageView imgLaser;
+    int buzzerState;
+    int laserState;
 
     public void initialize(URL url, ResourceBundle rb) {
         buzzerState();
         laserState();
         getState();
+        
+        imgBuzzer.setOnMousePressed(event->handleImgBuzzer());
+        imgLaser.setOnMousePressed(event->handleImgLaser());
         //cambia el color de fondo del objeto Pane
         pane.setBackground(
                 //la clase Background crea un fondo para agregar al Pane
@@ -80,8 +86,8 @@ public class RgbController implements Initializable {
                                 (int) sliderG.getValue(),
                                 (int) sliderB.getValue()
                         ), CornerRadii.EMPTY, Insets.EMPTY)));
-                int nowRedValue= new_val.intValue();
-                redValue=nowRedValue; 
+                int nowRedValue = new_val.intValue();
+                redValue = nowRedValue;
                 jsonObject = new JSONObject();
                 jsonObject.put("command", "change");
                 jsonObject.put("red", String.valueOf(nowRedValue));
@@ -106,8 +112,8 @@ public class RgbController implements Initializable {
                                 new_val.intValue(),
                                 (int) sliderB.getValue()
                         ), CornerRadii.EMPTY, Insets.EMPTY)));
-                  int nowGreenValue= new_val.intValue();
-                greenValue=nowGreenValue; 
+                int nowGreenValue = new_val.intValue();
+                greenValue = nowGreenValue;
                 jsonObject = new JSONObject();
                 jsonObject.put("command", "change");
                 jsonObject.put("red", String.valueOf(redValue));
@@ -120,7 +126,7 @@ public class RgbController implements Initializable {
                 coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
                 coapClient.shutdown();
             }
-            
+
         });
 
         sliderB.valueProperty().addListener(new ChangeListener<Number>() {
@@ -133,8 +139,8 @@ public class RgbController implements Initializable {
                                 (int) sliderG.getValue(),
                                 new_val.intValue()
                         ), CornerRadii.EMPTY, Insets.EMPTY)));
-                      int nowBlueValue= new_val.intValue();
-                blueValue=nowBlueValue; 
+                int nowBlueValue = new_val.intValue();
+                blueValue = nowBlueValue;
                 jsonObject = new JSONObject();
                 jsonObject.put("command", "change");
                 jsonObject.put("red", String.valueOf(redValue));
@@ -147,7 +153,7 @@ public class RgbController implements Initializable {
                 coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
                 coapClient.shutdown();
             }
-            
+
         });
     }
 
@@ -172,7 +178,7 @@ public class RgbController implements Initializable {
         sliderB.setValue(255);
     }
 
-   private void getState(){
+    private void getState() {
         jsonObject = new JSONObject();
         jsonObject.put("command", "status");
         json = jsonObject.toString();
@@ -186,13 +192,69 @@ public class RgbController implements Initializable {
         sliderR.setValue(jsonObject.getDouble("red"));
         sliderG.setValue(jsonObject.getDouble("green"));
         sliderB.setValue(jsonObject.getDouble("blue"));
-        
-        
+
     }
-   private void buzzerState(){
-       
-   }
-   private void laserState(){
-       
-   }
+
+    private void buzzerState() {
+
+        jsonObject = new JSONObject();
+        jsonObject.put("command", "status");
+        json = jsonObject.toString();
+
+        coapClient = new CoapClient();
+        coapClient.setURI("coap://" + ipAddress + "/buzzer");
+        coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+        json = coapResponse.getResponseText();
+
+        jsonObject = new JSONObject(json);
+        if(jsonObject.getString("status")=="on"){
+            buzzerState=1;
+            imgBuzzer.setImage(new Image(getClass().getResource("images/buzzerOn.png").toString()));
+        }else if(jsonObject.getString("status")=="off"){
+            buzzerState=0;
+            imgBuzzer.setImage(new Image(getClass().getResource("images/buzzer.png").toString()));
+        }
+
+
+    }
+
+    private void laserState() {
+        jsonObject = new JSONObject();
+        jsonObject.put("command", "status");
+        json = jsonObject.toString();
+
+        coapClient = new CoapClient();
+        coapClient.setURI("coap://" + ipAddress + "/laseremitter");
+        coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+        json = coapResponse.getResponseText();
+
+        jsonObject = new JSONObject(json);
+        if(jsonObject.getString("status")=="on"){
+             laserState=1;
+            imgLaser.setImage(new Image(getClass().getResource("images/laserOn.png").toString()));
+        }else if(jsonObject.getString("status")=="off"){
+            laserState=0;
+            imgLaser.setImage(new Image(getClass().getResource("images/laser.png").toString()));
+        }
+    }
+
+    private void handleImgBuzzer() {
+        if(buzzerState==0){
+            buzzerState=1;
+            imgBuzzer.setImage(new Image(getClass().getResource("images/buzzerOn.png").toString()));
+        }else if(buzzerState==1){
+            buzzerState=0;
+            imgBuzzer.setImage(new Image(getClass().getResource("images/buzzer.png").toString()));
+        }
+    }
+
+    private void handleImgLaser() {
+        if(laserState==0){
+             laserState=1;
+            imgLaser.setImage(new Image(getClass().getResource("images/laserOn.png").toString()));
+        }else if(laserState==1){
+            laserState=0;
+            imgLaser.setImage(new Image(getClass().getResource("images/laser.png").toString()));
+        }
+    }
 }

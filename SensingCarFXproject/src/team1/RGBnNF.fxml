@@ -34,12 +34,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="473.0" fitWidth="635.0" pickOnBounds="true">
+                        <ImageView fitHeight="473.0" fitWidth="680.0" pickOnBounds="true">
                            <image>
                               <Image url="@images/background.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="imgBuzzer" fitHeight="195.0" fitWidth="228.0" layoutX="369.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgBuzzer" fitHeight="195.0" fitWidth="228.0" layoutX="390.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/buzzer.png" />
                            </image>
