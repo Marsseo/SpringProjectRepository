@@ -1,3 +1,4 @@
+import com.sun.javafx.beans.event.AbstractNotifyListener;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,12 +12,12 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import javafx.beans.Observable;
 
 public class LinechartTest extends Application {
 
@@ -31,25 +32,28 @@ public class LinechartTest extends Application {
     private XYChart.Series xySeries1;
     private XYChart.Series xySeries2;
     private CategoryAxis xAxis;
-    private int lastObservedSize;
+    private int lastObservedSize=0;
 
     @Override public void start(Stage stage) {
 
         xyList1.addListener((ListChangeListener<XYChart.Data<String, Integer>>) change -> {
-            if (change.getList().size() - lastObservedSize > 10) {
-                lastObservedSize += 10;
-                xAxis.getCategories().remove(0, 10);
+           if (change.getList().size() >= 10) {
+                
+		xAxis.getCategories().remove( 0, 2);
+//              xAxis.getCategories().remove(lastObservedSize, lastObservedSize+10);
+//		lineChart.getData().remove(lastObservedSize, lastObservedSize+10);
+		
             }
         });
 
         stage.setTitle("Line Chart Sample");
         xAxis = new CategoryAxis();
-        xAxis.setLabel("Month");
+        xAxis.setLabel("Time");
 
         final NumberAxis yAxis = new NumberAxis();
         lineChart = new LineChart<>(xAxis,yAxis);
 
-        lineChart.setTitle("Woohoo, 2010");
+        lineChart.setTitle("Sensing Car");
         lineChart.setAnimated(false);
 
         task = new Task<Date>() {
@@ -81,9 +85,13 @@ public class LinechartTest extends Application {
 
                 String strDate = dateFormat.format(newDate);
                 myXaxisCategories.add(strDate);
-
-                xyList1.add(new XYChart.Data(strDate, Integer.valueOf(newDate.getMinutes() + random.nextInt(100500))));
-                xyList2.add(new XYChart.Data(strDate, Integer.valueOf(newDate.getMinutes() + random.nextInt(100500) - random.nextInt(10050))));
+		
+		if(xyList1.size()>=10){
+			xyList1.remove(0, 2);
+			xyList2.remove(0, 2);
+		}
+                xyList1.add(new XYChart.Data(strDate, Integer.valueOf(random.nextInt(100500))));
+                xyList2.add(new XYChart.Data(strDate, Integer.valueOf(random.nextInt(100500) - random.nextInt(10050))));
 
             }
         });
@@ -97,13 +105,13 @@ public class LinechartTest extends Application {
 	xAxis.setAutoRanging(false);
 
         xySeries1 = new XYChart.Series(xyList1);
-        xySeries1.setName("Series 1");
+        xySeries1.setName("Temperature");
 
         xySeries2 = new XYChart.Series(xyList2);
-        xySeries2.setName("Series 2");
-
+        xySeries2.setName("Gas");
+	
         lineChart.getData().addAll(xySeries1, xySeries2);
-
+	
         i = 0;
 
         stage.setScene(scene);

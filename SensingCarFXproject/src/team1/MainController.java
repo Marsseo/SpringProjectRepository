@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -19,22 +18,16 @@ import javafx.util.Duration;
 public class MainController implements Initializable {
 
 	@FXML
-	private Button btnHome;
-	@FXML
-	private Button btnController;
-	@FXML
-	private Button btnCharts;
-	@FXML
-	private Button btnCamera;
-	@FXML
-	private Button btnRgbnNF;
-	@FXML
 	private AnchorPane holderPane;
 
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
+		try {
+			setNode(FXMLLoader.load(getClass().getResource("Home.fxml")));
+		} catch (IOException ex) {
+			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}	
 	
 	private void setNode(Node node) {
@@ -50,10 +43,15 @@ public class MainController implements Initializable {
         ft.play();
 	
 	}
+	private void cleanPane(){
+		holderPane.getChildren().clear();
+		holderPane.getChildren().removeAll();
+	}
 
 	@FXML
 	private void switchHome(ActionEvent event) {
 		try {
+			cleanPane();
 			setNode(FXMLLoader.load(getClass().getResource("Home.fxml")));
 		} catch (IOException ex) {
 			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,6 +61,7 @@ public class MainController implements Initializable {
 	@FXML
 	private void switchController(ActionEvent event) {
 		try {
+			cleanPane();
 			setNode(FXMLLoader.load(getClass().getResource("Controller.fxml")));
 		} catch (IOException ex) {
 			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,16 +70,18 @@ public class MainController implements Initializable {
 
 	@FXML
 	private void switchChart(ActionEvent event) {
-//		try {
-//			setNode(FXMLLoader.load(getClass().getResource("Chart.fxml")));
-//		} catch (IOException ex) {
-//			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-//		}
+		try {
+			cleanPane();
+			setNode(FXMLLoader.load(getClass().getResource("Chart.fxml")));
+		} catch (IOException ex) {
+			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@FXML
 	private void switchCamera(ActionEvent event) {
 //		try {
+//			cleanPane();
 //			setNode(FXMLLoader.load(getClass().getResource("Camera.fxml")));
 //		} catch (IOException ex) {
 //			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,6 +91,7 @@ public class MainController implements Initializable {
 	@FXML
 	private void switchRGBnNF(ActionEvent event) {
 //		try {
+//			cleanPane();
 //			setNode(FXMLLoader.load(getClass().getResource("RGBnNF.fxml")));
 //		} catch (IOException ex) {
 //			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
