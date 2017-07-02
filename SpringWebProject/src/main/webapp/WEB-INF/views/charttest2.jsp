@@ -77,8 +77,9 @@
 						</div><br/>
 						<button type="button" class="btn btn-warning" onclick="backtire('change', 'forward','${backtireSpeed}')" style="margin-bottom: 5px;">전진</button>
 						<button type="button" class="btn btn-info" onclick="backtire('change', 'backward','${backtireSpeed}')" style="margin-bottom: 5px;">후진</button><br/>	
-						<button onmousedown="accelerator('forward')" onmouseup="stop('1')" style="color: black;">가속 패달</button>									
-						<button onclick="stop('1')" style="color: black;">정지 패달</button>
+						<!-- <button onmousedown="accelerator('${backtireDirection}')" onmouseup="stop()" style="color: black;"> -->
+						<button id="accl" style="color: black;">가속 패달</button>									
+						<button onclick="stop()" style="color: black;">정지 패달</button>
 					</div>
 				</div>
 			</div>
