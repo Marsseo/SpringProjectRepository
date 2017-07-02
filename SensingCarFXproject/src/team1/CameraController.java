@@ -63,17 +63,19 @@ public class CameraController implements Initializable {
     private String json;
     private int h=90;
     private int v=45;
-
+   int counter=0;
    
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         Webcam.setDriver(new IpCamDriver());
+     
         try {
-            IpCamDeviceRegistry.register("RPi", "http://192.168.3.48:50001/?action=stream", IpCamMode.PUSH);
+            IpCamDeviceRegistry.register("RPi"+counter, "http://"+ipAddress+":50001/?action=stream", IpCamMode.PUSH);
         } catch (MalformedURLException ex) {
             Logger.getLogger(CameraController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        counter++;
 
         WebcamPanel panel = new WebcamPanel(Webcam.getWebcams().get(0));
         panel.setFPSLimit(1);

@@ -80,22 +80,22 @@ public class MainController implements Initializable {
 
 	@FXML
 	private void switchCamera(ActionEvent event) {
-//		try {
-//			cleanPane();
-//			setNode(FXMLLoader.load(getClass().getResource("Camera.fxml")));
-//		} catch (IOException ex) {
-//			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-//		}
+		try {
+			cleanPane();
+			setNode(FXMLLoader.load(getClass().getResource("Camera.fxml")));
+		} catch (IOException ex) {
+			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@FXML
 	private void switchRGBnNF(ActionEvent event) {
-//		try {
-//			cleanPane();
-//			setNode(FXMLLoader.load(getClass().getResource("RGBnNF.fxml")));
-//		} catch (IOException ex) {
-//			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-//		}
+		try {
+			cleanPane();
+			setNode(FXMLLoader.load(getClass().getResource("RGBnNF.fxml")));
+		} catch (IOException ex) {
+			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 	
