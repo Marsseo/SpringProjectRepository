@@ -9,23 +9,23 @@
 
 <AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team1.ChartController">
    <children>
-      <LineChart fx:id="sensingChart" layoutX="156.0" layoutY="10.0" prefHeight="421.0" prefWidth="510.0">
+      <LineChart fx:id="sensingChart" alternativeRowFillVisible="false" layoutX="148.0" layoutY="5.0" prefHeight="426.0" prefWidth="529.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis minorTickVisible="false" side="LEFT" tickLabelFill="#030303" upperBound="255.0" />
         </yAxis>
       </LineChart>
       <VBox layoutX="22.0" layoutY="67.0" prefHeight="144.0" prefWidth="107.0" spacing="10.0">
          <children>
-            <CheckBox fx:id="thermistor" mnemonicParsing="false" text="Temperature" />
-            <CheckBox fx:id="photoresistor" mnemonicParsing="false" text="Illuminance" />
-            <CheckBox fx:id="gas" mnemonicParsing="false" text="Gas" />
-            <CheckBox fx:id="ultrasonic" mnemonicParsing="false" text="Distance(Ultra)" />
-            <CheckBox fx:id="tracking" mnemonicParsing="false" text="Tracking" />
+            <CheckBox fx:id="thermistor" mnemonicParsing="false" selected="true" text="Temperature" />
+            <CheckBox fx:id="photoresistor" mnemonicParsing="false" selected="true" text="Illuminance" />
+            <CheckBox fx:id="gas" mnemonicParsing="false" selected="true" text="Gas" />
+            <CheckBox fx:id="ultrasonic" mnemonicParsing="false" selected="true" text="Distance(Ultra)" />
+            <CheckBox fx:id="tracking" mnemonicParsing="false" selected="true" text="Tracking" />
          </children>
       </VBox>
-      <Pane fx:id="trackingPane" layoutX="19.0" layoutY="268.0" prefHeight="93.0" prefWidth="107.0" style="-fx-background-color: black;" />
+      <Pane fx:id="trackingPane" layoutX="22.0" layoutY="263.0" prefHeight="93.0" prefWidth="107.0" style="-fx-border-color: black; -fx-background-color: black;" />
    </children>
 </AnchorPane>

@@ -32,14 +32,13 @@ public class LinechartTest extends Application {
     private XYChart.Series xySeries1;
     private XYChart.Series xySeries2;
     private CategoryAxis xAxis;
-    private int lastObservedSize=0;
 
     @Override public void start(Stage stage) {
 
         xyList1.addListener((ListChangeListener<XYChart.Data<String, Integer>>) change -> {
            if (change.getList().size() >= 10) {
                 
-		xAxis.getCategories().remove( 0, 2);
+		xAxis.getCategories().remove(0, 1);
 //              xAxis.getCategories().remove(lastObservedSize, lastObservedSize+10);
 //		lineChart.getData().remove(lastObservedSize, lastObservedSize+10);
 		
@@ -54,7 +53,7 @@ public class LinechartTest extends Application {
         lineChart = new LineChart<>(xAxis,yAxis);
 
         lineChart.setTitle("Sensing Car");
-        lineChart.setAnimated(false);
+        lineChart.setAnimated(true);
 
         task = new Task<Date>() {
             @Override
@@ -87,11 +86,11 @@ public class LinechartTest extends Application {
                 myXaxisCategories.add(strDate);
 		
 		if(xyList1.size()>=10){
-			xyList1.remove(0, 2);
-			xyList2.remove(0, 2);
+			xyList1.remove(0, 1);
+			xyList2.remove(0, 1);
 		}
-                xyList1.add(new XYChart.Data(strDate, Integer.valueOf(random.nextInt(100500))));
-                xyList2.add(new XYChart.Data(strDate, Integer.valueOf(random.nextInt(100500) - random.nextInt(10050))));
+                xyList1.add(new XYChart.Data(strDate, Integer.valueOf(random.nextInt(50))));
+                xyList2.add(new XYChart.Data(strDate, Integer.valueOf(random.nextInt(500) - random.nextInt(100))));
 
             }
         });

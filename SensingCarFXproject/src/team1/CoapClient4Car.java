@@ -1,5 +1,7 @@
 package team1;
 
+import java.util.List;
+import java.util.Vector;
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapHandler;
 import org.eclipse.californium.core.CoapObserveRelation;
@@ -20,6 +22,7 @@ public class CoapClient4Car {
 	private JSONObject jsonObject;
 	private String json;
 	
+	private List<String> list = new Vector();	
 		
 	public void shutdown(){
 		coapClient.shutdown();
@@ -263,7 +266,7 @@ public class CoapClient4Car {
 		return 0;
 	}
 	public String trackingObserve(){
-		
+					
 		coapClient = new CoapClient();
 		coapClient.setURI("coap://" + ipAddress + "/trackingsensor");
 		coapObserveRelation = coapClient.observe(new CoapHandler() {
@@ -272,8 +275,9 @@ public class CoapClient4Car {
 				
 				String json = response.getResponseText();
 				JSONObject jsonObject = new JSONObject(json);
-				String a = jsonObject.getString("tracking");
-
+				String curColor = jsonObject.getString("tracking");
+				list.add(curColor);
+				//color = curColor;
 			}
 
 			@Override
@@ -285,6 +289,54 @@ public class CoapClient4Car {
 		shutdown();
 		
 		return null;
+	}
+	
+	// 현재 상태를 읽기 위한 메소드
+	public String curState(String resourceName){
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://" + ipAddress + "/"+resourceName);
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		
+		return json;
+	}
+	
+	public int curObserveState(String resourceName){
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://" + ipAddress + "/"+resourceName);
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		
+		JSONObject jsonObject = new JSONObject(json);
+		double tempValue;
+		int stateValue=-1;
+		
+		switch(resourceName){
+		
+			case "thermistorsensor": tempValue = Double.parseDouble(jsonObject.getString("temperature"));
+							  stateValue = (int)tempValue;
+							  break;
+			case "photoresistorsensor":	tempValue = Double.parseDouble(jsonObject.getString("photoresistor"));
+								stateValue = (int)tempValue;
+								break;
+			case "gassensor": tempValue = Double.parseDouble(jsonObject.getString("gas"));
+						 stateValue = (int)tempValue;
+						 break;
+			case "ultrasonicsensor": stateValue = Integer.parseInt(jsonObject.getString("distance"));
+							  break;
+			default: stateValue = 0;
+				   break;
+		}
+		
+		return stateValue;
 	}
 	
 }
