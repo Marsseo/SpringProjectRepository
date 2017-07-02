@@ -11,7 +11,6 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team1.RgbController">
    <children>
       <TabPane prefHeight="440.0" prefWidth="680.0" tabClosingPolicy="UNAVAILABLE">
@@ -33,7 +32,24 @@
           </Tab>
           <Tab text="Untitled Tab 2">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="473.0" fitWidth="680.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@images/background.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imgBuzzer" fitHeight="195.0" fitWidth="228.0" layoutX="390.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/buzzer.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imgLaser" fitHeight="196.0" fitWidth="250.0" layoutX="52.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/laser.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
