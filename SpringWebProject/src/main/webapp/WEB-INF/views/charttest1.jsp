@@ -25,16 +25,23 @@
 	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/exporting.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
-	<script src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
-	
 
-<link href="<%= application.getContextPath() %>/resources/css/roundslider.min.css" rel="stylesheet" />
-		<script src="<%= application.getContextPath() %>/resources/js/roundslider.min.js"></script>
-					<link
-	href="<%=application.getContextPath()%>/resources/css/ultraslider.css" rel="stylesheet"></link>
-		
+
+<link
+	href="<%=application.getContextPath()%>/resources/css/roundslider.min.css"
+	rel="stylesheet" />
+<script
+	src="<%=application.getContextPath()%>/resources/js/roundslider.min.js"></script>
+<link
+	href="<%=application.getContextPath()%>/resources/css/ultraslider.css"
+	rel="stylesheet"></link>
+<script
+	src="<%=application.getContextPath()%>/resources/js/laseremitter.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
 
 <!-- 기존 센서 -->
 <%-- 
@@ -62,6 +69,8 @@
 <script type="text/javascript">
 	ws = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/ultrasonicsensor");
+	
+
 	/*
 	//ws.onopen=handleOnOpen;
 	ws.onmessage = handleOnMessage;
@@ -71,7 +80,8 @@
 		var data = JSON.parse(event.data); //JSON.parse는 문자열로 되어있는 제이슨( '{"xxx":"value"}')을 javascript객체( {"xxx":"value"} )로 만들어주는 작업을함
 		$("#ultrasonicsensorStatus").html("앞차와의 거리 :" + data.distance + ";");
 	}
-	*/
+	 */
+	
 </script>
 
 <!-- 스타일 폰트 -->
@@ -206,54 +216,14 @@ body {
 <body style="background-color: black;">
 
 	<h4>splinechart</h4>
-	
-	<div style="width: 600px; height: 400px; margin: 0 auto">
-    <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
-</div>
-	
-	
-	
-
-	    <!-- 토글버튼 -->
-	    
-	<section class="container">
-		<div class="switch">
-			<input type="radio" class="switch-input" name="view" value="week"
-				id="week" checked> <label for="week"
-				class="switch-label switch-label-off">On</label> <input type="radio"
-				class="switch-input" name="view" value="month" id="month"> <label
-				for="month" class="switch-label switch-label-on">Off</label> <span
-				class="switch-selection"></span>
-		</div>
-
-		<div class="switch switch-blue">
-			<input type="radio" class="switch-input" name="view2" value="week2"
-				id="week2" checked> <label for="week2"
-				class="switch-label switch-label-off">On</label> <input type="radio"
-				class="switch-input" name="view2" value="month2" id="month2">
-			<label for="month2" class="switch-label switch-label-on">Off</label>
-			<span class="switch-selection"></span>
-		</div>
-
-		<div class="switch switch-yellow">
-			<input type="radio" class="switch-input" name="view3" value="week3"
-				id="week3" checked> <label for="week3"
-				class="switch-label switch-label-off">On</label> <input type="radio"
-				class="switch-input" name="view3" value="month3" id="month3">
-			<label for="month3" class="switch-label switch-label-on">Off</label>
-			<span class="switch-selection"></span>
-		</div>
-	</section>
 
 
-
-	<div id="container"
-		style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+<input type="hidden" id="ultraangle" value=" ${angle}"/>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4">
 				<div id="1ChartContainer"
-					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">${angle }</div>
 			</div>
 			<div class="col-md-4">
 				<div id="2ChartContainer"
@@ -270,23 +240,29 @@ body {
 					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 			</div>
 			<div class="col-md-4">
-				<div id="5ChartContainer" style="height: 230px; margin-top: 20px; border: 1px solid white;">
-					<span id="ultrasonicsensorStatus" contenteditable="true">angle=${angle};
-						distance=${distance}</span>
-					<hr />
-					<a href="html/exam01" class="btn btn-warning">그래프보기</a>
-					<hr />
-				</div>
-					
-			</div>
-		
-			
-			<div class="col-md-4">
 				<div id="3ChartContainer"
 					style="height: 230px; margin-top: 20px; border: 1px solid white;">
-					<div id="ultrahandle"  style="height: 100px; margin-top: 20px; border: 1px solid white;"></div>
-					</div>
+					
+					<div id="ultrahandle"
+						style="height: 100px; margin-top: 20px; border: 1px solid white;"></div>
+				</div>
 			</div>
+			<div class="col-md-4">
+				<div id="5ChartContainer"
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">
+					
+					<input id="laserOn" <c:if test="${laseremitterStatus=='off'}">onclick="laseremitter('change','on')" </c:if>
+					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					<input id="buzzerOn" <c:if test="${buzzerStatus=='off'}">onclick="buzzer('change','on')" </c:if>
+					<c:if test="${buzzerStatus=='on'}">onclick="buzzer('change','off')" </c:if> 
+					<c:if test="${buzzerStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${buzzerStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					
+				</div>
+
+			</div>
+
+
+
 		</div>
 		<div class="row">
 			<div class="col-md-4">
@@ -320,8 +296,8 @@ body {
 			</div>
 		</div>
 	</div>
-			<script
-	src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
+	<script
+		src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
 
 
 </body>
