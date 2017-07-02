@@ -63,22 +63,26 @@ public class CameraController implements Initializable {
     private String json;
     private int h=90;
     private int v=45;
-   int counter=0;
+   static int counter=0;
    
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        System.out.println(counter);
         Webcam.setDriver(new IpCamDriver());
-     
+     if(counter!=0){
+         Webcam.getDefault().close();
+     }
         try {
             IpCamDeviceRegistry.register("RPi"+counter, "http://"+ipAddress+":50001/?action=stream", IpCamMode.PUSH);
         } catch (MalformedURLException ex) {
             Logger.getLogger(CameraController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        counter++;
 
-        WebcamPanel panel = new WebcamPanel(Webcam.getWebcams().get(0));
+       
+        WebcamPanel panel = new WebcamPanel(Webcam.getWebcams().get(counter));
         panel.setFPSLimit(1);
+        
         SwingNode swingNode = new SwingNode();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -86,11 +90,11 @@ public class CameraController implements Initializable {
                 swingNode.setContent(panel);
             }
         });
-        
+     
         bpWebCamPaneHolder.setCenter(swingNode);
-        
+     
         getState();
-        
+
         hSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -108,6 +112,7 @@ public class CameraController implements Initializable {
                 coapClient.setURI("coap://"+ipAddress+"/camera");
                 coapResponse= coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
                 coapClient.shutdown();
+
             }
         });
         
@@ -127,9 +132,10 @@ public class CameraController implements Initializable {
                 coapClient.setURI("coap://"+ipAddress+"/camera");
                 coapResponse= coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
                 coapClient.shutdown();
+                
             }
         });
-
+               ++counter;
 
 
     }
