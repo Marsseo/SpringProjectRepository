@@ -29,7 +29,7 @@
       <VBox layoutY="40.0" prefHeight="442.0" prefWidth="120.0" style="-fx-background-color: #2A3F54;">
          <children>
             <Label prefHeight="51.0" prefWidth="140.0" style="-fx-alignment: center; -fx-font-size: 16; -fx-text-fill: #7387A8; -fx-border-color: #7387A8; -fx-border-width: 0 0 2 0;" text="MENU" />
-            <Button fx:id="btnHome" onAction="#switchHome" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Home" textFill="#a1aec4">
+            <Button fx:id="btnHome" onAction="#switchHome" prefHeight="80.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Home" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -37,7 +37,7 @@
                   
                </graphic>
             </Button>
-            <Button fx:id="btnController" layoutX="10.0" layoutY="67.0" onAction="#switchController" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Controller" textFill="#a1aec4">
+            <Button fx:id="btnController" layoutX="10.0" layoutY="67.0" onAction="#switchController" prefHeight="80.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Controller" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -45,7 +45,7 @@
                   
                </graphic>
             </Button>
-            <Button fx:id="btnCharts" layoutX="10.0" layoutY="109.0" onAction="#switchChart" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Chart" textFill="#a1aec4">
+            <Button fx:id="btnCharts" layoutX="10.0" layoutY="109.0" onAction="#switchChart" prefHeight="80.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Chart" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -53,7 +53,7 @@
                 
                </graphic>
             </Button>
-            <Button fx:id="btnCamera" layoutX="10.0" layoutY="151.0" onAction="#switchCamera" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Camera" textFill="#a1aec4">
+            <Button fx:id="btnCamera" layoutX="10.0" layoutY="151.0" onAction="#switchCamera" prefHeight="80.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Camera" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
@@ -61,23 +61,7 @@
                   
                </graphic>
             </Button>
-            <Button fx:id="btnRgbnNF" layoutX="10.0" layoutY="193.0" onAction="#switchRGBnNF" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="RGB &amp; OnOff" textFill="#a1aec4">
-               <font>
-                  <Font name="Roboto Bold" size="14.0" />
-               </font>
-               <graphic>
-                
-               </graphic>
-            </Button>
-            <Button layoutX="10.0" layoutY="235.0" prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Alerts" textFill="#a1aec4">
-               <font>
-                  <Font name="Roboto Bold" size="14.0" />
-               </font>
-               <graphic>
-                 
-               </graphic>
-            </Button>
-            <Button prefHeight="50.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="Controls" textFill="#a1aec4">
+            <Button fx:id="btnRgbnNF" layoutX="10.0" layoutY="193.0" onAction="#switchRGBnNF" prefHeight="80.0" prefWidth="120.0" style="-fx-alignment: left;" styleClass="nav-button" text="RGB &amp; OnOff" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>

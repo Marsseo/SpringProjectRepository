@@ -158,21 +158,21 @@ public class ChartController implements Initializable {
 					xyList3.remove(0, 1);
 					xyList4.remove(0, 1);
 				}
-				xyList1.add(new XYChart.Data(strDate, random.nextInt(50)));
-				xyList2.add(new XYChart.Data(strDate, random.nextInt(200)));
-				xyList3.add(new XYChart.Data(strDate, random.nextInt(255)));
-				xyList4.add(new XYChart.Data(strDate, random.nextInt(400)));
+//				xyList1.add(new XYChart.Data(strDate, random.nextInt(50)));
+//				xyList2.add(new XYChart.Data(strDate, random.nextInt(200)));
+//				xyList3.add(new XYChart.Data(strDate, random.nextInt(255)));
+//				xyList4.add(new XYChart.Data(strDate, random.nextInt(400)));
 				
-//				xyList1.add(new XYChart.Data(strDate, client.curObserveState("thermistorsensor")));
-//				xyList2.add(new XYChart.Data(strDate, client.curObserveState("photoresistorsensor")));
-//				xyList3.add(new XYChart.Data(strDate, client.curObserveState("gassensor")));
-//				xyList4.add(new XYChart.Data(strDate, client.curObserveState("ultrasonicsensor")));
+				xyList1.add(new XYChart.Data(strDate, client.curObserveState("thermistorsensor")));
+				xyList2.add(new XYChart.Data(strDate, client.curObserveState("photoresistorsensor")));
+				xyList3.add(new XYChart.Data(strDate, client.curObserveState("gassensor")));
+				xyList4.add(new XYChart.Data(strDate, client.curObserveState("ultrasonicsensor")));
 
-		//		if(curColor().equals("white")){
-		//			trackingPane.setStyle("-fx-border-color: black; -fx-background-color: white; -fx-border-width: 3");
-		//		}else{
-			//		trackingPane.setStyle("-fx-border-color: black; -fx-background-color: black;");
-		//		}
+				if(curColor().equals("white")){
+					trackingPane.setStyle("-fx-border-color: black; -fx-background-color: white; -fx-border-width: 3");
+				}else{
+					trackingPane.setStyle("-fx-border-color: black; -fx-background-color: black;");
+				}
 
 			}
 		});

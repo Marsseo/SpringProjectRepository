@@ -76,7 +76,7 @@ public class ControllerController implements Initializable {
 	@FXML
 	private Label lblLcdLine1;
 	// 공통으로 사용하는 필드 값 정리
-	private String ipAdress = "192.168.0.18";
+	private String ipAdress = "192.168.3.54";
 	private CoapClient coapClient;
 	private CoapResponse coapResponse;
 	private JSONObject jsonObject;
