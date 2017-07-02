@@ -26,6 +26,6 @@
             <CheckBox fx:id="tracking" mnemonicParsing="false" selected="true" text="Tracking" />
          </children>
       </VBox>
-      <Pane fx:id="trackingPane" layoutX="22.0" layoutY="263.0" prefHeight="93.0" prefWidth="107.0" style="-fx-border-color: black; -fx-background-color: black;" />
+      <Pane fx:id="trackingPane" layoutX="22.0" layoutY="263.0" prefHeight="93.0" prefWidth="107.0" style="-fx-border-color: black; -fx-background-color: black; -fx-border-width: 3;" />
    </children>
 </AnchorPane>

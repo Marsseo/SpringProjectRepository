@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Predicate;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,7 +42,7 @@ public class ChartController implements Initializable {
 	private XYChart.Series xySeries4;
 	private CategoryAxis xAxis;
 	private CoapClient4Car client = new CoapClient4Car();
-	private String trackingColor;
+	
 	@FXML
 	private LineChart<String, Number> sensingChart;
 	@FXML
@@ -72,20 +73,46 @@ public class ChartController implements Initializable {
 					
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		
+		thermistor.setOnAction(e->{
+			
+			if(thermistor.isSelected()){
+				sensingChart.getData().add(xySeries1);
+			}else{
+				sensingChart.getData().remove(xySeries1);
+			}
+		});
+		photoresistor.setOnAction(e->{
+			
+			if(photoresistor.isSelected()){
+				sensingChart.getData().add(xySeries2);
+			}else{
+				sensingChart.getData().remove(xySeries2);
+			}
+		});
+		gas.setOnAction(e->{
+			
+			if(gas.isSelected()){
+				sensingChart.getData().add(xySeries3);
+			}else{
+				sensingChart.getData().remove(xySeries3);
+			}
+		});
+		ultrasonic.setOnAction(e->{
+			
+			if(ultrasonic.isSelected()){
+				sensingChart.getData().add(xySeries4);
+			}else{
+				sensingChart.getData().remove(xySeries4);
+			}
+		});
 		tracking.setOnAction(e->{
+			
 			if(tracking.isSelected()){
 				trackingPane.setVisible(true);
 			}else{
 				trackingPane.setVisible(false);
 			}
 		});
-		
-//		if(curColor().equals("white")){
-//			
-//		}
-		
-		trackingPane.setStyle("StringProperty [bean: Pane[id=trackingPane], name: style, value: -fx-border-color: black; -fx-background-color: white;]");
-		System.out.println(trackingPane.styleProperty());
 		
 		
 		xyList1.addListener((ListChangeListener<XYChart.Data<String, Integer>>) change -> {
@@ -141,6 +168,12 @@ public class ChartController implements Initializable {
 //				xyList3.add(new XYChart.Data(strDate, client.curObserveState("gassensor")));
 //				xyList4.add(new XYChart.Data(strDate, client.curObserveState("ultrasonicsensor")));
 
+		//		if(curColor().equals("white")){
+		//			trackingPane.setStyle("-fx-border-color: black; -fx-background-color: white; -fx-border-width: 3");
+		//		}else{
+			//		trackingPane.setStyle("-fx-border-color: black; -fx-background-color: black;");
+		//		}
+
 			}
 		});
 		
@@ -151,6 +184,7 @@ public class ChartController implements Initializable {
 
 		xySeries1 = new XYChart.Series(xyList1);
 		xySeries1.setName("온도");
+		
 
 		xySeries2 = new XYChart.Series(xyList2);
 		xySeries2.setName("조도");
@@ -161,7 +195,8 @@ public class ChartController implements Initializable {
 		xySeries4 = new XYChart.Series(xyList4);
 		xySeries4.setName("거리(초음파)");
 
-		sensingChart.getData().addAll(xySeries1, xySeries2, xySeries3, xySeries4);		      
+		sensingChart.getData().addAll(xySeries1, xySeries2, xySeries3, xySeries4);
+
 	   
 	}
 	
@@ -169,7 +204,6 @@ public class ChartController implements Initializable {
 		String response = client.curState("trackingsensor");
 		JSONObject jsonObject = new JSONObject(response);
 		String color = jsonObject.getString("tracking");
-		trackingColor = color;
 		return color;
 	}
 		
