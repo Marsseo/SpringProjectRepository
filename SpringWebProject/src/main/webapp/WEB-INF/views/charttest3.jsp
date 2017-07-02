@@ -145,25 +145,28 @@
 						<div class="budget-wrap" >
 							<div class="budget"  >
 								<div class="header" >
+								<input type="hidden" id="hiddenleftright" value="${leftright}"/>
+							<input type="hidden" id="hiddenupdown" value="${updown}"/>
+						
 									<div class="title clearfix" style=" display:inline-block:">
-									<span>Camera Control  </span>
+									<span style="font-size: 10px">Camera Control  </span>
 									
-									<span style=" float:right;">상하 :
+									<span style="float:right; font-size: 10px">좌우 :
+									<span class="pull-right" > </span> 
+									</span> <span style=" float:right; font-size: 10px">상하 :
 									<span  id="upDown" style=" float:right; "> </span>  
 									</span> 
 									&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 								
-									<span style="float:right;">좌우 :
-									<span class="pull-right" > </span> 
-									</span> 
 									
+										<!-- <span id="leftRightStatus">좌우:$"{leftright}"</span> -->
 									</div>
 								</div>
 								<div class="content" display:inline;  ">
-							
-								<input id="rangeslider0" type="range" min="10" max="170" value="90" data-rangeslider>
+							<input id="rangeslider1" type="range" min="10" max="100" value="45" data-rangeslider >
+								
 								</br></br>
-									<input id="rangeslider1" type="range" min="10" max="100" value="45" data-rangeslider >
+									<input id="rangeslider0" type="range" min="10" max="170" value="90" data-rangeslider>
 									
 								</div>
 								

@@ -1,18 +1,21 @@
-var leftRight=90;
-var upDown=10;
+var currLeftRight=$('#hiddenleftright').val();
+var currUpDown=$('#hiddenupdown').val();
+
 $(function(){
+	
 	$('#rangeslider0').rangeslider({
 		polyfill:false,
 		onInit:function(){
-			$('.header .pull-right').text($('input[type="range"]').val()+'º');
+			
+			$('.header .pull-right').text($('#hiddenleftright').val()+'º');
 		},
 		onSlide:function(position, value){
 			console.log('onSlide');
 //			console.log('position: ' + position, 'value: ' + value);
-			leftRight=value;
+			currLeftRight=value;
 			$('.header .pull-right').text(value+'º');
 			cameraLeftRight(value);
-			console.log('leftRight:'+leftRight);
+//			console.log('leftRight:'+leftRight);
 		},
 		onSlideEnd:function(position, value){
 //			console.log('onSlideEnd');
@@ -25,12 +28,12 @@ $(function(){
 	$('#rangeslider1').rangeslider({
 		polyfill:false,
 		onInit:function(){
-			$('#upDown').text($('input[type="range"]').val()+'º');
+			$('#upDown').text($('#hiddenupdown').val()+'º');
 		},
 		onSlide:function(position, value){
 			console.log('onSlide');
 //			console.log('position: ' + position, 'value: ' + value);
-			upDown=value;
+			currUpDown=value;
 			$('#upDown').text(value+'º');
 			cameraUpDown(value);
 			console.log('upDown:'+upDown);
@@ -45,7 +48,7 @@ $(function(){
 function cameraLeftRight(value) {
     console.log(value);
   
-    var json = {"command":"change", "leftright":value, "updown":upDown};
+    var json = {"command":"change", "leftright":value, "updown":$('#hiddenupdown').val()};
 	
 	$.ajax({
 		url: "http://"+location.host+"/SpringWebProject/camera",
@@ -53,7 +56,9 @@ function cameraLeftRight(value) {
 		method: "post",
 		success: function(data){
 			if(data.result == "success"){
-				$("#fronttireStatus").html("angle="+data.angle);
+				$(".header .pull-right").html(data.leftright+"º");
+				$("#hiddenleftright").val(data.leftright);
+				
 			}
 		} 
 	}); 
@@ -61,7 +66,7 @@ function cameraLeftRight(value) {
 function cameraUpDown(value) {
     console.log("updown"+value);
   
-    var json = {"command":"change", "leftright":leftRight, "updown":value};
+    var json = {"command":"change", "leftright":$('#hiddenleftright').val(), "updown":value};
 	
 	$.ajax({
 		url: "http://"+location.host+"/SpringWebProject/camera",
@@ -69,7 +74,8 @@ function cameraUpDown(value) {
 		method: "post",
 		success: function(data){
 			if(data.result == "success"){
-				$("#fronttireStatus").html("angle="+data.angle);
+				$("#upDown").html(data.updown+"º");
+				$("#hiddenupdown").val(data.updown);
 			}
 		} 
 	}); 

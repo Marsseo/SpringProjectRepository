@@ -28,9 +28,9 @@ public class HomeController {
 		CoapResponse coapResponse = null;
 		JSONObject jsonObject = null;
 		String json = null;
-		/*
-		 * 			thermistorsensor
-		 */
+		
+//		 		thermistorsensor
+		 
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
@@ -43,9 +43,9 @@ public class HomeController {
 		double doubleT = Double.parseDouble(jsonObject.getString("temperature"));
 		int temperature = (int)doubleT;
 		model.addAttribute("temperature", temperature);
-		/*
-		 * 			photoresistorsensor
-		 */
+		
+//		 		photoresistorsensor
+		 
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
@@ -70,9 +70,9 @@ public class HomeController {
 		}
 		model.addAttribute("photoresistor", photoresistor);
 		model.addAttribute("photoresistorStr", strValue);
-		/*
-		 * 			gassensor
-		 */
+		
+//		  			gassensor
+		 
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
@@ -96,9 +96,9 @@ public class HomeController {
 		}
 		model.addAttribute("gas", gas);
 		model.addAttribute("gasStr", strValue);
-		/*
-		 * 			trackingsensor
-		 */
+		
+//		 		trackingsensor
+		 
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
@@ -111,9 +111,9 @@ public class HomeController {
 		String tracking = jsonObject.getString("tracking");
 
 		model.addAttribute("tracking", tracking);
-		/*
-		* 			lcd
-		*/
+		
+//			lcd
+		
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
@@ -216,9 +216,9 @@ public class HomeController {
 		return "charttest";
 
 	}
-	/*
-	* 			lcd
-	*/
+	
+//	 			lcd
+	
 	@RequestMapping("/lcd")
 	public void lcd(String command, String line0, String line1, HttpServletResponse response) throws IOException {
 		JSONObject jsonObject = new JSONObject();
