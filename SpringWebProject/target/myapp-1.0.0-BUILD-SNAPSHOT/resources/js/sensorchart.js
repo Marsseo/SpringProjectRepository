@@ -1,4 +1,38 @@
 var sensorchart;
+var temperaturevalue;
+var gasvalue;
+var photoresistorvalue;
+var ws1;
+var ws2;
+var ws3;
+var ws4;
+var series1;
+var series2;
+var series3;
+
+function thermistoronly() {
+	series1.show();
+	series2.hide();
+	series3.hide();	
+}
+
+function photoresistoronly() {
+	series1.hide();
+	series2.show();
+	series3.hide();
+}
+
+function gasonly() {
+	series1.hide();
+	series2.hide();
+	series3.show();
+}
+
+function showall() {
+	series1.show();
+	series2.show();
+	series3.show();
+}
 
 $(function() {
 	sensorChart = new Highcharts.Chart({
@@ -7,7 +41,8 @@ $(function() {
 			type : "spline",
 			events : {
 				load : requestSensorData
-			}
+			},			
+			animation: Highcharts.svg
 		},
 		colors : [ 'red', 'yellow', 'purple' ],
 		title : {
@@ -16,9 +51,9 @@ $(function() {
 		xAxis : {
 			type : "datetime",
 			tickPixelInterval : 100,
-			minRange : 20 * 1000
+			minRange : 20 * 1000		
 		},
-		yAxis :  {
+		yAxis : {
 			title : {
 				text : "데이터",
 				margin : 30
@@ -28,8 +63,8 @@ $(function() {
 			name : "온도(ºC)",
 			data : []
 		}, {
-			name : "조도",	
-//			type : 'column',
+			name : "조도",
+			// type : 'column',
 			data : []
 		}, {
 			name : "가스",
@@ -39,44 +74,100 @@ $(function() {
 });
 
 function requestSensorData() {
-	var ws = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/thermistorsensor");
-
-	ws.onmessage = function(event) {
+	ws1 = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/thermistorsensor");
+	ws1.onmessage = function(event) {
 		var data = JSON.parse(event.data);
-		if( data.temperature > 25) {
-			$('#thermistorimg').html("<img style='height: 100px;' src='/SpringWebProject/resources/image/hot.jpg'/>");
-		} else {
-			$('#thermistorimg').html("<img style='height: 100px;' />");
+
+		if (data.temperature != temperaturevalue) {
+			$('#thermistorvalue').html("▶현재온도◀<br/>" + data.temperature + " ºC");
 		}
-		var series1 = sensorChart.series[0];
+		temperaturevalue = data.temperature;
+
+		 if( data.temperature < 24) {
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature24.png'/>");
+		 } else if(data.temperature < 27){
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature27.png'/>");			 
+		 } else if(data.temperature < 30){
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature30.png'/>");			 
+		 } else {
+			 $('#thermistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/temperature33.png'/>");
+		 }
+
+		series1 = sensorChart.series[0];
 		var shift = series1.data.length > 20;
 		series1.addPoint([ data.time, data.temperature ], true, shift);
-
 	};
-	var ws2 = new WebSocket("ws://" + location.host
+	ws2 = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/photoresistorsensor");
 	ws2.onmessage = function(event) {
 		var data = JSON.parse(event.data);
-		var series2 = sensorChart.series[1];
+		var strValue;
+		if (data.photoresistor < 20) {
+			strValue = "아주밝음";
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star20.png'/>");			
+		} else if (data.photoresistor < 100) {
+			strValue = "밝음";
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star100.png'/>");
+		} else if (data.photoresistor < 150) {
+			strValue = "보통";
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star150.png'/>");
+		} else {
+			strValue = "어두움";
+			$('#photoresistorimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/star151.png'/>");
+		}
+
+		if (data.photoresistor != photoresistorvalue) {
+			$('#photoresistorvalue').html(
+					"▶현재밝기◀<br/>" + strValue + " (" + data.photoresistor + ")");
+		}
+		photoresistorvalue = data.photoresistor;
+
+		series2 = sensorChart.series[1];
 		var shift = series2.data.length > 20;
 		series2.addPoint([ data.time, data.photoresistor ], true, shift);
 	};
-	var ws3 = new WebSocket("ws://" + location.host
+	ws3 = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/gassensor");
 	ws3.onmessage = function(event) {
-		var data = JSON.parse(event.data);		
-		var series3 = sensorChart.series[2];
+		var data = JSON.parse(event.data);
+
+		var strValue;
+		if (data.gas < 40) {
+			strValue = "아주좋음";
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas40.png'/>");
+		} else if (data.gas < 120) {
+			strValue = "보통";
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas80.png'/>");
+		} else if (data.gas < 200) {
+			strValue = "가스검출";
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas150.png'/>");
+		} else {
+			strValue = "가스심각";
+			$('#gasimg').html("<img class='box-design-img2' src='/SpringWebProject/resources/image/gas151.png'/>");
+		}
+
+		if (data.gas != gasvalue) {
+			$('#gasvalue').html("▶가스오염◀<br/>" + strValue + " (" + data.gas + ")");
+		}
+		gasvalue = data.gas;
+
+		series3 = sensorChart.series[2];
 		var shift = series3.data.length > 20;
 		series3.addPoint([ data.time, data.gas ], true, shift);
 	};
-	var ws4 = new WebSocket("ws://" + location.host + "/SpringWebProject/websocket/trackingsensor");
+
+	ws4 = new WebSocket("ws://" + location.host
+			+ "/SpringWebProject/websocket/trackingsensor");
 	ws4.onmessage = function(event) {
 		var data = JSON.parse(event.data);
-
-		if(data.tracking == "white"){
+		if (data.tracking == "white") {
 			$('#trackingsensor').css("background-color", "white");
+			$('#trackingsensor').css("background", "linear-gradient(#FFFFFF, #F4E6FA)");
+			$('#trackingsensor').css("color", "black");
 		} else {
 			$('#trackingsensor').css("background-color", "black");
-		}	
+			$('#trackingsensor').css("background", "linear-gradient(#575151, #000000)");
+			$('#trackingsensor').css("color", "white");
+		}
 	};
 }

@@ -42,7 +42,6 @@
 		<link href="<%= application.getContextPath() %>/resources/css/frontcontrol.css" rel="stylesheet" />
 		
 		
-		
 	</head>
 	
 	<body style="background-color: black;">
@@ -61,15 +60,26 @@
 				<div class="col-md-4">
 					<div id="3ChartContainer"
 						style="height: 230px; margin-top: 20px; border: 1px solid white;">
-						<div id="slider" class="rslider" style="float:left;background-color: white"></div>
+						<div id="slider" class="rslider" style="float:left;background-color: black"></div>
     					<div id="container-speed" style="width: 300px; height: 200px; float: right"></div><br/>
-						<div style="float:left;background-color: white">
-						<input type="hidden" id="speed" value="${currSpeed}"/>
-						<span id="fronttireStatus">Angle : ${fronttireAngle}</span><br/>
-						<span id="backtireStatus">direction : ${backtireDirection} | speed : ${backtireSpeed}</span><br/>
-						</div>
-						<button onmousedown="accelerator('forward')" onmouseup="stop('1')" style="color: black;">가속 패달</button>									
-						<button onclick="stop('1')" style="color: black;">정지 패달</button>
+						<div style="float:left;background-color: black">
+							<input type="hidden" id="angle" value="${fronttireAngle}"/>
+							<input type="hidden" id="speed" value="${backtireSpeed}"/>
+							<input type="hidden" id="direction" value="${backtireDirection}"/>
+							<button onclick="backtire('change', '${backtireDirection}','500')" style="color: black;">1</button>
+							<button onclick="backtire('change', '${backtireDirection}','900')" style="color: black;">2</button>
+							<button onclick="backtire('change', '${backtireDirection}','1200')" style="color: black;">3</button>
+							<button onclick="backtire('change', '${backtireDirection}','1700')" style="color: black;">4</button>
+							<button onclick="backtire('change', '${backtireDirection}','2000')" style="color: black;">5</button>
+							<button onclick="backtire('change', '${backtireDirection}','2600')" style="color: black;">6</button><br/>								
+							<span id="fronttireStatus">Angle : ${fronttireAngle}</span><br/>
+							<span id="backtireStatus">direction : ${backtireDirection} | speed : ${backtireSpeed}</span><br/>
+						</div><br/>
+						<button type="button" class="btn btn-warning" onclick="backtire('change', 'forward','${backtireSpeed}')" style="margin-bottom: 5px;">전진</button>
+						<button type="button" class="btn btn-info" onclick="backtire('change', 'backward','${backtireSpeed}')" style="margin-bottom: 5px;">후진</button><br/>	
+						<!-- <button onmousedown="accelerator('${backtireDirection}')" onmouseup="stop()" style="color: black;"> -->
+						<button id="accl" style="color: black;">가속 패달</button>									
+						<button onclick="stop()" style="color: black;">정지 패달</button>
 					</div>
 				</div>
 			</div>

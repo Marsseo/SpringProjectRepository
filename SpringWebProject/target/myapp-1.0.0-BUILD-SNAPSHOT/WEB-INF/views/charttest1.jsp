@@ -25,11 +25,24 @@
 	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/exporting.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/themes/gray.js"></script>
-<link rel="stylesheet"
-	href="<%=application.getContextPath()%>/resources/slider/slider.css">
-
+<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorchart.js"></script>
+
+
+<link
+	href="<%=application.getContextPath()%>/resources/css/roundslider.min.css"
+	rel="stylesheet" />
+<script
+	src="<%=application.getContextPath()%>/resources/js/roundslider.min.js"></script>
+<link
+	href="<%=application.getContextPath()%>/resources/css/ultraslider.css"
+	rel="stylesheet"></link>
+<script
+	src="<%=application.getContextPath()%>/resources/js/laseremitter.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
+
 <!-- 기존 센서 -->
 <%-- 
 		<script src="<%=application.getContextPath()%>/resources/js/camera.js"></script>
@@ -54,8 +67,11 @@
 <script
 	src="<%=application.getContextPath()%>/resources/js/sensorchart.js"></script>
 <script type="text/javascript">
-	var ws = new WebSocket("ws://" + location.host
+	ws = new WebSocket("ws://" + location.host
 			+ "/SpringWebProject/websocket/ultrasonicsensor");
+	
+
+	/*
 	//ws.onopen=handleOnOpen;
 	ws.onmessage = handleOnMessage;
 	//ws.onclose=handleOnClose;
@@ -64,6 +80,8 @@
 		var data = JSON.parse(event.data); //JSON.parse는 문자열로 되어있는 제이슨( '{"xxx":"value"}')을 javascript객체( {"xxx":"value"} )로 만들어주는 작업을함
 		$("#ultrasonicsensorStatus").html("앞차와의 거리 :" + data.distance + ";");
 	}
+	 */
+	
 </script>
 
 <!-- 스타일 폰트 -->
@@ -193,79 +211,19 @@ body {
 }
 </style>
 
-<!--  3d 글씨 -->
-
-<style>
-body {
-	background-color: #444;
-}
-
-h1 {
-	margin: 0;
-	font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #fff;
-	text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0
-		#b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px
-		rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px
-		rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px
-		rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
-	-webkit-transition: .2s all linear;
-	letter-spacing: -2px;
-}
-
-h1:hover {
-	cursor: text;
-}
-
-h1:focus {
-	outline: none;
-}
-</style>
 </head>
 
 <body style="background-color: black;">
 
 	<h4>splinechart</h4>
 
-	<!-- 토글버튼 -->
-	<section class="container">
-		<div class="switch">
-			<input type="radio" class="switch-input" name="view" value="week"
-				id="week" checked> <label for="week"
-				class="switch-label switch-label-off">On</label> <input type="radio"
-				class="switch-input" name="view" value="month" id="month"> <label
-				for="month" class="switch-label switch-label-on">Off</label> <span
-				class="switch-selection"></span>
-		</div>
 
-		<div class="switch switch-blue">
-			<input type="radio" class="switch-input" name="view2" value="week2"
-				id="week2" checked> <label for="week2"
-				class="switch-label switch-label-off">On</label> <input type="radio"
-				class="switch-input" name="view2" value="month2" id="month2">
-			<label for="month2" class="switch-label switch-label-on">Off</label>
-			<span class="switch-selection"></span>
-		</div>
-
-		<div class="switch switch-yellow">
-			<input type="radio" class="switch-input" name="view3" value="week3"
-				id="week3" checked> <label for="week3"
-				class="switch-label switch-label-off">On</label> <input type="radio"
-				class="switch-input" name="view3" value="month3" id="month3">
-			<label for="month3" class="switch-label switch-label-on">Off</label>
-			<span class="switch-selection"></span>
-		</div>
-	</section>
-
-
-
-	<div id="container"
-		style="min-width: 310px; max-width: 400px; height: 400px; margin: 0 auto"></div>
+<input type="hidden" id="ultraangle" value=" ${angle}"/>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4">
 				<div id="1ChartContainer"
-					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">${angle }</div>
 			</div>
 			<div class="col-md-4">
 				<div id="2ChartContainer"
@@ -278,30 +236,33 @@ h1:focus {
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<div id="4ChartContainer"
+				<div id="ultraSensorChartContainer"
 					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
 			</div>
 			<div class="col-md-4">
-				<div
+				<div id="3ChartContainer"
 					style="height: 230px; margin-top: 20px; border: 1px solid white;">
-					<div id="player"
-						style="width: 30px; height: 100px;">
-						<div id="volume" style="width: 100px; height: 20px;"></div>
-					</div>
-				</div>
-					<span id="ultrasonicsensorStatus" contenteditable="true">angle=${angle};
-						distance=${distance}</span>
-					<hr />
-					<a href="html/exam01" class="btn btn-warning">그래프보기</a>
-					<hr />
 					
-
-
+					<div id="ultrahandle"
+						style="height: 100px; margin-top: 20px; border: 1px solid white;"></div>
+				</div>
 			</div>
 			<div class="col-md-4">
-				<div id="6ChartContainer"
-					style="height: 230px; margin-top: 20px; border: 1px solid white;"></div>
+				<div id="5ChartContainer"
+					style="height: 230px; margin-top: 20px; border: 1px solid white;">
+					
+					<input id="laserOn" <c:if test="${laseremitterStatus=='off'}">onclick="laseremitter('change','on')" </c:if>
+					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					<input id="buzzerOn" <c:if test="${buzzerStatus=='off'}">onclick="buzzer('change','on')" </c:if>
+					<c:if test="${buzzerStatus=='on'}">onclick="buzzer('change','off')" </c:if> 
+					<c:if test="${buzzerStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if> <c:if test="${buzzerStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/star100.png"</c:if>/>
+					
+				</div>
+
 			</div>
+
+
+
 		</div>
 		<div class="row">
 			<div class="col-md-4">
@@ -335,14 +296,9 @@ h1:focus {
 			</div>
 		</div>
 	</div>
+	<script
+		src="<%=application.getContextPath()%>/resources/js/ultraslider.js"></script>
 
-	<!-- 추가 -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript"
-		src="<%=application.getContextPath()%>/resources/slider/slider.js"></script>
 
 </body>
 </html>

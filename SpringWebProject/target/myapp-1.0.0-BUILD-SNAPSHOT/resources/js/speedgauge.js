@@ -1,8 +1,7 @@
-$( function(){
-	
-	var currSpeed = $('#speed').val();
-	console.log("speed : "+currSpeed);
+var	currSpeed;
 
+$( function(){
+		
 	var gaugeOptions = {
 
 	    chart: {
@@ -60,8 +59,8 @@ $( function(){
 	// The speed gauge
 	var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
 	    yAxis: {
-	        min: 300,
-	        max: 4095,
+	        min: 200,
+	        max: 3000,
 	        title: {
 	            text: 'Speed'
 	        }
@@ -87,24 +86,24 @@ $( function(){
 	}));
 
 	// Bring life to the dials
-	setInterval(function () {
+	setInterval(function(){
 	    // Speed
 	    var point,
 	        newVal,
 	        inc;
+	    	currSpeed = $('#speed').val();
 
 	    if (chartSpeed) {
 	        point = chartSpeed.series[0].points[0];
-	        inc = currSpeed;
+	        inc = Number(currSpeed);
 	        newVal = point.y + inc;
-
-	        if (newVal < 0 || newVal > 200) {
-	            newVal = point.y - inc;
-	        }
-
-	        point.update(newVal);
+	
+	        	        
+	        point.update(inc);
 	    }
 	    
-	}, 1000);
+	}, 100);
 });
+
+
 

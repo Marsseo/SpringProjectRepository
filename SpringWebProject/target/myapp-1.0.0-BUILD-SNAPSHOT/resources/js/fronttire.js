@@ -1,8 +1,10 @@
+var currAngle = Number($('#angle').val())-60;
+
 $("#slider").roundSlider({
 	        handleShape: "round",
 	        width: 16,
 	        radius: 130,
-	        value: 30,
+	        value: currAngle,
 	        keyboardAction: false,
 	        mouseScrollAction: false,
 	        circleShape: "half-top",
@@ -22,6 +24,7 @@ $("#slider").roundSlider({
 	        		success: function(data){
 	        			if(data.result == "success"){
 	        				$("#fronttireStatus").html("angle="+data.angle);
+	        				$("#angle").val(data.angle)
 	        			}
 	        		} 
 	        	}); 
@@ -39,6 +42,7 @@ $("#slider").roundSlider({
 	        		success: function(data){
 	        			if(data.result == "success"){
 	        				$("#fronttireStatus").html("angle="+data.angle);
+	        				$("#angle").val(data.angle)
 	        			}
 	        		} 
 	        	}); 

@@ -211,7 +211,7 @@ public class HomeController {
 		
 //--------------------------------------------------------------------------------------------------
 
-		model.addAttribute("cameraUrl", "http://"+ipAddress+":50001?action=stream");
+		model.addAttribute("cameraUrl", "http://"+"192.168.3.48"+":50001?action=stream");
 		coapClient.shutdown();
 		return "charttest";
 

@@ -13,6 +13,7 @@ body{
 *,:after,:before{box-sizing:border-box}
 .pull-left{float:left}
 .pull-right{float:right}
+
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}
 
@@ -108,20 +109,8 @@ body{
 	font-size:24px;
 	font-weight:400;
 }
-.budget-wrap .footer{
-	margin-top:30px;
-}
-.budget-wrap .footer .btn{
-	color:inherit;
-	padding:12px 24px;
-	border-radius:50px;
-	display:inline-block;
-	text-decoration:none;
-}
-.budget-wrap .footer .btn.btn-def{
-	color:#525263;
-}
-.budget-wrap .footer .btn.btn-pri{
-	color:#eee;
-	background:#ff5a84;
+#upDown{
+	color:#ff5a84;
+	font-size:24px;
+	font-weight:400;
 }
