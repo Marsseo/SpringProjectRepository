@@ -17,7 +17,7 @@ function laseremitter(command,status){
 					$("#laserOn").attr("src","/SpringWebProject/resources/image/laser.png");
 				}else if(status=='on'){
 					$("#laserOn").attr("onclick","laseremitter('change', 'off')");
-					$("#laserOn").attr("src","/SpringWebProject/resources/image/laserOn.png");
+					$("#laserOn").attr("src","/SpringWebProject/resources/image/laserOn.PNG");
 				}
 			}
 		}

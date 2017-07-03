@@ -247,7 +247,7 @@
 					style="height: 260px; margin-top: 20px; border: 1px solid white; background-color: black;">
 					
 					<input style="float: left; height: 220px; width: 180px;" id="laserOn" <c:if test="${laseremitterStatus=='off'}">onclick="laseremitter('change','on')" </c:if>
-					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laser.png"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.png"</c:if>/>
+					<c:if test="${laseremitterStatus=='on'}">onclick="laseremitter('change','off')" </c:if> <c:if test="${laseremitterStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/laser.png"</c:if> <c:if test="${laseremitterStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/laserOn.PNG"</c:if>/>
 					<input style="float: right; height: 220px; width: 180px;" id="buzzerOn" <c:if test="${buzzerStatus=='off'}">onclick="buzzer('change','on')" </c:if>
 					<c:if test="${buzzerStatus=='on'}">onclick="buzzer('change','off')" </c:if> 
 					<c:if test="${buzzerStatus=='off'}">type="image" src="<%=application.getContextPath()%>/resources/image/buzzer.png"</c:if> <c:if test="${buzzerStatus=='on'}">type="image" src="<%=application.getContextPath()%>/resources/image/buzzerOn.png"</c:if>/>
