@@ -283,9 +283,9 @@
 								</div>
 								<div class="col-md-4">
 									<div id="2ChartContainer"  class="box-design1">
-									<div id="slider" class="rslider" style="float:left;background-color: black"></div>
+									<div id="slider" class="rslider" style="float:left;background-color: white"></div>
     					<br/>
-						<div style="float:left;background-color: black">
+						<div style="float:left;background-color: white">
 							<input type="hidden" id="angle" value="${fronttireAngle}"/>
 							<input type="hidden" id="speed" value="${backtireSpeed}"/>
 							<input type="hidden" id="direction" value="${backtireDirection}"/>
@@ -306,8 +306,8 @@
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div id="3ChartContainer" class="box-design1">
-									<div id="container-speed" style="width: 300px; height: 200px; float: right"></div>
+									<div id="container-speed" class="box-design1">
+									
 									</div>
 								</div>
 							</div>							
