@@ -17,7 +17,7 @@
           <NumberAxis minorTickVisible="false" side="LEFT" tickLabelFill="#030303" upperBound="255.0" />
         </yAxis>
       </LineChart>
-      <VBox layoutX="22.0" layoutY="67.0" prefHeight="144.0" prefWidth="107.0" spacing="10.0">
+      <VBox layoutX="14.0" layoutY="66.0" prefHeight="160.0" prefWidth="138.0" spacing="30.0">
          <children>
             <CheckBox fx:id="thermistor" mnemonicParsing="false" selected="true" text="Temperature" />
             <CheckBox fx:id="photoresistor" mnemonicParsing="false" selected="true" text="Illuminance" />
@@ -26,6 +26,6 @@
             <CheckBox fx:id="tracking" mnemonicParsing="false" selected="true" text="Tracking" />
          </children>
       </VBox>
-      <Pane fx:id="trackingPane" layoutX="22.0" layoutY="263.0" prefHeight="93.0" prefWidth="107.0" style="-fx-border-color: black; -fx-background-color: black; -fx-border-width: 3;" />
+      <Pane fx:id="trackingPane" layoutX="14.0" layoutY="302.0" prefHeight="93.0" prefWidth="107.0" style="-fx-border-color: black; -fx-background-color: black; -fx-border-width: 3;" />
    </children>
 </AnchorPane>
