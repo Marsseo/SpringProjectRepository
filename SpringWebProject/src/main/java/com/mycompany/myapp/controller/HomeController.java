@@ -22,7 +22,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private String ipAddress = IpAdress.getIpAddress();
 
-	@RequestMapping(value = "/project", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		CoapClient coapClient = new CoapClient();
 		CoapResponse coapResponse = null;
@@ -210,7 +210,7 @@ public class HomeController {
 		model.addAttribute("backtireSpeed", jsonObject.getString("speed"));
 		
 //--------------------------------------------------------------------------------------------------
-
+		// 카메라는 자기 아이피 주기
 		model.addAttribute("cameraUrl", "http://"+"192.168.3.50"+":50001?action=stream");
 		coapClient.shutdown();
 		return "charttest";
