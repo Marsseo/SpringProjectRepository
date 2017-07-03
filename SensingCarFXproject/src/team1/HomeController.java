@@ -17,10 +17,7 @@ public class HomeController implements Initializable {
 	private Label gas;
 	@FXML
 	private Label distance;
-	@FXML
-	private Label angle;
-	@FXML
-	private Label speed;
+	
 	
 	private CoapClient4Car client;
 
@@ -40,9 +37,7 @@ public class HomeController implements Initializable {
 		
 		distance.setText(String.valueOf(client.curObserveState("ultrasonicsensor")));
 		
-		angle.setText("");
 		
-		speed.setText("");
 	}	
 	
 }
