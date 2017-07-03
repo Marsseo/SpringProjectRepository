@@ -1,29 +1,28 @@
 package team1;
 
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
-import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import hardware.camera.ViewerCanvas;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.embed.swing.SwingNode;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Slider;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javax.swing.SwingUtilities;
+
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javafx.scene.control.Slider;
+
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResponse;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
 import org.json.JSONObject;
-
 
 public class CameraController implements Initializable {
 
@@ -49,32 +48,14 @@ public class CameraController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        System.out.println(counter);
-        Webcam.setDriver(new IpCamDriver());
-     if(counter!=0){
-         Webcam.getDefault().close();
-     }
+        ViewerCanvas viewer= new ViewerCanvas(600,350);
         try {
-            IpCamDeviceRegistry.register("RPi"+counter, "http://"+ipAddress+":50001/?action=stream", IpCamMode.PUSH);
+            viewer.setCurrentURL(new URL("http://192.168.3.48:50001/?action=stream"));
         } catch (MalformedURLException ex) {
             Logger.getLogger(CameraController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+       bpWebCamPaneHolder.getChildren().add(viewer);
        
-        WebcamPanel panel = new WebcamPanel(Webcam.getWebcams().get(counter));
-        panel.setFPSLimit(1);
-        
-        SwingNode swingNode = new SwingNode();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                swingNode.setContent(panel);
-            }
-        });
-     
-        bpWebCamPaneHolder.setCenter(swingNode);
-     
-        getState();
 
         hSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -121,24 +102,7 @@ public class CameraController implements Initializable {
 
     }
     
-    private void getState(){
-        jsonObject = new JSONObject();
-        jsonObject.put("command", "status");
-        json = jsonObject.toString();
 
-        coapClient = new CoapClient();
-        coapClient.setURI("coap://" + ipAddress + "/camera");
-        coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
-        json = coapResponse.getResponseText();
-
-        jsonObject = new JSONObject(json);
-        hSlider.setValue(jsonObject.getDouble("leftright"));
-        vSlider.setValue(jsonObject.getDouble("updown"));
-        
         
         
     }
-
-
-
-}
