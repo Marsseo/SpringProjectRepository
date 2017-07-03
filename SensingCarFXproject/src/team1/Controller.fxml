@@ -210,7 +210,7 @@
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                         </Button>
-                        <Slider fx:id="sliderUltra" layoutX="242.0" layoutY="269.0" max="120.0" min="60.0" value="90.0">
+                        <Slider fx:id="sliderUltra" layoutX="242.0" layoutY="269.0" max="150.0" min="30.0" value="90.0">
                            <effect>
                               <InnerShadow color="#fe2ef7" />
                            </effect>

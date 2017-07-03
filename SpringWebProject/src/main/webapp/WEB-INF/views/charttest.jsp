@@ -208,7 +208,7 @@
 										<!-- <span id="leftRightStatus">좌우:$"{leftright}"</span> -->
 									</div>
 								</div>
-								<div class="content" display:inline;  ">
+								<div class="content" style="display:inline;  ">
 							<input id="rangeslider1" type="range" min="10" max="100" value="45" data-rangeslider >
 								
 								</br></br>

@@ -159,7 +159,7 @@ public class HomeController {
 		coapClient.setURI("coap://"+ipAddress+"/ultrasonicsensor");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
-		jsonObject = new JSONObject(json);
+		jsonObject = new JSONObject(json);		
 		model.addAttribute("angle", jsonObject.getString("angle"));
 		model.addAttribute("distance", jsonObject.getString("distance"));
 		model.addAttribute("change","null");
