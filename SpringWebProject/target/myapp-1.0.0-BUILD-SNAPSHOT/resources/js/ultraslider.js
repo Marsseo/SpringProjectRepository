@@ -15,6 +15,7 @@ $("#ultrahandle").roundSlider({
     	 console.log(args.handle.angle);
     	 
          var angle= Math.round(args.handle.angle);
+         
          console.log(angle);
          var json = {"command":"change", "angle":angle};
          $.ajax({
