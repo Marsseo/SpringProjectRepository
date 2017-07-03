@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 public class AppMain extends Application {
     public static Stage primaryStage;
+    public static String ipAddress = "192.168.3.48";
     
 
     @Override

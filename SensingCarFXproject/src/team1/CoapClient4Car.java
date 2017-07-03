@@ -16,7 +16,7 @@ public class CoapClient4Car {
 	private CoapClient coapClient;
 	private CoapObserveRelation coapObserveRelation;
 	// 아이피 세팅 ( 이 아이피를 바꾸면 자신의 차에서 작동함)
-	private String ipAddress ="192.168.3.54";
+	private String ipAddress =AppMain.ipAddress;
 	
 	private CoapResponse coapResponse;
 	private JSONObject jsonObject;
