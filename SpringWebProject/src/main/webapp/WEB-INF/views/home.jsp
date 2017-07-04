@@ -220,9 +220,9 @@
 									<div class="budget-wrap">
 										<div class="budget">
 											<div class="header">
-												<div class="title clearfix" style="float: up">
-													<span>UltraSensor Control </span>
-													<div id="ultrahandle"></div>
+												<div class="title clearfix" style="float: up;" align="center">
+													<span >UltraSensor Control </span>
+													<div id="ultrahandle" style="padding-top: 30px" ></div>
 												</div>
 											</div>
 										</div>
@@ -281,7 +281,7 @@
 							<div class="col-md-4">
 								<div id="2ChartContainer" class="box-design1">
 									<div id="slider" class="rslider"
-										style="float: left; background-color: white"></div>
+										style="float: left;  margin-top: 20px"></div>
 									<br />
 									<div style="float: left; background-color: white">
 										<input type="hidden" id="angle" value="${fronttireAngle}" /> <input

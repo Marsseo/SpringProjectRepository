@@ -213,8 +213,7 @@ public class HomeController {
 		// 카메라는 자기 아이피 주기
 		model.addAttribute("cameraUrl", "http://"+"192.168.3.50"+":50001?action=stream");
 		coapClient.shutdown();
-		return "charttest";
-
+		return "home";
 	}
 	
 //	 			lcd
