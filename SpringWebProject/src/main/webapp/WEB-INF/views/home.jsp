@@ -306,10 +306,11 @@
 											onclick="backtire('change', '','4090')"
 											style="color: black;">6</button>
 										<br /> <span id="fronttireStatus">Angle :
-											${fronttireAngle}</span><br /> <span id="backtireStatus">direction
-											: ${backtireDirection} | speed : ${backtireSpeed}</span><br />
+											${fronttireAngle}</span><br />
+										<span id="backtireStatus">
+										direction : ${backtireDirection} | speed : ${backtireSpeed}</span><br />
 									</div>
-									<br />
+									<br/>
 									<button type="button" class="btn btn-warning"
 										onclick="backtire('change', 'forward','')"
 										style="margin-bottom: 5px;">전진</button>

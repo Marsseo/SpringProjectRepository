@@ -1,16 +1,15 @@
-var currSpeed = $('#speed').val();
 var currDirection = $('#direction').val();
+var currSpeed = $('#speed').val();
 
-//var acclspeed = document.getElementById('speed');
-//
-//$(docoument).ready(function(){
-//	acclspeed.onmousedown(function(){
+
+
+//$('#accl').mousedown(function(){
 //		for(i=205;i<4096;i+=10){
 //			
 //			var speed = String(i);
 //			var direction = $('#direction').val();
 //			
-//			acclspeed.onmouseup(function(){
+//			$('#accl').mouseup(function(){
 //				for(j=i;j=0;j-=5){
 //					
 //					speed = String(i);
@@ -45,18 +44,21 @@ var currDirection = $('#direction').val();
 //				} 
 //			});
 //		}
-//	});
 //});
 
 function backtire(command, direction, speed){
 	
-	if(direction=""){
+	console.log("1d"+direction);
+	console.log("cur"+currDirection);
+	if(direction==""){
 		direction = currDirection;
-	}
-	if(speed=""){
+		console.log("2d"+direction);
+	}else if(speed==""){
 		speed = currSpeed;
+		console.log("2s"+speed);
 	}
-	
+	console.log("3d"+direction);
+	console.log("3s"+speed);
 	var json = {"command":command, "direction": direction, "speed":speed};
 	
 	$.ajax({
