@@ -55,7 +55,6 @@ public class HomeController implements Initializable {
                     String strTime = sdf.format(new Date());
                     Platform.runLater(() -> {
                         clock.setText(strTime);
-                        System.gc();
                     });
                     try {
                         Thread.sleep(100);
