@@ -384,8 +384,7 @@ public class HomeController {
 		CoapResponse coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
-		model.addAttribute("backtireDirection", jsonObject.getString("direction"));	
-		model.addAttribute("backtireSpeed", jsonObject.getString("speed"));
+
 		coapClient.shutdown();
 		
 		response.setContentType("application/json;charset=UTF-8");
