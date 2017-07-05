@@ -50,7 +50,7 @@ public class CameraController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         ViewerCanvas viewer= new ViewerCanvas(600,350);
         try {
-            viewer.setCurrentURL(new URL("http://192.168.3.48:50001/?action=stream"));
+            viewer.setCurrentURL(new URL("http://"+ipAddress+":50001/?action=stream"));
         } catch (MalformedURLException ex) {
             Logger.getLogger(CameraController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,7 +60,7 @@ public class CameraController implements Initializable {
         hSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                int hAngle=newValue.intValue();
+                int hAngle=180-newValue.intValue();
                 h=hAngle;
                 System.out.println(h);
                 
