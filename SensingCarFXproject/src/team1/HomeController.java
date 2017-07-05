@@ -92,7 +92,7 @@ public class HomeController implements Initializable {
 
 						distance.setText(sensingMap.get("distance"));
 
-						Tracking.setText(sensingMap.get("tacking"));
+						Tracking.setText(sensingMap.get("tracking"));
 
 						speed.setText(sensingMap.get("speed"));
 
