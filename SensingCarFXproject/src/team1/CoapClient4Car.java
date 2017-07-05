@@ -55,6 +55,20 @@ public class CoapClient4Car {
 		
 		return json;
 	}
+	public String backTireState(){
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		
+		coapClient = new CoapClient();
+		coapClient.setURI("coap://" + ipAddress + "/backtire");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		shutdown();
+		
+		return json;
+	}
 	public String frontTirePost(String angle){
 		
 		jsonObject = new JSONObject();

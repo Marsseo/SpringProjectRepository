@@ -102,9 +102,9 @@
             </HBox>
          </children>
       </VBox>
-      <ImageView fitHeight="250.0" fitWidth="363.0" layoutX="160.0" layoutY="62.0" pickOnBounds="true">
+      <ImageView fitHeight="273.0" fitWidth="363.0" layoutX="160.0" layoutY="54.0" pickOnBounds="true">
          <image>
-            <Image url="@images/main.png" />
+            <Image url="@images/main.PNG" />
          </image></ImageView>
       <Pane layoutX="2.0" layoutY="207.0" prefHeight="78.0" prefWidth="155.0" style="-fx-background-color: #00f0bF; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
          <children>
@@ -113,11 +113,11 @@
                <children>
                   <HBox>
                      <children>
-                        <Label fx:id="angle" prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
-                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="º" />
+                        <Label prefHeight="42.0" prefWidth="39.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
+                        <Label fx:id="direction" prefHeight="42.0" prefWidth="141.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="forward" />
                      </children>
                   </HBox>
-                  <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="Tire Angle" />
+                  <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="Direction" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -151,11 +151,10 @@
                <children>
                   <HBox>
                      <children>
-                        <Label fx:id="angle1" prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
-                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="º" />
+                        <Label fx:id="clock" prefHeight="42.0" prefWidth="129.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="00:00:00" />
                      </children>
                   </HBox>
-                  <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="Tire Angle" />
+                  <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="NOW Time" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -170,11 +169,11 @@
                <children>
                   <HBox>
                      <children>
-                        <Label fx:id="speed1" prefHeight="42.0" prefWidth="78.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
-                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="pwm" />
+                        <Label prefHeight="42.0" prefWidth="75.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="NOW:" />
+                        <Label fx:id="Tracking" prefHeight="42.0" prefWidth="78.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="black" />
                      </children>
                   </HBox>
-                  <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="Speed" />
+                  <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="What's the color?" />
                </children>
                <padding>
                   <Insets left="10.0" />
