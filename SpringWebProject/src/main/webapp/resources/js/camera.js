@@ -10,7 +10,7 @@ $(function(){
 			$('.header .pull-right').text($('#hiddenleftright').val()+'º');
 		},
 		onSlide:function(position, value){
-			console.log('onSlide');
+//			console.log('onSlide');
 //			console.log('position: ' + position, 'value: ' + value);
 			currLeftRight=value;
 			$('.header .pull-right').text(value+'º');
@@ -46,9 +46,10 @@ $(function(){
 });
 
 function cameraLeftRight(value) {
-    console.log(value);
-  
-    var json = {"command":"change", "leftright":value, "updown":$('#hiddenupdown').val()};
+//    console.log(value);
+    var angle=180-value;
+    console.log('angle:'+angle);
+    var json = {"command":"change", "leftright":angle, "updown":$('#hiddenupdown').val()};
 	
 	$.ajax({
 		url: "http://"+location.host+"/SpringWebProject/camera",
@@ -56,7 +57,7 @@ function cameraLeftRight(value) {
 		method: "post",
 		success: function(data){
 			if(data.result == "success"){
-				$(".header .pull-right").html(data.leftright+"º");
+				$(".header .pull-right").html((180-data.leftright)+"º");
 				$("#hiddenleftright").val(data.leftright);
 				
 			}
