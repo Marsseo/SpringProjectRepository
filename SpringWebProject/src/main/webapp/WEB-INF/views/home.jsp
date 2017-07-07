@@ -286,7 +286,7 @@
 									<div style="float: left; background-color: white">
 										<input type="hidden" id="angle" value="${fronttireAngle}" /> 
 										<input type="hidden" id="speed" value="${backtireSpeed}" />
-										<input type="hidden" id="direction" value="${backtireDirection}"/>
+										<input type="hidden" id="backDirection" value="${backtireDirection}"/>
 										<button
 											onclick="backtire('change', '','1000')"
 											style="color: black;">1</button>
@@ -318,11 +318,11 @@
 										onclick="backtire('change', 'backward','')"
 										style="margin-bottom: 5px;">후진</button>
 									<br />
-									<button id="accl" style="color: black;">										
+									<button id="accl" onmousedown="accl()" style="color: black;" class="btn btn-default">										
 										가속 패달
 									</button>
 									<button onclick="stop('${backtireDirection}')"
-										style="color: black;">정지 패달</button>
+										style="color: black;" class="btn btn-danger">정지 패달</button>
 								</div>
 							</div>
 							<div class="col-md-4">
