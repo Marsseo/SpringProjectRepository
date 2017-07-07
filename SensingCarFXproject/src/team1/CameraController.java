@@ -1,9 +1,10 @@
 package team1;
 
+import hardware.camera.ViewerCanvas;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import hardware.camera.ViewerCanvas;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
