@@ -1,10 +1,8 @@
-var acclbtn = document.getElementById('accl');
 var currSpeed = $('#speed').val();
 
 
 function backtire(command, direction, speed){
 	
-	console.log("asdf"+acclbtn);
 
 	if(direction==""){
 		
@@ -84,14 +82,14 @@ function backtire(command, direction, speed){
 //	}
 //}
 
+$('#accl').onmouseup = stop($('#backDirection').val());
+
 function accl(direction){
 	var i = 500;
 	while(i<4095){
 		
 		var speed = String(i);
 		
-		&('#accl').onmouseup = stop($('#backDirection').val());
-	
 		var json = {"command":"change", "direction":direction, "speed":speed};
 		$.ajax({
 			url: "http://"+location.host+"/SpringWebProject/backtire",
